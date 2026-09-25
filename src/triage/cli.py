@@ -1,7 +1,8 @@
-"""Milestone 1 command contracts. Paths are relative to the current working directory."""
+"""CPU experiment, policy, and local API commands. Paths resolve from the working directory."""
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -28,6 +29,17 @@ def parser():
     evaluate = commands.add_parser("evaluate")
     evaluate.add_argument("--predictions", type=Path, required=True)
     evaluate.add_argument("--output", type=Path, required=True)
+    policy = commands.add_parser("policy").add_subparsers(dest="action", required=True)
+    select = policy.add_parser("select")
+    select.add_argument("--predictions", type=Path, required=True)
+    select.add_argument("--split", choices=["val"], required=True)
+    select.add_argument("--output", type=Path, default=Path("artifacts/policy-v1"))
+    serve = commands.add_parser("serve")
+    serve.add_argument("--bundle", type=Path, required=True)
+    serve.add_argument("--policy", type=Path, help="Defaults to policy.json inside the bundle")
+    serve.add_argument("--config", type=Path, default=Path("configs/service.yaml"))
+    serve.add_argument("--host", choices=["127.0.0.1", "::1"], default="127.0.0.1")
+    serve.add_argument("--port", type=int, default=8000)
     return root
 
 
@@ -57,6 +69,25 @@ def main():
             result = predict(
                 cfg, args.split, args.output or Path(cfg["prediction_output"]), args.bundle
             )
+        elif args.command == "policy":
+            from triage.evaluation.select_policy import select_policy
+
+            result = select_policy(args.predictions, args.split, args.output)
+        elif args.command == "serve":
+            import uvicorn
+
+            from triage.service.app import create_app
+            from triage.service.schemas import ServiceSettings
+
+            settings = ServiceSettings(**config(args.config))
+            app = create_app(
+                args.bundle,
+                args.policy or args.bundle / "policy.json",
+                settings=settings,
+                api_key=os.environ.get("TRIAGE_API_KEY"),
+            )
+            uvicorn.run(app, host=args.host, port=args.port, access_log=False)
+            return 0
         else:
             from triage.evaluation.report import evaluate
 

@@ -1,0 +1,61 @@
+{
+  "base_url": "http://127.0.0.1:8765",
+  "checks": [
+    {
+      "body": {
+        "status": "live"
+      },
+      "path": "/health/live",
+      "status": 200
+    },
+    {
+      "body": {
+        "status": "ready"
+      },
+      "path": "/health/ready",
+      "status": 200
+    },
+    {
+      "body": {
+        "automatic_routing": true,
+        "fixture": false,
+        "model_type": "baseline",
+        "model_version": "baseline-c1-v1-551714a82382",
+        "policy_version": "policy-v1-51f9c25a5c5c",
+        "supported_intent_count": 150
+      },
+      "path": "/v1/model",
+      "status": 200
+    },
+    {
+      "body": {
+        "decision": "route",
+        "intent": "make_call",
+        "latency_ms": 38.13259999969887,
+        "model_version": "baseline-c1-v1-551714a82382",
+        "policy_version": "policy-v1-51f9c25a5c5c",
+        "reason": "supported_intent",
+        "request_id": "8083bb52-2dda-47e5-9b46-cb25799daf8a"
+      },
+      "path": "/v1/triage",
+      "sample_id": "308e172a5b75a46f1ca1d33b4e6606aee3becc996f2cb9896dd20051ae3fa8b0",
+      "status": 200
+    },
+    {
+      "body": {
+        "decision": "human_review",
+        "intent": null,
+        "latency_ms": 4.677100000662904,
+        "model_version": "baseline-c1-v1-551714a82382",
+        "policy_version": "policy-v1-51f9c25a5c5c",
+        "reason": "low_gate_score",
+        "request_id": "57e682bd-6d8f-4ac2-9dbd-61ef0dceeaf3"
+      },
+      "path": "/v1/triage",
+      "sample_id": "1c9a4e4c57432984441d225194c16cead1e0197225e75bba87eac5c3264c1138",
+      "status": 200
+    }
+  ],
+  "fixture": false,
+  "purpose": "Localhost HTTP smoke check; not a load benchmark"
+}

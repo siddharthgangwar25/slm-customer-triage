@@ -1,6 +1,80 @@
 # Implementation status
 
-Last updated: **2026-09-25**. Milestone 1: **implemented, executed, and locally verified**. Milestones 2–6 have not been implemented. The original specification is preserved unchanged.
+Last updated: **2026-09-25**. Milestones 1 and 2: **implemented, executed, and locally verified**. Milestones 3–6 have not been implemented. The original specification and Milestone 1 benchmark evidence are preserved unchanged.
+
+## Milestone 2 — routing policy and API
+
+The exact validation selector and local FastAPI service are complete. No baseline retraining, hyperparameter change, test prediction, GPU execution, or paid provisioning occurred in this milestone.
+
+### Changed files
+
+| Files | Result |
+| --- | --- |
+| `src/triage/policy.py` | Immutable routing rules, inclusive threshold behavior, strict JSON-output validation, unchanged four-code reason vocabulary |
+| `src/triage/evaluation/select_policy.py` | Exact score sweep, original constraints/tie breaks, validation-only selection, frozen policy hashes, unmet-target fallback, retained threshold/report evidence |
+| `src/triage/service/{__init__,schemas,runtime,app}.py` | Strict API request/response/error contracts, trusted baseline loading, readiness/liveness, safe metadata, auth, rate/body/token limits, bounded asynchronous inference and timeout behavior |
+| `src/triage/cli.py`, `configs/service.yaml` | `triage policy select` and `triage serve`, explicit policy/output paths, localhost defaults |
+| `pyproject.toml`, `uv.lock` | Locked FastAPI/Pydantic/Uvicorn dependencies and httpx2 development client; type checks expanded to policy and API schemas |
+| `tests/test_policy.py`, `tests/test_service.py` | 63 new tests; existing 33 tests retained. The existing CPU CI workflow automatically includes them |
+| `scripts/verify_api.py` | Repeatable real-model validation parity through the ASGI API, with explicit evidence output and test-split rejection |
+| `reports/baseline-c1-v1-policy/` | Frozen `policy.json`, all exact sweep points, and validation selection report |
+| `reports/baseline-c1-v1-api/` | Genuine full-validation API parity and separate localhost HTTP smoke evidence |
+| `README.md`, `docs/api.md`, `docs/decisions.md`, `docs/experiment_journal.md`, this file | Reproduction commands, API behavior/limits, ML decisions, measurements, and handoff |
+
+### Measured acceptance results
+
+All routing figures use the original validation mix: **3,100 requests = 3,000 supported + 100 oos**, model `baseline-c1-v1-551714a82382`. No test examples were predicted.
+
+| Check | Observed result |
+| --- | --- |
+| Exact sweep | 3,068 thresholds, including every unique observed score plus zero/all-review endpoints |
+| Frozen policy | `policy-v1-51f9c25a5c5c`, threshold **0.2088413160728636**, `targets_met`, automatic routing enabled |
+| Routing coverage | **68.4194%**, 2,121 / 3,100 requests |
+| Routing error | **4.7619%**, 101 / 2,121 routes; Wilson 95% **3.9345–5.7529%** |
+| Oos recall | **90%**, 90 / 100; Wilson 95% **82.5634–94.4771%** |
+| Supported review rate | **29.6333%**, 889 / 3,000 supported requests |
+| Overall reviews | 979 / 3,100 requests; no gated infrastructure failures |
+| API/offline parity | **3,100 actual baseline API calls, zero intent/decision/reason mismatches**; 2,121 routes and 979 reviews |
+| Real HTTP smoke | `triage serve` on `127.0.0.1:8765`; live/ready/model endpoints returned 200; one genuine validation route and one review verified; server stopped afterward |
+| Unmet-target behavior | Synthetic fixture freezes `targets_unmet`, disables routing, records null error/zero coverage, and returns review only while a healthy model is loaded |
+| Failure contracts | 401 auth, 422 schema/body/token budget, 429 rate limit, and 503 missing/corrupt/unavailable/busy/timed-out inference verified |
+| Runtime safety | Gate short-circuit and baseline prediction reuse verified; timeout retains occupied slot, liveness remains responsive, readiness recovers after successful completion, failed model stays unready |
+| Input/log contracts | Instruction-like input remains data; raw messages and auth secrets absent from application logs; chunked oversized bodies rejected; no public `/metrics` |
+| Tests and checks | **96 tests passed**, no warnings; lint, formatting, core type checks, and dependency-lock consistency passed |
+
+These constraints apply to validation-selected point estimates. The Wilson intervals do not establish a <=5% unseen routing-error guarantee or >=90% unseen oos-recall guarantee. API parity and the five HTTP smoke calls are correctness checks, not throughput/latency benchmarks or production usage.
+
+### Commands actually executed for Milestone 2
+
+PowerShell, repository root (the local uv executable remains in `.tools/`):
+
+```powershell
+.\.tools\uv.exe sync --python .tools/python/cpython-3.11.16-windows-x86_64-none/python.exe --cache-dir .uv-cache
+.\.venv\Scripts\triage.exe policy select --predictions reports/baseline-c1-v1-val/predictions.jsonl --split val --output reports/baseline-c1-v1-policy
+.\.venv\Scripts\ruff.exe check src tests scripts --fix
+.\.venv\Scripts\ruff.exe format src tests scripts
+.\.venv\Scripts\pytest.exe -q
+.\.venv\Scripts\python.exe scripts/verify_api.py --bundle artifacts/baseline-c1-v1 --policy reports/baseline-c1-v1-policy/policy.json --predictions reports/baseline-c1-v1-val/predictions.jsonl --output reports/baseline-c1-v1-api
+.\.venv\Scripts\triage.exe serve --bundle artifacts/baseline-c1-v1 --policy reports/baseline-c1-v1-policy/policy.json --port 8765
+.\.venv\Scripts\ruff.exe check .
+.\.venv\Scripts\ruff.exe format --check .
+.\.venv\Scripts\mypy.exe
+.\.tools\uv.exe lock --check --offline --python .tools/python/cpython-3.11.16-windows-x86_64-none/python.exe --cache-dir .uv-cache
+```
+
+The live server was probed with Python `urllib.request`, saving `http_smoke.json`, then its known process was stopped. `uv sync` ran a second time after replacing deprecated httpx fallback with the installed Starlette version's supported httpx2 client. The first test run had a client deprecation warning (91 passed); after migration 93 passed without warnings; the final runtime/concurrency checks brought the suite to 96 passing tests. Early formatting violations were fixed before the final checks; no test failures occurred.
+
+Final acceptance also updated the separate `.tools/acceptance-venv` via `UV_PROJECT_ENVIRONMENT=.tools/acceptance-venv` and `uv sync --locked --offline --python .tools/python/cpython-3.11.16-windows-x86_64-none/python.exe --cache-dir .uv-cache`. Its Ruff lint/format and mypy checks passed, and its pytest run reported **96 passed in 8.02 seconds**, without warnings. This verifies the updated lock independently of the development environment. Milestone 2 is committed locally with its lock and evidence; no push was performed.
+
+Verified versions: FastAPI 0.141.1, Pydantic 2.13.5, Starlette 1.7.0, Uvicorn 0.54.0, httpx2 2.13.1; existing model dependencies remain unchanged. The full training lock hash in the original baseline metadata is historical; API evidence records the updated service dependency lock. No original benchmark artifact was rewritten.
+
+### Limitations and next concrete task
+
+No Milestone 2 blocker remains. The API is a single-process localhost demonstration with one inference slot and a global in-memory rate limiter. A native worker cannot be forcibly cancelled; a permanently stuck operation needs a process restart. Auth is optional for local use. `/metrics`, containers, remote deployment, release freezing, and production observability remain later work. Hosted CI/Linux execution is unverified. No GPU test or real SLM tokenizer was run or claimed verified; the current baseline has no prompt.
+
+**Next: Milestone 3 — prompted model benchmark.** Inspect hardware and available resources, pin a feasible model/revision, implement the full fixed catalog and non-thinking prompt, verify real tokenizer budgeting, save every raw validation outcome, and attach this frozen baseline's gate by a checked one-to-one sample-ID join. Keep test prediction blocked and paid services disabled.
+
+## Milestone 1 — historical completion record
 
 ## Delivered files
 
@@ -89,4 +163,4 @@ No blocking Milestone 1 issue remains. Windows execution is verified; the GitHub
 
 The baseline is deliberately ungated. Its scores are not calibrated correctness probabilities, and raw oos rejection is zero. The report's threshold curve is exploratory only. No validation constraint, deployment readiness, cost saving, or real customer outcome is claimed. Only one C configuration was run. The error observations are assistant-authored and not an independent human annotation study.
 
-**Next concrete task: Milestone 2.** Implement exact validation-score threshold selection with the specified error/oos/coverage constraints and tie breaks, persist a frozen policy, and build the FastAPI routing/error/readiness contracts and tests. Reuse these saved validation predictions; keep test prediction blocked until the later release-freeze workflow. Do not add GPU or cloud work yet.
+The next task recorded at Milestone 1 completion was Milestone 2; it is now complete as documented above. The current next task is Milestone 3.

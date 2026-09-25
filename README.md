@@ -1,6 +1,6 @@
 # Customer request triage
 
-A reproducible CPU baseline for the official CLINC150 benchmark. Milestone 1 implements data preparation, TF-IDF/logistic-regression training, saved validation predictions, and offline evaluation. See the [project specification](Customer_Request_Triage_Project_Spec.md) and [implementation status](docs/implementation_status.md).
+A reproducible CPU triage service for the official CLINC150 benchmark. Milestones 1 and 2 implement data preparation, TF-IDF/logistic-regression training, validation evaluation, a frozen routing policy, and a local FastAPI service. See the [project specification](Customer_Request_Triage_Project_Spec.md) and [implementation status](docs/implementation_status.md).
 
 The measured validation result is **0.882634 supported macro-F1** across all 150 supported labels and **88.33% supported accuracy**. The evaluation includes 3,000 supported and 100 out-of-scope requests. This is public benchmark evidence, not production customer usage. [Report](reports/baseline-c1-v1-val/report.md) · [40 reviewed errors](reports/baseline-c1-v1-val/error_analysis.md) · [data provenance](reports/baseline-c1-v1-val/data_manifest.json).
 
@@ -32,7 +32,24 @@ For offline preparation, put the three original files (`data_full.json`, `domain
 
 The baseline trains on 15,000 supported requests only. Word unigrams/bigrams capture local wording, and TF-IDF downweights common terms. Logistic regression learns a weight for each feature and intent. Saving both transformations and classifier in one pipeline keeps inference consistent with training. Domain metadata never enters the model. The maximum predicted probability is an uncalibrated gate score, not confidence that the prediction is correct.
 
-The report's coverage/error curve is a diagnostic sweep, not a selected policy. The ungated baseline predicts a supported label for every out-of-scope request. Threshold selection and HTTP routing belong to Milestone 2. The CLI deliberately disallows test prediction until a frozen-release workflow exists.
+The Milestone 1 report's coverage/error curve is a diagnostic sweep. Milestone 2's [exact policy selection](reports/baseline-c1-v1-policy/report.md) selected threshold **0.2088413161**, with **68.42% coverage**, **4.76% routing error**, and **90% oos recall** on validation. The raw classifier still predicts a supported label for every request; the policy sends low-score requests to human review. The CLI deliberately disallows test prediction until a frozen-release workflow exists.
+
+## Select a policy and run the API
+
+After generating your own bundle and predictions above, select their policy and serve it:
+
+```console
+uv run --locked triage policy select --predictions artifacts/baseline-c1-v1-val/predictions.jsonl --split val --output reports/local-baseline-policy
+uv run --locked triage serve --bundle artifacts/baseline-c1-v1 --policy reports/local-baseline-policy/policy.json --config configs/service.yaml
+```
+
+Open `http://127.0.0.1:8000/docs`. The service binds to loopback only. `--policy` defaults to `policy.json` inside the bundle if omitted. Use the policy generated from the same model bundle: hashes and model dependency versions must match. The retained milestone policy can be used with the original local milestone bundle.
+
+`POST /v1/triage` accepts `{"text":"what is my account balance"}` and an optional `client_request_id`. It returns a new server request ID, intent or null, route/review decision, machine-readable reason, model and policy versions, and latency. Human review is a recommendation; it does not create a ticket. No confidence field is exposed. `/health/live`, `/health/ready`, and `/v1/model` expose health and safe metadata.
+
+The defaults cap text at 2,000 characters, bodies at 16 KiB, model input at 512 tokens, and inference at 5 seconds. This baseline counts its own tokenizer's tokens; it has no system prompt. A future SLM adapter must budget its full prompt and generation reserve. Optional bearer authentication uses the `TRIAGE_API_KEY` environment variable. The default per-process sliding-window rate limit is 60 valid triage requests per minute; configure `0` to disable it for offline acceptance checks. Missing/corrupt bundles and failed/timed-out inference return 503. `/metrics` is not exposed.
+
+See the [API runbook](docs/api.md) for response examples, failure behavior, and operational limits. The [API parity evidence](reports/baseline-c1-v1-api/api_parity.json) records **3,100 requests with zero differences** against offline policy decisions; [localhost smoke evidence](reports/baseline-c1-v1-api/http_smoke.json) confirms the server command works over HTTP. Neither check is a load benchmark.
 
 ## Checks
 
@@ -43,7 +60,7 @@ uv run --locked mypy
 uv run --locked pytest -q
 ```
 
-Tests use explicitly marked synthetic fixtures and cover source corruption, hashes and split membership, deterministic processing, leakage prevention, saved-model parity, metric arithmetic, failure accounting, CLI execution, and model-free report generation. The CPU CI workflow runs these on Windows and Linux; hosted CI execution remains unverified until pushed. API/container/GPU tests arrive with their respective milestones.
+Tests use explicitly marked synthetic fixtures and cover source corruption, hashes and split membership, deterministic processing, leakage prevention, saved-model parity, metric arithmetic, failure accounting, CLI execution, model-free report generation, exact policy selection, and API contracts with fake and tiny real baseline adapters. The CPU CI workflow runs these on Windows and Linux; hosted CI execution remains unverified until pushed. Container/GPU tests arrive with their respective milestones.
 
 ## Data attribution and limitations
 

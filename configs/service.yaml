@@ -1,0 +1,5 @@
+max_body_bytes: 16384
+max_input_tokens: 512
+inference_timeout_seconds: 5.0
+rate_limit_requests: 60
+rate_limit_window_seconds: 60.0
