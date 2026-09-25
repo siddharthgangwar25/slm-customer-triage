@@ -1,0 +1,23 @@
+repository: https://github.com/clinc/oos-eval
+commit: 828f8093932c8fe6ca7936c3d2e52903b1c523de
+output: data/clinc150
+preprocessing_version: clinc-canonical-v1
+license: CC-BY-3.0
+expected_intents: 150
+files:
+  data_full.json:
+    path: data/data_full.json
+    sha256: 36923c3705a59e08fe9c3883d8bc2dd966ef93e22cb78ac41171782a698d56e0
+  domains.json:
+    path: data/domains.json
+    sha256: b947b579d3b8e74b06f93b01083d8efaff2888b43a3e362533bd88a6e1211b3a
+  LICENSE:
+    path: LICENSE
+    sha256: e6bc9e9c474700b708f568bac9e5a8a9bcb2b1dad53442f5ba449fcb848b8e76
+expected_counts:
+  train: 15000
+  val: 3000
+  test: 4500
+  oos_train: 100
+  oos_val: 100
+  oos_test: 1000

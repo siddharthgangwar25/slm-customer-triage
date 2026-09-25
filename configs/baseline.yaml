@@ -1,0 +1,10 @@
+experiment_id: baseline-c1-v1
+data_dir: data/clinc150
+bundle: artifacts/baseline-c1-v1
+prediction_output: artifacts/baseline-c1-v1-val
+C: 1.0
+seed: 42
+max_iter: 2000
+ngram_range: [1, 2]
+sublinear_tf: true
+threads: 1
