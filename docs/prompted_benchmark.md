@@ -1,6 +1,6 @@
 # Prompted model benchmark
 
-Milestone 3 uses the pinned official Qwen3 model through Transformers. The initial feasibility configuration is Qwen/Qwen3-4B at revision `1cfa9a7208912126459214e8b04321603b3df60c`, with NF4 double quantization and FP16 compute on the local 4 GiB GTX 1650. A completed software test suite or ten-request smoke is not a completed benchmark; see `implementation_status.md` for actual execution state.
+Milestone 3 uses the pinned official Qwen3 model through Transformers. The completed configuration is Qwen/Qwen3-4B at revision `1cfa9a7208912126459214e8b04321603b3df60c`, with NF4 double quantization, FP16 compute and system-prefix caching on the local 4 GiB GTX 1650. All 3,100 validation outcomes and the [baseline comparison](../reports/baseline-prompted-v1/report.md) are retained. A software test suite or ten-request smoke alone is not a completed benchmark; see `implementation_status.md` for measurements and limitations.
 
 ## Isolated environment
 

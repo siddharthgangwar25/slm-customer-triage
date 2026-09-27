@@ -1,0 +1,18 @@
+{
+  "minimum_error_meeting_coverage_and_oos_targets": {
+    "coverage": 0.21516129032258063,
+    "human_review_count": 2433,
+    "infrastructure_failure_count": 0,
+    "oos_count": 100,
+    "oos_recall": 0.98,
+    "routed_count": 667,
+    "routed_error_count": 61,
+    "routing_error": 0.09145427286356822,
+    "sample_count": 3100,
+    "supported_count": 3000,
+    "supported_review_rate": 0.7783333333333333,
+    "threshold": 0.6771616657577827
+  },
+  "purpose": "diagnostic only; does not relax the frozen policy constraints",
+  "source_threshold_sweep_sha256": "62cc46e0911a7982b8a567657aee6ac3e9763bee4095d668a6b57dea10975757"
+}

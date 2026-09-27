@@ -1,36 +1,81 @@
 # Implementation status
 
-Last updated: **2026-09-27**. Milestones 1 and 2: **implemented, executed, and locally verified**. Milestone 3 is **in progress**: implementation, token audit, real-model smoke and cache parity have passed; the full validation run is executing. Milestones 4?6 have not been implemented. Original baseline evidence remains unchanged.
+Last updated: **2026-09-27**. Milestones **1, 2 and 3 are implemented, executed, and locally verified**. Milestones 4-6 have not been implemented. Original baseline evidence remains unchanged. Test predictions remain unused.
 
-## Milestone 3 ? validation run in progress
+## Milestone 3 - completed prompted model benchmark
 
-Hardware inspection found an AMD Ryzen 5 5600H, 15.35 GiB RAM, and NVIDIA GeForce GTX 1650 with 4 GiB VRAM. The default **Qwen/Qwen3-4B**, revision `1cfa9a7208912126459214e8b04321603b3df60c`, loads using bitsandbytes NF4 with double quantization and FP16 compute. It has 4,022,468,096 parameters. No smaller model, cloud resource, or paid service has been substituted.
+The full validation run contains **3,100 verified outcomes: 3,000 supported and 100 oos requests**, with no missing or duplicate IDs. Configuration, source code, prompt, input data, baseline gate, dependency lock and prediction hashes were verified after the user completed the resumed terminal run. All requests reached the model before offline gating.
 
-Implemented: isolated locked CUDA environment; fixed full-catalog zero-shot prompt; explicit non-thinking tokenization and budget checks; resumable validation-only predictions with raw outputs, token counts, errors, timing and memory; checked one-to-one baseline-gate attachment; shared saved-prediction evaluation, exact policy selection, paired bootstrap and baseline comparison. CPU commands import neither torch nor Transformers. The Milestone 2 API continues to serve the baseline only.
+The model is **Qwen/Qwen3-4B**, revision `1cfa9a7208912126459214e8b04321603b3df60c`, with **4,022,468,096 parameters**, NF4 double quantization and FP16 compute. Experiment: `prompted-qwen3-4b-nf4-cache-v1`; model version: `prompted-qwen3-4b-nf4-cache-v1-95bdf39cb9b2`. No smaller model or paid service was substituted.
 
-Real evidence completed:
+### Measured validation results
 
-- `reports/prompted-hardware/hardware.json`: actual hardware/CUDA inspection.
-- `reports/prompted-hardware/token_audit.json`: all 3,100 validation prompts contain all 150 labels, use 645?679 input tokens, and fit the 2,048-token limit plus 32 generation tokens. Non-thinking template verified; no truncation.
-- `reports/prompted-hardware/uncached-smoke/`: ten genuine requests, eight strictly valid outputs and two explicit unknown-label failures (`translation` instead of catalog label `translate`). Median 17.80 seconds/request, peak CUDA allocated 2,975,083,008 bytes. All ten are from the same class; this is hardware evidence, not classification performance.
-- `reports/prompted-cache-smoke/cache_parity.json`: six predetermined validation cases, including oos, gave identical cached/uncached outputs. Cached times were 1.38?2.16 seconds versus 17.80?23.49 seconds uncached. This supports enabling the fixed system-prefix cache on this stack, not universal floating-point parity.
-- CPU suite: **111 tests passed** in 10.89 seconds; lint and formatting passed; mypy passed on five configured core modules; optional dependency lock consistency passed offline.
+| Measure | CPU baseline A | Prompted Qwen B |
+| --- | ---: | ---: |
+| Supported macro-F1, all 150 labels | 0.882634 | 0.801038 |
+| Supported accuracy | 88.3333% | 79.2333% |
+| Invalid outputs | 0 | 70 / 3,100 (2.2581%) |
+| Infrastructure failures | 0 | 0 |
+| Selected policy | targets_met | targets_unmet; automatic routing disabled |
+| Selected routing coverage | 68.4194% (2,121 routes) | 0% (all 3,100 reviewed) |
+| Selected routing error | 4.7619% | Undefined: zero routes |
+| Selected oos review recall | 90% | 100% from reviewing everything |
 
-The original September 25 download was interrupted without predictions. The resumed September 27 hardware smoke completed. The full run now uses `configs/prompted.yaml`, experiment **prompted-qwen3-4b-nf4-cache-v1**, with a distinct configuration identity and a 627-token system cache. Every request receives its own cache copy. Actual full-run outputs are under `artifacts/prompted-qwen3-4b-nf4-cache-v1-val/`. Milestone 3 remains incomplete until all 3,100 outcomes and the raw/policy comparison exist.
+The prompted macro-F1 difference is **-0.081596**, with paired bootstrap 95% interval **[-0.099838, -0.067063]** (1,000 supported-sample resamples, seed 42). Of 3,000 supported requests, 2,171 are correct for both candidates, 206 only for Qwen, 479 only for the baseline, and 144 for neither. These are validation comparisons, not independent test or production guarantees.
 
-Commands executed from the repository root:
+All 70 invalid outputs remain failures: **65 unknown catalog labels and five non-JSON `oos` strings**. There are no truncated generations. Valid `oos` predictions include 53 gold-oos requests and 92 supported requests. Without a gate, 58% of gold-oos requests go to review (53 valid oos plus five invalid outputs); this differs from raw oos classification accuracy.
+
+The exact prompted threshold sweep finds no point meeting all original constraints (error <=5%, oos recall >=90%, coverage >=20%). Among points meeting the latter two, the smallest routing error is **9.1454% (61/667)** at **21.5161% coverage**, **98% oos recall**, threshold `0.6771616657577827`. This is diagnostic, not an alternative selected policy. The frozen prompted policy is `policy-v1-b6d73dde0c13`, with automatic routing disabled. The baseline remains the better measured candidate of A and B; final deployment selection awaits later milestones and C.
+
+### Hardware, runtime and execution scope
+
+Local hardware: AMD Ryzen 5 5600H, 15.35 GiB RAM, NVIDIA GTX 1650 with 4 GiB VRAM, Windows, driver 617.14, PyTorch 2.8.0+cu128 / CUDA 12.8. Native BF16 is unavailable, hence FP16 compute. Successful inference does not establish fine-tuning feasibility.
+
+- All 3,100 prompts include the complete sorted 150-label catalog and fit: **645-679 input tokens**, limit 2,048 plus 32 generated tokens. Non-thinking template verified, greedy decoding, batch size one, no prompt truncation or few-shot examples.
+- Uncached ten-request smoke: median **17.80 seconds/request**, eight valid outputs and two unknown-label failures. It is hardware evidence from one intent class, not a quality benchmark.
+- Six predetermined cached/uncached probes matched exactly. Cached durations were **1.38-2.16 seconds** versus **17.80-23.49 seconds** uncached. Each request receives a deep copy of the fixed **627-token system cache**; no request tokens are shared.
+- Full validation summed saved-request inference time: **4,840.60 seconds (80.68 minutes)**. Across all requests, p50 **1,486.78 ms**, p95 **2,052.95 ms**, p99 **2,186.12 ms**. These include tokenization and cached generation; exclude gate execution, loading, prefix prefill and the paused interval. They are not API latency, throughput or cost measurements. This was a shared local development machine, not an isolated serving load test.
+- The run paused at **1,118** saved requests for user terminal handoff. The user resumed the remaining **1,982** with unchanged configuration. The last process session took **3,118.51 seconds**, including **29.46 seconds** for load/prefix initialization; this is not the total wall time across both sessions.
+- Resumed-session peak CUDA allocated/reserved memory: **2.734 / 2.957 GiB**. Peak process working set: **4.667 GiB**. These allocator/process measurements exclude other applications and some driver overhead, and are not a measured maximum across both sessions.
+
+### Implemented files and retained evidence
+
+| Files | Result |
+| --- | --- |
+| `configs/prompted.yaml`, `prompts/intent-v1.txt` | Pinned model, full catalog, decoding and cache configuration |
+| `environments/prompted/{pyproject.toml,uv.lock}` | Separate locked CUDA environment; CPU environment stays independent |
+| `src/triage/models/{prompting,prompted}.py` | Escaped user-message isolation, non-thinking/token checks, strict raw outcomes, resumable validation-only runner and provenance |
+| `src/triage/evaluation/{gate,bootstrap,compare}.py`, updated evaluator/policy selector and CLI | Verified shared gate, paired bootstrap, raw/policy comparisons and disabled-policy fallback |
+| `tests/test_prompted.py`, `scripts/verify_prompt_cache.py` | CPU fixture contracts and separate genuine cache-parity probe |
+| `reports/prompted-hardware/`, `reports/prompted-cache-smoke/` | Hardware/token audits, uncached smoke, cache parity |
+| `reports/prompted-qwen3-4b-nf4-cache-v1-val/` | All raw predictions, copied gate/provenance/license, run and prompt, metrics, plot, per-class confusion data, failure breakdown and 40 reviewed examples |
+| `reports/prompted-qwen3-4b-nf4-cache-v1-policy/` | Frozen review-only policy and complete exact threshold sweep |
+| `reports/baseline-prompted-v1/` | Comparison, all paired predictions, bootstrap interval and feasibility diagnostic |
+| README, benchmark runbook, decisions, experiment journal and this file | Reproduction, measured outcome, limitations and next task |
+
+### Commands and acceptance checks
+
+The GPU environment was installed with the locked optional project. Actual inference commands included the uncached smoke, cache-parity probe, full validation start, and the user's continuation:
 
 ```powershell
-.\.tools\uv.exe sync --project environments/prompted --locked --python .tools/python/cpython-3.11.16-windows-x86_64-none/python.exe --cache-dir .uv-cache
-.\environments\prompted\.venv\Scripts\triage.exe predict --config configs/prompted.yaml --split val --limit 10 --output artifacts/prompted-qwen3-4b-smoke-v2
-$env:HF_HUB_OFFLINE='1' # after the pinned weights/tokenizer were cached
+$env:HF_HUB_OFFLINE='1' # pinned model/tokenizer already downloaded
 .\environments\prompted\.venv\Scripts\python.exe -u scripts/verify_prompt_cache.py --output reports/prompted-cache-smoke
 .\environments\prompted\.venv\Scripts\triage.exe predict --config configs/prompted.yaml --split val
+.\environments\prompted\.venv\Scripts\triage.exe predict --config configs/prompted.yaml --split val --resume
+.\.venv\Scripts\triage.exe evaluate --predictions artifacts/prompted-qwen3-4b-nf4-cache-v1-val/predictions.jsonl --output reports/prompted-qwen3-4b-nf4-cache-v1-val
+.\.venv\Scripts\triage.exe policy select --predictions artifacts/prompted-qwen3-4b-nf4-cache-v1-val/predictions.jsonl --split val --output reports/prompted-qwen3-4b-nf4-cache-v1-policy
+.\.venv\Scripts\triage.exe compare --baseline reports/baseline-c1-v1-val/predictions.jsonl --candidate artifacts/prompted-qwen3-4b-nf4-cache-v1-val/predictions.jsonl --output reports/baseline-prompted-v1
 ```
 
-The smoke used the earlier uncached configuration retained in its `run.json`; the current default enables prefix caching. Existing outputs are never overwritten. If the full run is interrupted, use the same prediction command with `--resume`; configuration, prompt, code, data, gate and dependency-lock hashes must match. Do not start a second worker against the same output. See `docs/prompted_benchmark.md` for analysis commands.
+Existing completed outputs cannot be overwritten or resumed; use new output directories for reproductions. The original smoke's uncached configuration is retained in its `run.json`, while the current default enables prefix caching.
 
-Next concrete task: finish the active validation run, evaluate and select the prompted policy from its saved predictions, compare with the unchanged baseline, and record measured quality/runtime/memory and limitations here. Test predictions remain unused.
+Final software checks: **111 tests passed in 10.00 seconds**; Ruff lint and formatting passed; mypy passed on the five configured core modules; both CPU and optional GPU lockfiles passed offline consistency checks. Fixture tests are clearly separated from the genuine benchmark. Verified complete prediction IDs/hashes, one-to-one gate alignment, resumed-run identity and retained report integrity. The generated coverage/error plot was inspected, and all 40 queued examples were reviewed. No inference code changed after the frozen full run began.
+
+### Limits and next concrete task
+
+No Milestone 3 blocker remains. The API still serves only the baseline. No test prediction, cloud provisioning, serving-load benchmark or cost claim was made. Public benchmark contamination, small oos sample size, validation threshold selection, NF4 precision and the baseline-dependent gate limit interpretation. Cache parity is verified for six probes, not guaranteed for every possible floating-point execution.
+
+**Next: Milestone 4.** First check training memory and record a maximum training budget, then build conversational completion-only SFT records and verify loss masks. Use the same pinned Qwen3-4B base revision for the paired experiment; any model replacement must be documented for both B and C. Do not begin test evaluation or paid provisioning.
 
 ## Milestone 2 — routing policy and API
 
@@ -193,4 +238,4 @@ No blocking Milestone 1 issue remains. Windows execution is verified; the GitHub
 
 The baseline is deliberately ungated. Its scores are not calibrated correctness probabilities, and raw oos rejection is zero. The report's threshold curve is exploratory only. No validation constraint, deployment readiness, cost saving, or real customer outcome is claimed. Only one C configuration was run. The error observations are assistant-authored and not an independent human annotation study.
 
-The next task recorded at Milestone 1 completion was Milestone 2; it is now complete as documented above. The current next task is Milestone 3.
+The next task recorded at Milestone 1 completion was Milestone 2; it is now complete as documented above. Milestone 3 is now complete; the current next task is Milestone 4 as documented above.

@@ -1,6 +1,6 @@
 # Experiment journal
 
-## 2026-09-27 — prompted-qwen3-4b-nf4-cache-v1 (running)
+## 2026-09-27 — prompted-qwen3-4b-nf4-cache-v1 (complete)
 
 Hypothesis: a prompted language model may resolve semantic intent distinctions missed by the lexical baseline, while its ability to follow the exact 150-label output contract may limit that benefit. Keep the same baseline gate so the comparison measures candidate labels under the specified policy, rather than introducing a new uncertainty estimator.
 
@@ -8,7 +8,11 @@ The default 4B Qwen model fits the local 4 GiB GPU with NF4 double quantization 
 
 Full-prompt inference took about 18 seconds/request. Reusing the 627-token fixed system prefix reduced six predetermined probe cases to 1.38–2.16 seconds, with exactly matching output tokens/text accounting. Each request gets a separate cache copy. The final experiment records caching as part of its identity. No smaller model, test predictions, few-shot examples, or paid service was used.
 
-Decision: run the entire 3,100-request validation split before drawing a quality conclusion. Record raw failures, compare supported macro-F1 and selected routing policies, and retain all paired predictions for inspection. Successful inference on this GPU does not establish that fine-tuning will fit; Milestone 4 needs its own memory and training-budget check.
+The full 3,100-request validation run completed after a user-requested pause at 1,118 requests and terminal resumption. All outcome IDs, hashes and frozen inputs were verified. Qwen's supported macro-F1 was 0.801038 versus 0.882634 for the baseline; paired difference -0.081596, bootstrap 95% interval [-0.099838, -0.067063]. It fixed 206 supported baseline mistakes but introduced 479 errors on requests the baseline classified correctly. There were 65 unknown-label JSON outputs, five bare `oos` strings, and no truncation or infrastructure failures.
+
+The prompted candidate could not meet the original routing constraints under any shared-gate threshold. Its frozen policy disables automatic routing. Reviewing everything gives 100% oos review recall but zero coverage, not perfect classification. The baseline remains the better measured A/B candidate. Summed saved-request inference took 80.68 minutes; cached per-request p95 was 2.053 seconds on the local GTX 1650. These are offline measurements, not API capacity or cost evidence.
+
+Decision: preserve this negative result and the fixed zero-shot prompt. Milestone 4 can test whether completion-only fine-tuning improves exact-label adherence and semantic distinctions, using the same pinned base model. Successful inference does not establish that fine-tuning will fit; first perform its memory and training-budget check. Keep test predictions unused. Full evidence and reviewed examples are linked from the implementation status.
 
 ## 2026-09-25 — baseline-c1-v1
 

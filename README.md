@@ -1,6 +1,6 @@
 # Customer request triage
 
-A reproducible CPU triage service for the official CLINC150 benchmark. Milestones 1 and 2 implement data preparation, TF-IDF/logistic-regression training, validation evaluation, a frozen routing policy, and a local FastAPI service. See the [project specification](Customer_Request_Triage_Project_Spec.md) and [implementation status](docs/implementation_status.md).
+A reproducible triage service and model comparison for the official CLINC150 benchmark. Milestones 1-3 implement a TF-IDF/logistic-regression baseline, frozen routing policy, local FastAPI service, and a genuine prompted Qwen3-4B validation benchmark. See the [project specification](Customer_Request_Triage_Project_Spec.md) and [implementation status](docs/implementation_status.md).
 
 The measured validation result is **0.882634 supported macro-F1** across all 150 supported labels and **88.33% supported accuracy**. The evaluation includes 3,000 supported and 100 out-of-scope requests. This is public benchmark evidence, not production customer usage. [Report](reports/baseline-c1-v1-val/report.md) · [40 reviewed errors](reports/baseline-c1-v1-val/error_analysis.md) · [data provenance](reports/baseline-c1-v1-val/data_manifest.json).
 
@@ -54,6 +54,8 @@ See the [API runbook](docs/api.md) for response examples, failure behavior, and 
 ## Prompted model experiment
 
 Milestone 3 adds a pinned Qwen3-4B runner with strict JSON parsing, complete validation accounting, a verified shared baseline gate, and raw/policy comparison. The optional CUDA environment stays separate from the CPU service. See the [benchmark runbook](docs/prompted_benchmark.md), [hardware/token audit](reports/prompted-hardware/token_audit.json), and [current execution status](docs/implementation_status.md). The API continues to load the baseline bundle.
+
+The completed **3,100-request validation run** achieved **0.801038 supported macro-F1**, below the baseline's **0.882634**. It produced 70 invalid outputs and zero infrastructure failures. No shared-gate threshold met all routing constraints, so the prompted policy disables automatic routing. See the [paired comparison](reports/baseline-prompted-v1/report.md), [prompted report](reports/prompted-qwen3-4b-nf4-cache-v1-val/report.md), and [error review](reports/prompted-qwen3-4b-nf4-cache-v1-val/error_analysis.md). This is a completed experiment with a negative result, not a deployment upgrade.
 
 ## Checks
 

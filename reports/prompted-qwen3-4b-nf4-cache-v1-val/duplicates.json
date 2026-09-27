@@ -1,0 +1,148 @@
+{
+  "exact": {
+    "conflicting_label_groups": 4,
+    "cross_split_groups": 5,
+    "group_count": 5,
+    "groups": [
+      {
+        "conflicting_labels": true,
+        "cross_split": true,
+        "sample_ids": [
+          "44d338300c15cfdae6f225f2d4b8ace2860d5f2f6b369db5e5e95cff8dd881ad",
+          "bca223661cbbd222a14dda208526cd569c2dc55fbd5b84b2b9712eae7a003c63"
+        ],
+        "splits": [
+          "train",
+          "val"
+        ],
+        "within_split": false
+      },
+      {
+        "conflicting_labels": true,
+        "cross_split": true,
+        "sample_ids": [
+          "b0e6ba286d9013626ca3cd595723b1a42271b7f144f513ed7110e06d337e04d2",
+          "77512a6f5d21eb7c3a69ce479fab4df4ad9c8c773403aaa2476db79bdfac35c9"
+        ],
+        "splits": [
+          "train",
+          "val"
+        ],
+        "within_split": false
+      },
+      {
+        "conflicting_labels": false,
+        "cross_split": true,
+        "sample_ids": [
+          "e03c4340bc9681a480bba27df33e719c80d00e3c842e57f338703b5aea7cb20e",
+          "659c426a12a1cbdd228bac008305193f06cf87b3d2ea3c765035216317d211ab"
+        ],
+        "splits": [
+          "train",
+          "val"
+        ],
+        "within_split": false
+      },
+      {
+        "conflicting_labels": true,
+        "cross_split": true,
+        "sample_ids": [
+          "b3f8e9da6a05194623042a2c780c201682ac796962128431c2aeb5d8b181c0f7",
+          "1094bd9283520f71b60a05972f25e79acea211f8dc2f5b1c75404076d1b9698e"
+        ],
+        "splits": [
+          "test",
+          "train"
+        ],
+        "within_split": false
+      },
+      {
+        "conflicting_labels": true,
+        "cross_split": true,
+        "sample_ids": [
+          "cef5b8e3a2f34b3f0883be04cd161da265942aee2383209c5d5bc7f4f0e8231d",
+          "6715841ec8cafe8505e0fcf1211c30060e8c94baa410ed527601eb7589e59d53"
+        ],
+        "splits": [
+          "test",
+          "train"
+        ],
+        "within_split": false
+      }
+    ],
+    "within_split_groups": 0
+  },
+  "normalized": {
+    "conflicting_label_groups": 4,
+    "cross_split_groups": 5,
+    "group_count": 5,
+    "groups": [
+      {
+        "conflicting_labels": true,
+        "cross_split": true,
+        "sample_ids": [
+          "44d338300c15cfdae6f225f2d4b8ace2860d5f2f6b369db5e5e95cff8dd881ad",
+          "bca223661cbbd222a14dda208526cd569c2dc55fbd5b84b2b9712eae7a003c63"
+        ],
+        "splits": [
+          "train",
+          "val"
+        ],
+        "within_split": false
+      },
+      {
+        "conflicting_labels": true,
+        "cross_split": true,
+        "sample_ids": [
+          "b0e6ba286d9013626ca3cd595723b1a42271b7f144f513ed7110e06d337e04d2",
+          "77512a6f5d21eb7c3a69ce479fab4df4ad9c8c773403aaa2476db79bdfac35c9"
+        ],
+        "splits": [
+          "train",
+          "val"
+        ],
+        "within_split": false
+      },
+      {
+        "conflicting_labels": false,
+        "cross_split": true,
+        "sample_ids": [
+          "e03c4340bc9681a480bba27df33e719c80d00e3c842e57f338703b5aea7cb20e",
+          "659c426a12a1cbdd228bac008305193f06cf87b3d2ea3c765035216317d211ab"
+        ],
+        "splits": [
+          "train",
+          "val"
+        ],
+        "within_split": false
+      },
+      {
+        "conflicting_labels": true,
+        "cross_split": true,
+        "sample_ids": [
+          "b3f8e9da6a05194623042a2c780c201682ac796962128431c2aeb5d8b181c0f7",
+          "1094bd9283520f71b60a05972f25e79acea211f8dc2f5b1c75404076d1b9698e"
+        ],
+        "splits": [
+          "test",
+          "train"
+        ],
+        "within_split": false
+      },
+      {
+        "conflicting_labels": true,
+        "cross_split": true,
+        "sample_ids": [
+          "cef5b8e3a2f34b3f0883be04cd161da265942aee2383209c5d5bc7f4f0e8231d",
+          "6715841ec8cafe8505e0fcf1211c30060e8c94baa410ed527601eb7589e59d53"
+        ],
+        "splits": [
+          "test",
+          "train"
+        ],
+        "within_split": false
+      }
+    ],
+    "within_split_groups": 0
+  }
+}
