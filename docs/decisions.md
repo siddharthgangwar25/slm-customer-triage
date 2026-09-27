@@ -1,5 +1,17 @@
 # Implementation decisions
 
+## 2026-09-27 — Milestone 3 implementation
+
+- **Preserve the paired model.** The local GTX 1650 has 4 GiB VRAM and lacks native BF16 support. Qwen/Qwen3-4B at `1cfa9a7208912126459214e8b04321603b3df60c` loads with bitsandbytes NF4 double quantization and FP16 compute. No smaller model or remote inference service has been substituted. Milestone 4 must use this exact base revision unless a replacement is explicitly recorded for both B and C.
+- **Isolate GPU dependencies.** `environments/prompted/uv.lock` pins the CUDA environment independently of the CPU package. GPU libraries are imported only when constructing the real adapter; evaluation, policy selection, API and CI retain their CPU path.
+- **Budget before inference.** The pinned tokenizer encodes all 150 labels and each validation input, with explicit non-thinking mode. All 3,100 inputs fit: 645–679 tokens against a 2,048-token budget plus 32 generated tokens. Oversized prompts fail before inference; no labels or request text are removed.
+- **Keep failures visible.** Retain raw completions without JSON repair. Missing EOS, invalid labels/JSON and inference exceptions remain explicit outcomes. Only validation is accepted by the runner. Smoke outputs cannot enter benchmark evaluation.
+- **Resume with provenance.** Bind runs to configuration, prompt, code, dependency lock, input IDs, data and gate hashes. Every append has a checksum checkpoint. Reuse the exact pinned local snapshot for tokenizer/model loading, avoiding an installed Transformers tokenizer helper that otherwise attempted a hub lookup despite `local_files_only=True`.
+- **Measure cache behavior before use.** Full-prompt smoke inference takes roughly 18 seconds/request. An optional deep-copied system-prefix KV cache avoids recomputing constant instructions while keeping each request's tokens isolated. `scripts/verify_prompt_cache.py` compares cached/uncached outputs on six predetermined validation indices and records timings; this is hardware evidence, not quality tuning. The final experiment configuration and metadata identify whether caching is enabled.
+- **Compare the same gate.** Candidate B attaches A's saved gate scores by exact IDs, text, labels and provenance. Select each candidate's threshold independently under the original constraints; publish raw and gated outcomes. A paired supported-sample bootstrap describes the F1 difference, without treating validation selection as an independent test.
+
+Primary references: [Qwen3-4B model card](https://huggingface.co/Qwen/Qwen3-4B), [bitsandbytes hardware compatibility](https://huggingface.co/docs/bitsandbytes/main/en/installation), and [Transformers cache API](https://huggingface.co/docs/transformers/v4.57.1/en/kv_cache). Installed APIs are exercised by real smoke/parity checks; see implementation status for completion state.
+
 ## 2026-09-25 — Milestone 1
 
 - **CPU first.** Python 3.11.16, uv 0.12.19, scikit-learn 1.9.1, NumPy 2.4.6, SciPy 1.17.1, and joblib 1.6.0 were installed and exercised together on Windows. `uv.lock` includes exact versions and distribution hashes. GPU packages are absent. The local Python installation was needed because PATH exposed only unusable Windows app aliases.

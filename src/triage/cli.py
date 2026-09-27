@@ -26,9 +26,17 @@ def parser():
     predict.add_argument("--split", choices=["val"], required=True)
     predict.add_argument("--output", type=Path)
     predict.add_argument("--bundle", type=Path, help="Trusted project-controlled model bundle")
+    predict.add_argument("--limit", type=int, help="Prompted hardware smoke only; not a benchmark")
+    predict.add_argument(
+        "--resume", action="store_true", help="Resume an unchanged partial prompted run"
+    )
     evaluate = commands.add_parser("evaluate")
     evaluate.add_argument("--predictions", type=Path, required=True)
     evaluate.add_argument("--output", type=Path, required=True)
+    comparison = commands.add_parser("compare")
+    comparison.add_argument("--baseline", type=Path, required=True)
+    comparison.add_argument("--candidate", type=Path, required=True)
+    comparison.add_argument("--output", type=Path, required=True)
     policy = commands.add_parser("policy").add_subparsers(dest="action", required=True)
     select = policy.add_parser("select")
     select.add_argument("--predictions", type=Path, required=True)
@@ -63,12 +71,29 @@ def main():
             result = train(cfg, args.output or Path(cfg["bundle"]))
             result = {"model_version": result["model_version"], "fit": result["fit"]}
         elif args.command == "predict":
-            from triage.models.baseline import predict
-
             cfg = config(args.config)
-            result = predict(
-                cfg, args.split, args.output or Path(cfg["prediction_output"]), args.bundle
-            )
+            if cfg.get("model_type") == "prompted":
+                from triage.models.prompted import run
+
+                result = run(
+                    cfg,
+                    args.split,
+                    args.output or Path(cfg["prediction_output"]),
+                    limit=args.limit,
+                    resume=args.resume,
+                )
+            else:
+                from triage.models.baseline import predict
+
+                if args.limit is not None or args.resume:
+                    raise ValueError("Smoke/resume flags apply only to prompted experiments")
+                result = predict(
+                    cfg, args.split, args.output or Path(cfg["prediction_output"]), args.bundle
+                )
+        elif args.command == "compare":
+            from triage.evaluation.compare import compare
+
+            result = compare(args.baseline, args.candidate, args.output)
         elif args.command == "policy":
             from triage.evaluation.select_policy import select_policy
 

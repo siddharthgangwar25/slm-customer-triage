@@ -51,6 +51,10 @@ The defaults cap text at 2,000 characters, bodies at 16 KiB, model input at 512 
 
 See the [API runbook](docs/api.md) for response examples, failure behavior, and operational limits. The [API parity evidence](reports/baseline-c1-v1-api/api_parity.json) records **3,100 requests with zero differences** against offline policy decisions; [localhost smoke evidence](reports/baseline-c1-v1-api/http_smoke.json) confirms the server command works over HTTP. Neither check is a load benchmark.
 
+## Prompted model experiment
+
+Milestone 3 adds a pinned Qwen3-4B runner with strict JSON parsing, complete validation accounting, a verified shared baseline gate, and raw/policy comparison. The optional CUDA environment stays separate from the CPU service. See the [benchmark runbook](docs/prompted_benchmark.md), [hardware/token audit](reports/prompted-hardware/token_audit.json), and [current execution status](docs/implementation_status.md). The API continues to load the baseline bundle.
+
 ## Checks
 
 ```console
@@ -60,10 +64,10 @@ uv run --locked mypy
 uv run --locked pytest -q
 ```
 
-Tests use explicitly marked synthetic fixtures and cover source corruption, hashes and split membership, deterministic processing, leakage prevention, saved-model parity, metric arithmetic, failure accounting, CLI execution, model-free report generation, exact policy selection, and API contracts with fake and tiny real baseline adapters. The CPU CI workflow runs these on Windows and Linux; hosted CI execution remains unverified until pushed. Container/GPU tests arrive with their respective milestones.
+Tests use explicitly marked synthetic fixtures and cover source corruption, hashes and split membership, deterministic processing, leakage prevention, saved-model parity, metric arithmetic, failure accounting, CLI execution, model-free report generation, exact policy selection, and API contracts with fake and tiny real baseline adapters. The CPU CI workflow runs these on Windows and Linux; hosted CI execution remains unverified until pushed. Optional GPU execution and cache-parity probes use the separate prompted environment.
 
 ## Data attribution and limitations
 
 CLINC150 accompanies *An Evaluation Dataset for Intent Classification and Out-of-Scope Prediction*, Larson et al. (2019), from the [original CLINC repository](https://github.com/clinc/oos-eval). Source revision: `828f8093932c8fe6ca7936c3d2e52903b1c523de`. The [CC BY 3.0 source license](reports/baseline-c1-v1-val/CLINC_LICENSE.txt) is retained. Canonicalization adds metadata; request text and official split membership are preserved.
 
-There are five cross-split duplicate groups, four with conflicting labels. They are reported without altering the benchmark. Only 100 training oos examples exist. Public benchmark contamination cannot be ruled out for later language-model experiments. No test classification, GPU experiment, deployment, cost claim, or cloud provisioning has been performed.
+There are five cross-split duplicate groups, four with conflicting labels. They are reported without altering the benchmark. Only 100 training oos examples exist. Public benchmark contamination cannot be ruled out for later language-model experiments. No test classification, deployment, cost claim, or cloud provisioning has been performed. Local GPU smoke evidence and prompted benchmark execution are tracked in the implementation status.

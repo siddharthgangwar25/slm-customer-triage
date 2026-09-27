@@ -1,0 +1,19 @@
+{
+  "execution": {
+    "last_session_seconds": 660.2420113000001,
+    "peak_gpu_allocated_bytes": 2975083008,
+    "peak_gpu_reserved_bytes": 3015704576,
+    "peak_process_rss_bytes": 5013925888,
+    "process_rss_bytes": 1521602560,
+    "resumed": true,
+    "sum_inference_seconds": 178.69060429999945
+  },
+  "latency_seconds": {
+    "p50": 17.795521449999796,
+    "p95": 18.204109774999825
+  },
+  "model_memory_bytes": 2594962688,
+  "purpose": "hardware smoke only; first 10 validation requests, all same gold class",
+  "sample_count": 10,
+  "valid_output_count": 8
+}

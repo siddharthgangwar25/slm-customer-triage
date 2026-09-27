@@ -1,0 +1,23 @@
+{
+  "bf16_native_supported": false,
+  "bf16_supported_with_emulation": true,
+  "compute_capability": [
+    7,
+    5
+  ],
+  "cuda_available": true,
+  "gpu": "NVIDIA GeForce GTX 1650",
+  "gpu_memory_free_total_bytes": [
+    3454795776,
+    4294639616
+  ],
+  "nvidia_smi": "NVIDIA GeForce GTX 1650, 4096 MiB, 51 MiB, 617.14",
+  "observed_date": "2026-09-27",
+  "paid_services_enabled": false,
+  "platform": "Windows-10-10.0.26200-SP0",
+  "processor": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+  "ram_available_bytes": 6168645632,
+  "ram_total_bytes": 16477143040,
+  "torch_cuda": "12.8",
+  "torch_version": "2.8.0+cu128"
+}

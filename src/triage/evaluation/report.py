@@ -44,6 +44,9 @@ def load_predictions(path):
             raise ValueError("Unknown parse status")
         if row["parse_status"] == "error" and row["error_type"] is None:
             raise ValueError("Failed predictions require an explicit error_type")
+    from triage.evaluation.gate import verify_saved_gate
+
+    verify_saved_gate(rows, manifest, path.parent)
     return rows, catalog, manifest
 
 
@@ -56,6 +59,8 @@ def write_csv(path, fieldnames, rows):
 
 def evaluate(predictions: Path, output: Path):
     rows, catalog, manifest = load_predictions(predictions)
+    if manifest.get("benchmark_complete") is False:
+        raise ValueError("Hardware smoke predictions are not a complete validation benchmark")
     output = new_directory(output)
     metrics = classification(rows, catalog)
     metrics["serial_model_latency_ms"] = dict(
@@ -75,6 +80,10 @@ def evaluate(predictions: Path, output: Path):
     shutil.copyfile(
         predictions.parent / "prediction_manifest.json", output / "prediction_manifest.json"
     )
+    if "gate_reference" in manifest:
+        shutil.copyfile(
+            predictions.parent / "gate_predictions.jsonl", output / "gate_predictions.jsonl"
+        )
     write_csv(
         output / "per_class.csv",
         ["label", "precision", "recall", "f1", "support"],
@@ -108,7 +117,7 @@ def evaluate(predictions: Path, output: Path):
     ax.set(
         xlabel="Routing coverage",
         ylabel="Routing error",
-        title=f"Baseline diagnostic: {manifest['split']}, n={len(rows)}",
+        title=f"Routing diagnostic: {manifest['split']}, n={len(rows)}",
     )
     ax.grid(alpha=0.3)
     fig.tight_layout()
@@ -119,7 +128,7 @@ def evaluate(predictions: Path, output: Path):
     selected = errors[:30] + [r for r in rows if r["label"] == "oos"][:10]
     write_json(output / "error_review_samples.json", selected)
     lines = [
-        "# Baseline validation report",
+        "# Validation classification report",
         "",
         "TEST FIXTURE — not benchmark evidence."
         if manifest["fixture"]
@@ -138,13 +147,13 @@ def evaluate(predictions: Path, output: Path):
         f"| Infrastructure failure rate | {metrics['infrastructure_failure_rate']:.6f} |",
         f"| Serial model p95 latency (ms) | {metrics['serial_model_latency_ms']['p95']:.3f} |",
         "",
-        "Timing includes vectorization and classification per request on this CPU. "
-        "It is not API latency, a load test, or a cost estimate.",
+        f"Timing scope: {manifest['timing_scope']}. "
+        "This is not API latency, a load test, or a cost estimate.",
         "",
-        "The classifier fits only supported training requests. It always predicts a supported "
-        "intent, so all oos examples are wrong before gating. Gate scores are uncalibrated "
-        "ranking signals. The coverage/error plot is exploratory; no deployment threshold "
-        "or target achievement is claimed in Milestone 1.",
+        "Raw classification runs without gating. The gate scores come from the frozen baseline "
+        "and are uncalibrated ranking signals. This curve is exploratory; exact policy selection "
+        "is a separate command. Malformed, unknown, truncated, and failed outputs remain in "
+        "classification accounting. The baseline itself cannot predict oos; a prompted model can.",
         "",
         f"Supported classification errors: {len(errors)}. "
         f"Review queue: {len(selected)} examples in `error_review_samples.json`. "

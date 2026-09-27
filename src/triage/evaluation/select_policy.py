@@ -84,11 +84,13 @@ def select_policy(predictions: Path, split: str, output: Path):
     rows, catalog, manifest = load_predictions(predictions)
     if manifest["split"] != "val":
         raise ValueError("Prediction manifest must identify split=val")
-    # Milestone 2 supports the genuine baseline gate. Future SLM files must carry a verified join.
-    if manifest["gate_model_version"] != manifest["model"]["model_version"]:
-        raise ValueError("Milestone 2 requires predictions from the baseline gate itself")
-    if manifest["model"]["backend"] != "scikit-learn CPU":
-        raise ValueError("Milestone 2 supports only the CPU baseline")
+    if manifest.get("benchmark_complete") is False:
+        raise ValueError("Policy selection requires the complete validation benchmark")
+    gate_model = manifest.get("gate_model", manifest["model"])
+    if gate_model["backend"] != "scikit-learn CPU":
+        raise ValueError("Policy requires the frozen CPU baseline gate")
+    if manifest["gate_model_version"] != gate_model["model_version"]:
+        raise ValueError("Gate model version mismatch")
     points = exact_sweep(rows, catalog)
     selected = choose_point(points)
     threshold = selected["threshold"] if selected else ALL_REVIEW_THRESHOLD
@@ -105,12 +107,15 @@ def select_policy(predictions: Path, split: str, output: Path):
         "split": "val",
         "model_version": manifest["model"]["model_version"],
         "gate_model_version": manifest["gate_model_version"],
-        "pipeline_sha256": manifest["model"]["pipeline_sha256"],
+        "pipeline_sha256": gate_model["pipeline_sha256"],
         "catalog_sha256": object_hash(catalog),
         "data_manifest_sha256": manifest["data_manifest_sha256"],
         "predictions_sha256": manifest["predictions_sha256"],
         "prediction_manifest_sha256": sha256(predictions.parent / "prediction_manifest.json"),
     }
+    if "gate_reference" in manifest:
+        payload["candidate_metadata_sha256"] = object_hash(manifest["model"])
+        payload["gate_reference"] = manifest["gate_reference"]
     digest = object_hash(payload)
     frozen = {**payload, "config_sha256": digest, "policy_version": f"policy-v1-{digest[:12]}"}
     new_directory(output)

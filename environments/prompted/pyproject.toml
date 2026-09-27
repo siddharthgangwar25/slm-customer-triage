@@ -1,0 +1,21 @@
+[project]
+name = "triage-prompted-environment"
+version = "0.1.0"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+  "customer-request-triage",
+  "torch==2.8.0",
+  "transformers>=4.51,<5",
+  "accelerate>=1.10,<2",
+  "bitsandbytes>=0.47,<1",
+  "psutil>=7,<8",
+]
+
+[tool.uv.sources]
+customer-request-triage = { path = "../..", editable = true }
+torch = { index = "pytorch-cu128" }
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true

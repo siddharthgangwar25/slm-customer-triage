@@ -1,0 +1,43 @@
+{
+  "config": {
+    "batch_size": 1,
+    "cache_dir": "artifacts/huggingface",
+    "data_dir": "data/clinc150",
+    "device": "cuda:0",
+    "do_sample": false,
+    "dtype": "float16",
+    "enable_thinking": false,
+    "environment_lock": "environments/prompted/uv.lock",
+    "experiment_id": "prompted-qwen3-4b-nf4-v1",
+    "gate_predictions": "reports/baseline-c1-v1-val/predictions.jsonl",
+    "max_input_tokens": 2048,
+    "max_new_tokens": 32,
+    "model_id": "Qwen/Qwen3-4B",
+    "model_type": "prompted",
+    "prediction_output": "artifacts/prompted-qwen3-4b-nf4-v1-val",
+    "prompt_file": "prompts/intent-v1.txt",
+    "prompt_version": "intent-v1",
+    "quantization": "nf4",
+    "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+    "seed": 42
+  },
+  "config_sha256": "37079914428005981da5b9b42cf5181cd5b2e37b11b2a959f75d3b2f156fae0b",
+  "data_manifest_sha256": "0d36ac83b17181b9aa47a79748f421c62d79139e61104d738b99e1be027518e1",
+  "environment_lock_sha256": "d0a778505f544f9924afb2996e20cdf83cf2124abf248f8a73646ca7ab7f34c1",
+  "gate_predictions_sha256": "2075ef8fdf20ca7275dfdbeb1dcb013ca8ecc21f915576ef3f38a7b84f564108",
+  "implementation_sha256": "065880b7f15fbd0228118b610c85f4d23d9bf35089814753166f65fc75a2bc92",
+  "purpose": "hardware_smoke",
+  "sample_ids": [
+    "128f0a8a182b07fe6389b01265c7cd5628c877bf0384174282387e365b5a5d64",
+    "5aa013df14bc2c8d6f1e7d90cf6a8f18728f42aa06aa83c24a6bd0923c727e76",
+    "782b066924fa03c1076a5a99aad2af5c0d087a924e6b142a8a79bf637d0e66d9",
+    "3460323f44897587ea23f3cc52615e6b80f0f7af8d213a980eaf9aeb1592e015",
+    "c58a506c8e7d2b4146b48336764bc0e75e39f2225fda987926441bcfaf35bd87",
+    "ed84278be69a16d96ee5d60888ad52e5250644dea5bc414c4ce9a6e0f4285529",
+    "d8d68c1d0a26226410ee425d5b5440d77d8ae4370d008384744d5985d6f3ea29",
+    "fe1341d2f5717db1c7874b1631b7d2a64428cff584b40967bea308b9a199fce3",
+    "8cb65b26c2e233f6a3c5d29c54e1f3b696dd9a56760db115163c6467406218ca",
+    "49f3e8ea47743a9cfb3d9ca2e00fba4a386a86a5e5c282a3d468c685b6eb6801"
+  ],
+  "system_prompt_sha256": "d00e437d4dd47c033aab1509fc6874383b28eeb17827da299b0dcfa6c9a265d3"
+}

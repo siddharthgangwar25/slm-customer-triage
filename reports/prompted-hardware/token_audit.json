@@ -1,0 +1,20 @@
+{
+  "catalog_size": 150,
+  "chat_template_sha256": "41d5929bf73796beb66809ac700b2cf3ff81694f933e5c14d52b7fd6963c947d",
+  "enable_thinking": false,
+  "input_length_percentiles": {
+    "max": 679.0,
+    "median": 652.0,
+    "min": 645.0,
+    "p95": 661.0
+  },
+  "max_input_tokens": 2048,
+  "max_new_tokens": 32,
+  "model_id": "Qwen/Qwen3-4B",
+  "non_thinking_suffix_verified": true,
+  "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+  "sample_count": 3100,
+  "split": "val",
+  "system_prompt_sha256": "d00e437d4dd47c033aab1509fc6874383b28eeb17827da299b0dcfa6c9a265d3",
+  "would_truncate": 0
+}

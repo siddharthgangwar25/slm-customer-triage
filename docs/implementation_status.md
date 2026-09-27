@@ -1,6 +1,36 @@
 # Implementation status
 
-Last updated: **2026-09-25**. Milestones 1 and 2: **implemented, executed, and locally verified**. Milestones 3–6 have not been implemented. The original specification and Milestone 1 benchmark evidence are preserved unchanged.
+Last updated: **2026-09-27**. Milestones 1 and 2: **implemented, executed, and locally verified**. Milestone 3 is **in progress**: implementation, token audit, real-model smoke and cache parity have passed; the full validation run is executing. Milestones 4?6 have not been implemented. Original baseline evidence remains unchanged.
+
+## Milestone 3 ? validation run in progress
+
+Hardware inspection found an AMD Ryzen 5 5600H, 15.35 GiB RAM, and NVIDIA GeForce GTX 1650 with 4 GiB VRAM. The default **Qwen/Qwen3-4B**, revision `1cfa9a7208912126459214e8b04321603b3df60c`, loads using bitsandbytes NF4 with double quantization and FP16 compute. It has 4,022,468,096 parameters. No smaller model, cloud resource, or paid service has been substituted.
+
+Implemented: isolated locked CUDA environment; fixed full-catalog zero-shot prompt; explicit non-thinking tokenization and budget checks; resumable validation-only predictions with raw outputs, token counts, errors, timing and memory; checked one-to-one baseline-gate attachment; shared saved-prediction evaluation, exact policy selection, paired bootstrap and baseline comparison. CPU commands import neither torch nor Transformers. The Milestone 2 API continues to serve the baseline only.
+
+Real evidence completed:
+
+- `reports/prompted-hardware/hardware.json`: actual hardware/CUDA inspection.
+- `reports/prompted-hardware/token_audit.json`: all 3,100 validation prompts contain all 150 labels, use 645?679 input tokens, and fit the 2,048-token limit plus 32 generation tokens. Non-thinking template verified; no truncation.
+- `reports/prompted-hardware/uncached-smoke/`: ten genuine requests, eight strictly valid outputs and two explicit unknown-label failures (`translation` instead of catalog label `translate`). Median 17.80 seconds/request, peak CUDA allocated 2,975,083,008 bytes. All ten are from the same class; this is hardware evidence, not classification performance.
+- `reports/prompted-cache-smoke/cache_parity.json`: six predetermined validation cases, including oos, gave identical cached/uncached outputs. Cached times were 1.38?2.16 seconds versus 17.80?23.49 seconds uncached. This supports enabling the fixed system-prefix cache on this stack, not universal floating-point parity.
+- CPU suite: **111 tests passed** in 10.89 seconds; lint and formatting passed; mypy passed on five configured core modules; optional dependency lock consistency passed offline.
+
+The original September 25 download was interrupted without predictions. The resumed September 27 hardware smoke completed. The full run now uses `configs/prompted.yaml`, experiment **prompted-qwen3-4b-nf4-cache-v1**, with a distinct configuration identity and a 627-token system cache. Every request receives its own cache copy. Actual full-run outputs are under `artifacts/prompted-qwen3-4b-nf4-cache-v1-val/`. Milestone 3 remains incomplete until all 3,100 outcomes and the raw/policy comparison exist.
+
+Commands executed from the repository root:
+
+```powershell
+.\.tools\uv.exe sync --project environments/prompted --locked --python .tools/python/cpython-3.11.16-windows-x86_64-none/python.exe --cache-dir .uv-cache
+.\environments\prompted\.venv\Scripts\triage.exe predict --config configs/prompted.yaml --split val --limit 10 --output artifacts/prompted-qwen3-4b-smoke-v2
+$env:HF_HUB_OFFLINE='1' # after the pinned weights/tokenizer were cached
+.\environments\prompted\.venv\Scripts\python.exe -u scripts/verify_prompt_cache.py --output reports/prompted-cache-smoke
+.\environments\prompted\.venv\Scripts\triage.exe predict --config configs/prompted.yaml --split val
+```
+
+The smoke used the earlier uncached configuration retained in its `run.json`; the current default enables prefix caching. Existing outputs are never overwritten. If the full run is interrupted, use the same prediction command with `--resume`; configuration, prompt, code, data, gate and dependency-lock hashes must match. Do not start a second worker against the same output. See `docs/prompted_benchmark.md` for analysis commands.
+
+Next concrete task: finish the active validation run, evaluate and select the prompted policy from its saved predictions, compare with the unchanged baseline, and record measured quality/runtime/memory and limitations here. Test predictions remain unused.
 
 ## Milestone 2 — routing policy and API
 

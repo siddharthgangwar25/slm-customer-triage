@@ -1,5 +1,15 @@
 # Experiment journal
 
+## 2026-09-27 — prompted-qwen3-4b-nf4-cache-v1 (running)
+
+Hypothesis: a prompted language model may resolve semantic intent distinctions missed by the lexical baseline, while its ability to follow the exact 150-label output contract may limit that benefit. Keep the same baseline gate so the comparison measures candidate labels under the specified policy, rather than introducing a new uncertainty estimator.
+
+The default 4B Qwen model fits the local 4 GiB GPU with NF4 double quantization and FP16 compute. All validation prompts fit without truncation and the tokenizer explicitly disables thinking. A ten-request uncached smoke exposed two invented `translation` labels instead of the supported `translate` label. They remain failures; the prompt is not repaired around these observations.
+
+Full-prompt inference took about 18 seconds/request. Reusing the 627-token fixed system prefix reduced six predetermined probe cases to 1.38–2.16 seconds, with exactly matching output tokens/text accounting. Each request gets a separate cache copy. The final experiment records caching as part of its identity. No smaller model, test predictions, few-shot examples, or paid service was used.
+
+Decision: run the entire 3,100-request validation split before drawing a quality conclusion. Record raw failures, compare supported macro-F1 and selected routing policies, and retain all paired predictions for inspection. Successful inference on this GPU does not establish that fine-tuning will fit; Milestone 4 needs its own memory and training-budget check.
+
 ## 2026-09-25 — baseline-c1-v1
 
 Hypothesis: local word patterns will provide a useful CPU baseline for supported intents, while closely related intents and unsupported requests will expose the need for a review gate.
