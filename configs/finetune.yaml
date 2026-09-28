@@ -1,0 +1,20 @@
+experiment_id: finetuned-qwen3-06b-qlora-v1
+paired_config: configs/prompted-small.yaml
+prepared_data: artifacts/sft-qwen3-06b-v1
+output: artifacts/finetuned-qwen3-06b-qlora-v1
+environment_lock: environments/training/uv.lock
+training_dtype: float32
+precision_reason: GTX 1650 lacks native BF16; FP16 gradients failed in the prior 4B attempt. Use explicit FP32 compute with an NF4 base.
+max_seq_length: 1024
+epochs: 1
+microbatch: 1
+gradient_accumulation_steps: 16
+learning_rate: 0.0001
+rank: 16
+alpha: 32
+dropout: 0.05
+target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+seed: 42
+save_steps: 100
+local_time_budget_hours: 24
+paid_cloud_enabled: false

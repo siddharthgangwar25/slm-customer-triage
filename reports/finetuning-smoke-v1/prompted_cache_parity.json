@@ -1,0 +1,292 @@
+{
+  "all_equal": true,
+  "comparisons": [
+    {
+      "cached": {
+        "result": {
+          "error_type": null,
+          "input_tokens": 653,
+          "output_tokens": 8,
+          "raw_output": "{\"intent\": \"oos\"}",
+          "truncated": false
+        },
+        "seconds": 0.9000419000003603
+      },
+      "equal": true,
+      "sample_id": "128f0a8a182b07fe6389b01265c7cd5628c877bf0384174282387e365b5a5d64",
+      "source_index": 0,
+      "uncached": {
+        "result": {
+          "error_type": null,
+          "input_tokens": 653,
+          "output_tokens": 8,
+          "raw_output": "{\"intent\": \"oos\"}",
+          "truncated": false
+        },
+        "seconds": 4.349700499999017
+      }
+    },
+    {
+      "cached": {
+        "result": {
+          "error_type": null,
+          "input_tokens": 658,
+          "output_tokens": 8,
+          "raw_output": "{\"intent\": \"oos\"}",
+          "truncated": false
+        },
+        "seconds": 0.7852698999995482
+      },
+      "equal": true,
+      "sample_id": "4c20407204eeb2cca83010ff661c32a8193818b4ec7baee0269992a4bd6c5946",
+      "source_index": 500,
+      "uncached": {
+        "result": {
+          "error_type": null,
+          "input_tokens": 658,
+          "output_tokens": 8,
+          "raw_output": "{\"intent\": \"oos\"}",
+          "truncated": false
+        },
+        "seconds": 2.843839000001026
+      }
+    },
+    {
+      "cached": {
+        "result": {
+          "error_type": null,
+          "input_tokens": 649,
+          "output_tokens": 8,
+          "raw_output": "{\"intent\": \"oos\"}",
+          "truncated": false
+        },
+        "seconds": 0.7888364999998885
+      },
+      "equal": true,
+      "sample_id": "b78d2d6f5097bd8a5ff0bec351b726d102523e89a3ada740b999f601ef2ff192",
+      "source_index": 1000,
+      "uncached": {
+        "result": {
+          "error_type": null,
+          "input_tokens": 649,
+          "output_tokens": 8,
+          "raw_output": "{\"intent\": \"oos\"}",
+          "truncated": false
+        },
+        "seconds": 2.8442176999997173
+      }
+    },
+    {
+      "cached": {
+        "result": {
+          "error_type": null,
+          "input_tokens": 652,
+          "output_tokens": 8,
+          "raw_output": "{\"intent\": \"oos\"}",
+          "truncated": false
+        },
+        "seconds": 0.7892615999990085
+      },
+      "equal": true,
+      "sample_id": "d1f4940054dbcd5bed10bfb00eead4c3215dd114cebfc7f6210535a3f9e5c0e4",
+      "source_index": 1500,
+      "uncached": {
+        "result": {
+          "error_type": null,
+          "input_tokens": 652,
+          "output_tokens": 8,
+          "raw_output": "{\"intent\": \"oos\"}",
+          "truncated": false
+        },
+        "seconds": 2.8487365000000864
+      }
+    },
+    {
+      "cached": {
+        "result": {
+          "error_type": null,
+          "input_tokens": 670,
+          "output_tokens": 8,
+          "raw_output": "{\"intent\": \"oos\"}",
+          "truncated": false
+        },
+        "seconds": 0.8627622999993037
+      },
+      "equal": true,
+      "sample_id": "5c6f53d6568a5606153e4e8f62f082a7d5ea2eb047707414c681235f17f86884",
+      "source_index": 2500,
+      "uncached": {
+        "result": {
+          "error_type": null,
+          "input_tokens": 670,
+          "output_tokens": 8,
+          "raw_output": "{\"intent\": \"oos\"}",
+          "truncated": false
+        },
+        "seconds": 2.8473265999964497
+      }
+    },
+    {
+      "cached": {
+        "result": {
+          "error_type": null,
+          "input_tokens": 649,
+          "output_tokens": 8,
+          "raw_output": "{\"intent\": \"oos\"}",
+          "truncated": false
+        },
+        "seconds": 0.9362970000001951
+      },
+      "equal": true,
+      "sample_id": "e5bb7ae9d793d336e3b55cce0bf9151e5c1a3896e65eeb5ebffa0d390f95fcb6",
+      "source_index": 3099,
+      "uncached": {
+        "result": {
+          "error_type": null,
+          "input_tokens": 649,
+          "output_tokens": 8,
+          "raw_output": "{\"intent\": \"oos\"}",
+          "truncated": false
+        },
+        "seconds": 2.9349781999990228
+      }
+    }
+  ],
+  "config": {
+    "batch_size": 1,
+    "cache_dir": "artifacts/huggingface",
+    "data_dir": "data/clinc150",
+    "device": "cuda:0",
+    "do_sample": false,
+    "dtype": "float16",
+    "enable_thinking": false,
+    "environment_lock": "environments/training/uv.lock",
+    "experiment_id": "prompted-qwen3-06b-nf4-v1",
+    "gate_predictions": "reports/baseline-c1-v1-val/predictions.jsonl",
+    "max_input_tokens": 2048,
+    "max_new_tokens": 32,
+    "model_id": "Qwen/Qwen3-0.6B",
+    "model_type": "prompted",
+    "prediction_output": "artifacts/prompted-qwen3-06b-nf4-v1-val",
+    "prefix_cache": true,
+    "prompt_file": "prompts/intent-v1.txt",
+    "prompt_version": "intent-v1",
+    "quantization": "nf4",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "seed": 42
+  },
+  "config_sha256": "53f85eece67ce836cdc5378b3712abb75fde73fd8b81835762e7010a1364648c",
+  "memory": {
+    "peak_gpu_allocated_bytes": 797547008,
+    "peak_gpu_reserved_bytes": 1321205760,
+    "peak_process_rss_bytes": 2508255232,
+    "process_rss_bytes": 1522626560
+  },
+  "metadata": {
+    "chat_template_sha256": "41d5929bf73796beb66809ac700b2cf3ff81694f933e5c14d52b7fd6963c947d",
+    "context_limit": 40960,
+    "enable_thinking": false,
+    "environment": {
+      "accelerate": "1.15.0",
+      "bitsandbytes": "0.50.2",
+      "psutil": "7.2.2",
+      "torch": "2.8.0+cu128",
+      "transformers": "4.57.6"
+    },
+    "generation_defaults": {
+      "_from_model_config": false,
+      "assistant_confidence_threshold": 0.4,
+      "assistant_early_exit": null,
+      "assistant_lookbehind": 10,
+      "bad_words_ids": null,
+      "begin_suppress_tokens": null,
+      "bos_token_id": 151643,
+      "cache_config": null,
+      "cache_implementation": null,
+      "constraints": null,
+      "decoder_start_token_id": null,
+      "disable_compile": false,
+      "diversity_penalty": 0.0,
+      "do_sample": true,
+      "dola_layers": null,
+      "early_stopping": false,
+      "encoder_no_repeat_ngram_size": 0,
+      "encoder_repetition_penalty": 1.0,
+      "eos_token_id": [
+        151645,
+        151643
+      ],
+      "epsilon_cutoff": 0.0,
+      "eta_cutoff": 0.0,
+      "exponential_decay_length_penalty": null,
+      "force_words_ids": null,
+      "forced_bos_token_id": null,
+      "forced_eos_token_id": null,
+      "guidance_scale": null,
+      "is_assistant": false,
+      "length_penalty": 1.0,
+      "low_memory": null,
+      "max_length": 20,
+      "max_matching_ngram_size": null,
+      "max_new_tokens": null,
+      "max_time": null,
+      "min_length": 0,
+      "min_new_tokens": null,
+      "min_p": null,
+      "no_repeat_ngram_size": 0,
+      "num_assistant_tokens": 20,
+      "num_assistant_tokens_schedule": "constant",
+      "num_beam_groups": 1,
+      "num_beams": 1,
+      "num_return_sequences": 1,
+      "output_attentions": false,
+      "output_hidden_states": false,
+      "output_logits": null,
+      "output_scores": false,
+      "pad_token_id": 151643,
+      "penalty_alpha": null,
+      "prefill_chunk_size": null,
+      "prompt_lookup_num_tokens": null,
+      "remove_invalid_values": false,
+      "renormalize_logits": false,
+      "repetition_penalty": 1.0,
+      "return_dict_in_generate": false,
+      "return_legacy_cache": null,
+      "sequence_bias": null,
+      "stop_strings": null,
+      "suppress_tokens": null,
+      "target_lookbehind": 10,
+      "temperature": 0.6,
+      "token_healing": false,
+      "top_k": 20,
+      "top_p": 0.95,
+      "transformers_version": "4.57.6",
+      "typical_p": 1.0,
+      "use_cache": true,
+      "watermarking_config": null
+    },
+    "hardware": {
+      "gpu": "NVIDIA GeForce GTX 1650",
+      "gpu_total_bytes": 4294639616,
+      "platform": "Windows-10-10.0.26200-SP0",
+      "processor": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+      "ram_total_bytes": 16477143040,
+      "torch_cuda": "12.8"
+    },
+    "load_seconds": 18.31064680000054,
+    "model_memory_bytes": 531497216,
+    "parameter_count": 596049920,
+    "prefix_cache_tokens": 627,
+    "system_prompt_sha256": "d00e437d4dd47c033aab1509fc6874383b28eeb17827da299b0dcfa6c9a265d3",
+    "token_budget": {
+      "configured_input_limit": 2048,
+      "generation_reserve": 32,
+      "max_input_tokens": 679,
+      "min_input_tokens": 645,
+      "non_thinking_template_verified": true,
+      "sample_count": 3100,
+      "would_exceed_input_budget": 0
+    }
+  },
+  "purpose": "hardware/cache smoke, not validation quality benchmark"
+}

@@ -1,6 +1,74 @@
 # Implementation status
 
-Last updated: **2026-09-27**. Milestones **1, 2 and 3 are implemented, executed, and locally verified**. Milestones 4-6 have not been implemented. Original baseline evidence remains unchanged. Test predictions remain unused.
+Last updated: **2026-09-28**. Milestones **1, 2 and 3 are implemented, executed, and locally verified**. **Milestone 4's workflow is implemented and smoke-tested; full training and paired validation are pending the user's terminal run.** Milestones 5-6 have not been implemented. Original baseline and 4B evidence remain unchanged. Test predictions remain unused.
+
+## Milestone 4 — implementation and smoke verified; long run pending
+
+The user requested terminal commands for the long run. Run from the project root, with no environment activation required:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\run_milestone4.ps1
+```
+
+This runs the new paired B, one epoch of C, validation checkpoint selection, and reports. See [the runbook](finetuning.md) for separate stages and resume behavior. **Milestone 4 is not complete until genuine full training, C validation and all three candidate reports exist and their changed errors are reviewed.** The small smoke results below are not held-out quality estimates.
+
+### Implemented
+
+- Pinned smaller pair: **Qwen/Qwen3-0.6B**, revision `c1899de289a04d12100db370d81485cdf75e47ca`. The user had chosen the smaller-model route after the discarded 4B training attempt. Both B and C must be rerun on this base; the old 4B benchmark remains historical evidence.
+- Conversational completion-only SFT for exactly **15,000 supported + 100 oos training records**, full sorted 150-label catalog, B's exact non-thinking prefix, JSON+EOS targets, fail-on-truncation preflight and ten directly inspected masks. Validation/test examples never enter SFT.
+- Separate exact training lock: PyTorch 2.8.0+cu128, Transformers 4.57.6, TRL 0.24.0, PEFT 0.17.1, accelerate 1.15.0, bitsandbytes 0.50.2. Root CPU and original prompted locks remain unchanged.
+- Configuration 1: rank 16, alpha 32, dropout 0.05; verified attention/feed-forward projections; learning rate 1e-4; microbatch 1, accumulation 16; seed 42; one epoch; sequence limit 1,024; local budget 24 hours. NF4 base, explicit FP32 training fallback; B/C inference both NF4/FP16. No paid service.
+- Real smoke prerequisite, finite loss/gradient checks, changed-weight verification, adapter reload parity, periodic and epoch checkpoints, exact identity/hash checks, bounded cumulative recorded runtime and resume. Loss, gradient norm, memory, elapsed time and processed examples are logged.
+- Verified PEFT inference with cache constructed after adapter loading. Existing strict parser/shared baseline gate retain invalid outputs and infrastructure errors. Smoke adapters cannot enter complete benchmark evaluation.
+- Validation-only checkpoint selection by macro-F1, then invalid count, then earlier step; A/B/C raw/policy comparison with strict pairing, bootstrap intervals, changed errors and fixed/regressed examples.
+
+### Executed and measured on 2026-09-28
+
+Evidence is retained in [reports/finetuning-smoke-v1](../reports/finetuning-smoke-v1/README.md). Windows, AMD Ryzen 5 5600H, approximately 15.35 GiB RAM, GTX 1650 4 GiB, CUDA 12.8; native BF16 unsupported. Before the training smoke, CUDA reported 3,456,892,928 free GPU bytes. Desktop GPU availability varies.
+
+| Check | Actual result |
+| --- | --- |
+| Prepared training data | 15,100 records; 651–692 tokens including completion; no truncation |
+| Direct mask inspection | 10 examples, including longest request and oos; JSON+EOS supervised, prefix masked; exact real TRL collator agreement |
+| Prompted prefix cache | All six predetermined cached/uncached output comparisons equal; hardware probe only |
+| Trainable LoRA parameters | 10,092,544 |
+| Training smoke | One optimizer update, 16 actual examples, finite loss **3.2666759491**, gradient norm **66.4597015381**; weights changed |
+| Measured training time | **46.12 seconds** for smoke training; **53.34 seconds** including model load and save/reload scope |
+| Peak GPU allocation / reservation | **2,295,059,456 / 3,479,175,168 bytes** (2.14 / 3.24 GiB) |
+| Process RSS at completion | 2,608,156,672 bytes |
+| Saved adapter reload | Maximum absolute probe-logit difference **0.0** after unload/reload on the identical frozen base |
+| Fresh-process NF4/FP16 adapter inference | All 3 requests accounted for: **1 valid, 2 invalid outputs**, zero infrastructure errors. One-update smoke; not a C benchmark |
+| Tiny random CPU model fixture | EOS/padding mask correct; uninterrupted versus optimizer/RNG-resumed adapter parameters differ by **0.0** after two steps; explicitly synthetic |
+| Automated suite | **141 passed in 10.99 seconds**; includes 30 new CPU contract/integration tests |
+| Static checks | Ruff lint/format and mypy core checks passed; PowerShell script parsed without syntax errors |
+| Training lock | `uv lock --check --offline --project environments/training ...` passed |
+
+The 16-example measurement projects **12.09 hours for one epoch**, excluding full B/C validation and allowing no claim of stable long-run throughput. This is a feasibility estimate, not a completed training duration. The configured 24-hour training ceiling is checked at optimizer boundaries; save/reload can add time. A full epoch has 944 optimizer updates with the last accumulated batch smaller than 16.
+
+Commands actually executed (repository root, explicit interpreters; no activation):
+
+```powershell
+.\.tools\uv.exe sync --offline --project environments/training --python .tools/python/cpython-3.11.16-windows-x86_64-none/python.exe --cache-dir .uv-cache
+# Downloaded the pinned 0.6B snapshot using huggingface_hub.snapshot_download.
+# The first restricted-network attempt failed; an authorized network escalation succeeded.
+$env:HF_HUB_OFFLINE = '1'
+.\environments\training\.venv\Scripts\triage.exe data sft --config configs/finetune.yaml
+.\environments\training\.venv\Scripts\python.exe scripts/verify_prompt_cache.py --config configs/prompted-small.yaml --output artifacts/qwen3-06b-cache-smoke-v1
+.\environments\training\.venv\Scripts\triage.exe train slm --config configs/finetune.yaml --smoke
+.\environments\training\.venv\Scripts\triage.exe predict --config configs/finetuned.yaml --bundle artifacts/finetuned-qwen3-06b-qlora-v1-smoke/adapter --split val --limit 3 --output artifacts/finetuned-qwen3-06b-inference-smoke-v1
+.\environments\training\.venv\Scripts\python.exe scripts/verify_sft_stack.py --output artifacts/sft-stack-fixture-v1
+.\.venv\Scripts\pytest.exe -q
+.\.venv\Scripts\ruff.exe check .
+.\.venv\Scripts\ruff.exe format --check .
+.\.venv\Scripts\mypy.exe
+.\.tools\uv.exe lock --check --offline --project environments/training --python .tools/python/cpython-3.11.16-windows-x86_64-none/python.exe --cache-dir .uv-cache
+```
+
+Installed TRL/PEFT source APIs were inspected. Early lint issues were fixed before acceptance. No training/test failure is hidden or treated as a benchmark success. The fresh adapter inference's two invalid completions are retained unchanged. The user-facing long-run script has been syntax checked; its full path has **not** been run, per the user's request to execute the long job themselves. GPU checkpoint resume over a long run and non-Windows execution remain unverified; only the tiny installed-stack resume fixture was executed.
+
+### Next concrete task
+
+The user runs `scripts/run_milestone4.ps1`, then asks Codex to continue. Verify the full 0.6B B predictions, completed C training and each epoch checkpoint, selected C report/policy, all input/source hashes and changed-error examples. Record actual quality/runtime/resource results, retain the genuine reports, and only then mark Milestone 4 complete. Test remains unused until Milestone 5's frozen release. The baseline API remains unchanged.
 
 ## Milestone 3 - completed prompted model benchmark
 

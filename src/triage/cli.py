@@ -17,10 +17,24 @@ def parser():
     prepare.add_argument("--config", type=Path, required=True)
     prepare.add_argument("--output", type=Path)
     prepare.add_argument("--source-dir", type=Path, help="Use checksum-verified local source files")
+    sft = data.add_parser("sft")
+    sft.add_argument("--config", type=Path, required=True)
+    sft.add_argument("--output", type=Path)
     train = commands.add_parser("train").add_subparsers(dest="action", required=True)
     baseline = train.add_parser("baseline")
     baseline.add_argument("--config", type=Path, required=True)
     baseline.add_argument("--output", type=Path)
+    slm = train.add_parser("slm")
+    slm.add_argument("--config", type=Path, required=True)
+    slm.add_argument("--output", type=Path)
+    slm.add_argument("--smoke", action="store_true")
+    slm.add_argument("--smoke-evidence", type=Path)
+    slm.add_argument("--resume-checkpoint", type=Path)
+    checkpoints = commands.add_parser("checkpoint").add_subparsers(dest="action", required=True)
+    checkpoint = checkpoints.add_parser("select")
+    checkpoint.add_argument("--config", type=Path, required=True)
+    checkpoint.add_argument("--output", type=Path, required=True)
+    checkpoint.add_argument("--resume", action="store_true")
     predict = commands.add_parser("predict")
     predict.add_argument("--config", type=Path, required=True)
     predict.add_argument("--split", choices=["val"], required=True)
@@ -36,6 +50,7 @@ def parser():
     comparison = commands.add_parser("compare")
     comparison.add_argument("--baseline", type=Path, required=True)
     comparison.add_argument("--candidate", type=Path, required=True)
+    comparison.add_argument("--finetuned", type=Path)
     comparison.add_argument("--output", type=Path, required=True)
     policy = commands.add_parser("policy").add_subparsers(dest="action", required=True)
     select = policy.add_parser("select")
@@ -54,7 +69,12 @@ def parser():
 def main():
     args = parser().parse_args()
     try:
-        if args.command == "data":
+        if args.command == "data" and args.action == "sft":
+            from triage.training.data import prepare
+
+            cfg = config(args.config)
+            result = prepare(cfg, args.output or Path(cfg["prepared_data"]))
+        elif args.command == "data":
             from triage.data.prepare import prepare
 
             cfg = config(args.config)
@@ -64,6 +84,22 @@ def main():
                 "splits": {split: value["count"] for split, value in result["splits"].items()},
                 "duplicate_summary": result["duplicate_summary"],
             }
+        elif args.command == "train" and args.action == "slm":
+            from triage.training.runner import run
+
+            cfg = config(args.config)
+            output = args.output or Path(cfg["output"] + ("-smoke" if args.smoke else ""))
+            result = run(
+                cfg,
+                output,
+                smoke=args.smoke,
+                smoke_evidence=args.smoke_evidence,
+                resume_checkpoint=args.resume_checkpoint,
+            )
+        elif args.command == "checkpoint":
+            from triage.training.select import select
+
+            result = select(config(args.config), args.output, resume=args.resume)
         elif args.command == "train":
             from triage.models.baseline import train
 
@@ -72,7 +108,18 @@ def main():
             result = {"model_version": result["model_version"], "fit": result["fit"]}
         elif args.command == "predict":
             cfg = config(args.config)
-            if cfg.get("model_type") == "prompted":
+            if cfg.get("model_type") == "finetuned":
+                from triage.models.finetuned import run
+
+                result = run(
+                    cfg,
+                    args.split,
+                    args.output or Path(cfg["prediction_output"]),
+                    bundle=args.bundle,
+                    limit=args.limit,
+                    resume=args.resume,
+                )
+            elif cfg.get("model_type") == "prompted":
                 from triage.models.prompted import run
 
                 result = run(
@@ -91,9 +138,14 @@ def main():
                     cfg, args.split, args.output or Path(cfg["prediction_output"]), args.bundle
                 )
         elif args.command == "compare":
-            from triage.evaluation.compare import compare
+            if args.finetuned:
+                from triage.evaluation.three_way import compare
 
-            result = compare(args.baseline, args.candidate, args.output)
+                result = compare(args.baseline, args.candidate, args.finetuned, args.output)
+            else:
+                from triage.evaluation.compare import compare
+
+                result = compare(args.baseline, args.candidate, args.output)
         elif args.command == "policy":
             from triage.evaluation.select_policy import select_policy
 

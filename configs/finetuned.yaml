@@ -1,0 +1,3 @@
+model_type: finetuned
+training_config: configs/finetune.yaml
+prediction_output: artifacts/finetuned-qwen3-06b-qlora-v1-val

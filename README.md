@@ -57,6 +57,10 @@ Milestone 3 adds a pinned Qwen3-4B runner with strict JSON parsing, complete val
 
 The completed **3,100-request validation run** achieved **0.801038 supported macro-F1**, below the baseline's **0.882634**. It produced 70 invalid outputs and zero infrastructure failures. No shared-gate threshold met all routing constraints, so the prompted policy disables automatic routing. See the [paired comparison](reports/baseline-prompted-v1/report.md), [prompted report](reports/prompted-qwen3-4b-nf4-cache-v1-val/report.md), and [error review](reports/prompted-qwen3-4b-nf4-cache-v1-val/error_analysis.md). This is a completed experiment with a negative result, not a deployment upgrade.
 
+## Fine tuning
+
+Milestone 4 adds completion-only QLoRA training, checkpoint selection and A/B/C error analysis. Following the local hardware limitation and the approved smaller-model approach, both new B and C use pinned Qwen3-0.6B. Full training and validation are run in your terminal; the [fine-tuning runbook](docs/finetuning.md) provides the command, resume behavior and artifact locations. See [implementation status](docs/implementation_status.md) for checks actually executed and results still pending.
+
 ## Checks
 
 ```console

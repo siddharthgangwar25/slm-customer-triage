@@ -1,0 +1,8 @@
+{
+  "fixture": true,
+  "max_resume_parameter_difference": 0.0,
+  "optimizer_steps": 2,
+  "pad_equals_eos_mask_correct": true,
+  "passed": true,
+  "purpose": "random tiny CPU model, not benchmark evidence"
+}

@@ -244,3 +244,45 @@ def test_paired_bootstrap_known_difference_and_id_alignment():
     assert result["difference"] == 1.0
     assert result["percentile_95"] == [1.0, 1.0]
     assert paired_macro_f1(b, b, ["a"], repetitions=30)["percentile_95"] == [0.0, 0.0]
+
+
+def test_three_way_comparison_preserves_failures_and_explains_changes(prompted_config, tmp_path):
+    from triage.evaluation.three_way import compare as compare_three
+
+    class B(FixtureAdapter):
+        metadata = {
+            **FixtureAdapter.metadata,
+            "system_prompt_sha256": "system",
+            "chat_template_sha256": "chat",
+        }
+
+    class C(B):
+        metadata = {**B.metadata, "model_type": "finetuned"}
+
+        def generate(self, text):
+            label = "weather" if "weather" in text else "oos" if "unrelated" in text else "bill"
+            return {
+                "raw_output": json.dumps({"intent": label}),
+                "input_tokens": 20,
+                "output_tokens": 7,
+                "truncated": False,
+                "error_type": None,
+            }
+
+    b, c, result = tmp_path / "b", tmp_path / "c", tmp_path / "comparison"
+    run(prompted_config, "val", b, adapter_factory=B)
+    run({**prompted_config, "experiment_id": "TEST-C"}, "val", c, adapter_factory=C)
+    compare_three(
+        Path(prompted_config["gate_predictions"]),
+        b / "predictions.jsonl",
+        c / "predictions.jsonl",
+        result,
+    )
+    evidence = read_json(result / "comparison.json")
+    assert evidence["fixture"] is True
+    assert evidence["sample_count"] == 3
+    assert evidence["outcomes_b_to_c"]["supported"]["fixed_by_c"] == 1
+    assert evidence["outcomes_b_to_c"]["oos"]["fixed_by_c"] == 1
+    assert evidence["candidates"]["prompted"]["raw"]["invalid_output_count"] == 1
+    assert len(read_jsonl(result / "changed_errors.jsonl")) == 2
+    assert "TEST FIXTURE" in (result / "report.md").read_text(encoding="utf-8")
