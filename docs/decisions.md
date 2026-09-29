@@ -1,5 +1,11 @@
 # Implementation decisions
 
+## 2026-09-29 — Milestone 4 acceptance
+
+- **Retain the completed single-epoch experiment.** The user ran the documented terminal workflow; current source/config/data/prompt/lock hashes match the run. All 11 bundles and every validation outcome verified. No post-result tuning was done. Step 944 is the only eligible epoch checkpoint; exact adapter reload and fresh-process full validation are recorded.
+- **Separate supported gains from oos behavior.** C reaches 0.966217 supported macro-F1 versus 0.272377 for its paired base and 0.882634 for A. Raw oos correctness falls to 55/100; the shared policy achieves 90/100 oos review recall at 80.35% coverage and 2.25% error. Preserve both observations, the single unknown-label failure, and all three supported regressions.
+- **Defer deployment choice to the release milestone.** Close M4 with genuine reports and a 40-example review. The baseline remains the API model. C has not passed serving/export parity, load tests, cost measurement or a frozen test release. Peak reserved training memory exceeded dedicated VRAM, so do not claim all training stayed within the 4 GiB physical limit. No cloud spending or test predictions occurred.
+
 ## 2026-09-28 — Milestone 4 local implementation
 
 - **Replace both sides of the pair.** The user previously selected a smaller paired model after the 4B FP16 attempt produced non-finite gradients and FP32 exceeded the practical budget. That attempt was undone at the user's request. The new implementation pins Qwen/Qwen3-0.6B at `c1899de289a04d12100db370d81485cdf75e47ca` and requires new B and C results. Original 4B benchmark evidence is retained. Prior discarded smoke observations motivate the choice but are not retained acceptance evidence for this implementation.

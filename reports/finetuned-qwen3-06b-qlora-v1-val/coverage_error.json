@@ -1,0 +1,2245 @@
+{
+  "points": [
+    {
+      "coverage": 0.98,
+      "human_review_count": 62,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.56,
+      "oos_recall_wilson95": [
+        0.4622810465167699,
+        0.6532797336983921
+      ],
+      "routed_count": 3038,
+      "routed_error_count": 142,
+      "routing_error": 0.0467412771560237,
+      "routing_error_wilson95": [
+        0.039790595423861916,
+        0.054836775107240235
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.002,
+      "threshold": 0.0
+    },
+    {
+      "coverage": 0.98,
+      "human_review_count": 62,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.56,
+      "oos_recall_wilson95": [
+        0.4622810465167699,
+        0.6532797336983921
+      ],
+      "routed_count": 3038,
+      "routed_error_count": 142,
+      "routing_error": 0.0467412771560237,
+      "routing_error_wilson95": [
+        0.039790595423861916,
+        0.054836775107240235
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.002,
+      "threshold": 0.01
+    },
+    {
+      "coverage": 0.9719354838709677,
+      "human_review_count": 87,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.6,
+      "oos_recall_wilson95": [
+        0.5020025867910618,
+        0.6905987135675411
+      ],
+      "routed_count": 3013,
+      "routed_error_count": 136,
+      "routing_error": 0.04513773647527381,
+      "routing_error_wilson95": [
+        0.038286133070484014,
+        0.053147726675172806
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.009,
+      "threshold": 0.02
+    },
+    {
+      "coverage": 0.9538709677419355,
+      "human_review_count": 143,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.68,
+      "oos_recall_wilson95": [
+        0.5833738138954762,
+        0.7633085267500092
+      ],
+      "routed_count": 2957,
+      "routed_error_count": 126,
+      "routing_error": 0.04261075414271221,
+      "routing_error_wilson95": [
+        0.03590482740289243,
+        0.05050353399670647
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.025,
+      "threshold": 0.03
+    },
+    {
+      "coverage": 0.9341935483870968,
+      "human_review_count": 204,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.72,
+      "oos_recall_wilson95": [
+        0.6251197129007884,
+        0.7986031478881379
+      ],
+      "routed_count": 2896,
+      "routed_error_count": 113,
+      "routing_error": 0.03901933701657458,
+      "routing_error_wilson95": [
+        0.032555722314993235,
+        0.04670428623532451
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.044,
+      "threshold": 0.04
+    },
+    {
+      "coverage": 0.9135483870967742,
+      "human_review_count": 268,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.81,
+      "oos_recall_wilson95": [
+        0.7222115462093562,
+        0.8748524849023126
+      ],
+      "routed_count": 2832,
+      "routed_error_count": 98,
+      "routing_error": 0.0346045197740113,
+      "routing_error_wilson95": [
+        0.028478399921376064,
+        0.041991498245568616
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.06233333333333333,
+      "threshold": 0.05
+    },
+    {
+      "coverage": 0.8929032258064517,
+      "human_review_count": 332,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.84,
+      "oos_recall_wilson95": [
+        0.7557973061072976,
+        0.8990471151119521
+      ],
+      "routed_count": 2768,
+      "routed_error_count": 87,
+      "routing_error": 0.03143063583815029,
+      "routing_error_wilson95": [
+        0.02555224011255441,
+        0.038607799869082374
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.08266666666666667,
+      "threshold": 0.06
+    },
+    {
+      "coverage": 0.8770967741935484,
+      "human_review_count": 381,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.85,
+      "oos_recall_wilson95": [
+        0.7671644040916763,
+        0.9069401471634337
+      ],
+      "routed_count": 2719,
+      "routed_error_count": 82,
+      "routing_error": 0.03015814637734461,
+      "routing_error_wilson95": [
+        0.024363136421199888,
+        0.037278887677180385
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.09866666666666667,
+      "threshold": 0.07
+    },
+    {
+      "coverage": 0.86,
+      "human_review_count": 434,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.86,
+      "oos_recall_wilson95": [
+        0.7786281178903616,
+        0.9147365634006086
+      ],
+      "routed_count": 2666,
+      "routed_error_count": 77,
+      "routing_error": 0.028882220555138786,
+      "routing_error_wilson95": [
+        0.023171343366930303,
+        0.03594881835623617
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.116,
+      "threshold": 0.08
+    },
+    {
+      "coverage": 0.8419354838709677,
+      "human_review_count": 490,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.87,
+      "oos_recall_wilson95": [
+        0.7901964855992357,
+        0.9224283257275948
+      ],
+      "routed_count": 2610,
+      "routed_error_count": 68,
+      "routing_error": 0.026053639846743294,
+      "routing_error_wilson95": [
+        0.02060383369171639,
+        0.032896526228271786
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.13433333333333333,
+      "threshold": 0.09
+    },
+    {
+      "coverage": 0.8258064516129032,
+      "human_review_count": 540,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.88,
+      "oos_recall_wilson95": [
+        0.8018790057328857,
+        0.9300059356298052
+      ],
+      "routed_count": 2560,
+      "routed_error_count": 62,
+      "routing_error": 0.02421875,
+      "routing_error_wilson95": [
+        0.01893855851996462,
+        0.030924688047355563
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.15066666666666667,
+      "threshold": 0.1
+    },
+    {
+      "coverage": 0.8106451612903226,
+      "human_review_count": 587,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.89,
+      "oos_recall_wilson95": [
+        0.8136870349691969,
+        0.9374580364293543
+      ],
+      "routed_count": 2513,
+      "routed_error_count": 57,
+      "routing_error": 0.022682053322721846,
+      "routing_error_wilson95": [
+        0.017548403574351598,
+        0.029272765239321166
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.166,
+      "threshold": 0.11
+    },
+    {
+      "coverage": 0.7958064516129032,
+      "human_review_count": 633,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.9,
+      "oos_recall_wilson95": [
+        0.8256343384950865,
+        0.9447708629393249
+      ],
+      "routed_count": 2467,
+      "routed_error_count": 54,
+      "routing_error": 0.02188893392784759,
+      "routing_error_wilson95": [
+        0.01681515498855156,
+        0.028449367517103197
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.181,
+      "threshold": 0.12
+    },
+    {
+      "coverage": 0.7819354838709678,
+      "human_review_count": 676,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.91,
+      "oos_recall_wilson95": [
+        0.837737871472837,
+        0.9519274599974348
+      ],
+      "routed_count": 2424,
+      "routed_error_count": 53,
+      "routing_error": 0.021864686468646866,
+      "routing_error_wilson95": [
+        0.016755095973301222,
+        0.02848733879179617
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.195,
+      "threshold": 0.13
+    },
+    {
+      "coverage": 0.7696774193548387,
+      "human_review_count": 714,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.91,
+      "oos_recall_wilson95": [
+        0.837737871472837,
+        0.9519274599974348
+      ],
+      "routed_count": 2386,
+      "routed_error_count": 53,
+      "routing_error": 0.022212908633696564,
+      "routing_error_wilson95": [
+        0.017022554249569256,
+        0.028939264018868177
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.20766666666666667,
+      "threshold": 0.14
+    },
+    {
+      "coverage": 0.7558064516129033,
+      "human_review_count": 757,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.93,
+      "oos_recall_wilson95": [
+        0.8625048526092651,
+        0.9656807389327273
+      ],
+      "routed_count": 2343,
+      "routed_error_count": 48,
+      "routing_error": 0.020486555697823303,
+      "routing_error_wilson95": [
+        0.015486752521915906,
+        0.027056154859166924
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.22133333333333333,
+      "threshold": 0.15
+    },
+    {
+      "coverage": 0.7425806451612903,
+      "human_review_count": 798,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.94,
+      "oos_recall_wilson95": [
+        0.8752318455410406,
+        0.9722138760368118
+      ],
+      "routed_count": 2302,
+      "routed_error_count": 46,
+      "routing_error": 0.01998262380538662,
+      "routing_error_wilson95": [
+        0.015014761879187157,
+        0.02654987321489756
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.23466666666666666,
+      "threshold": 0.16
+    },
+    {
+      "coverage": 0.7290322580645161,
+      "human_review_count": 840,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.94,
+      "oos_recall_wilson95": [
+        0.8752318455410406,
+        0.9722138760368118
+      ],
+      "routed_count": 2260,
+      "routed_error_count": 44,
+      "routing_error": 0.019469026548672566,
+      "routing_error_wilson95": [
+        0.014534800368555607,
+        0.026034055927828866
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.24866666666666667,
+      "threshold": 0.17
+    },
+    {
+      "coverage": 0.7151612903225807,
+      "human_review_count": 883,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.94,
+      "oos_recall_wilson95": [
+        0.8752318455410406,
+        0.9722138760368118
+      ],
+      "routed_count": 2217,
+      "routed_error_count": 43,
+      "routing_error": 0.019395579612088407,
+      "routing_error_wilson95": [
+        0.014431249289816067,
+        0.026022542881553742
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.263,
+      "threshold": 0.18
+    },
+    {
+      "coverage": 0.7029032258064516,
+      "human_review_count": 921,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.95,
+      "oos_recall_wilson95": [
+        0.8882495307680808,
+        0.9784563208456319
+      ],
+      "routed_count": 2179,
+      "routed_error_count": 40,
+      "routing_error": 0.018357044515832952,
+      "routing_error_wilson95": [
+        0.013509843665986985,
+        0.024899477579904346
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.2753333333333333,
+      "threshold": 0.19
+    },
+    {
+      "coverage": 0.69,
+      "human_review_count": 961,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.95,
+      "oos_recall_wilson95": [
+        0.8882495307680808,
+        0.9784563208456319
+      ],
+      "routed_count": 2139,
+      "routed_error_count": 38,
+      "routing_error": 0.017765310892940627,
+      "routing_error_wilson95": [
+        0.012970363292187134,
+        0.024289256868715768
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.2886666666666667,
+      "threshold": 0.2
+    },
+    {
+      "coverage": 0.6793548387096774,
+      "human_review_count": 994,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 2106,
+      "routed_error_count": 35,
+      "routing_error": 0.016619183285849954,
+      "routing_error_wilson95": [
+        0.011973821677083104,
+        0.02302476009406484
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.299,
+      "threshold": 0.21
+    },
+    {
+      "coverage": 0.6667741935483871,
+      "human_review_count": 1033,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 2067,
+      "routed_error_count": 35,
+      "routing_error": 0.016932752781809387,
+      "routing_error_wilson95": [
+        0.012200196996372537,
+        0.023457510408590024
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.312,
+      "threshold": 0.22
+    },
+    {
+      "coverage": 0.6541935483870968,
+      "human_review_count": 1072,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 2028,
+      "routed_error_count": 31,
+      "routing_error": 0.015285996055226824,
+      "routing_error_wilson95": [
+        0.010789629472592589,
+        0.021615191550652665
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.325,
+      "threshold": 0.23
+    },
+    {
+      "coverage": 0.6451612903225806,
+      "human_review_count": 1100,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 2000,
+      "routed_error_count": 29,
+      "routing_error": 0.0145,
+      "routing_error_wilson95": [
+        0.01011467734679028,
+        0.020746775563306317
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.3343333333333333,
+      "threshold": 0.24
+    },
+    {
+      "coverage": 0.632258064516129,
+      "human_review_count": 1140,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1960,
+      "routed_error_count": 28,
+      "routing_error": 0.014285714285714285,
+      "routing_error_wilson95": [
+        0.00990217910542071,
+        0.02056945522733724
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.3476666666666667,
+      "threshold": 0.25
+    },
+    {
+      "coverage": 0.6196774193548387,
+      "human_review_count": 1179,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1921,
+      "routed_error_count": 25,
+      "routing_error": 0.013014055179593961,
+      "routing_error_wilson95": [
+        0.00883045694160625,
+        0.019141435794786464
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.3606666666666667,
+      "threshold": 0.26
+    },
+    {
+      "coverage": 0.607741935483871,
+      "human_review_count": 1216,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1884,
+      "routed_error_count": 23,
+      "routing_error": 0.012208067940552018,
+      "routing_error_wilson95": [
+        0.008148575032366389,
+        0.018252719730928686
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.373,
+      "threshold": 0.27
+    },
+    {
+      "coverage": 0.6009677419354839,
+      "human_review_count": 1237,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1863,
+      "routed_error_count": 23,
+      "routing_error": 0.012345679012345678,
+      "routing_error_wilson95": [
+        0.008240579362219943,
+        0.018457702157722064
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.38,
+      "threshold": 0.28
+    },
+    {
+      "coverage": 0.587741935483871,
+      "human_review_count": 1278,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1822,
+      "routed_error_count": 23,
+      "routing_error": 0.012623490669593854,
+      "routing_error_wilson95": [
+        0.008426329729635291,
+        0.018871472376844743
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.39366666666666666,
+      "threshold": 0.29
+    },
+    {
+      "coverage": 0.5787096774193549,
+      "human_review_count": 1306,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1794,
+      "routed_error_count": 23,
+      "routing_error": 0.01282051282051282,
+      "routing_error_wilson95": [
+        0.008558071071754105,
+        0.019164873338142832
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.403,
+      "threshold": 0.3
+    },
+    {
+      "coverage": 0.5674193548387096,
+      "human_review_count": 1341,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1759,
+      "routed_error_count": 21,
+      "routing_error": 0.011938601478112564,
+      "routing_error_wilson95": [
+        0.007821774140145505,
+        0.018182526241671673
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.4146666666666667,
+      "threshold": 0.31
+    },
+    {
+      "coverage": 0.5551612903225807,
+      "human_review_count": 1379,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1721,
+      "routed_error_count": 19,
+      "routing_error": 0.011040092969203951,
+      "routing_error_wilson95": [
+        0.007079100470489052,
+        0.017179047202574127
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.42733333333333334,
+      "threshold": 0.32
+    },
+    {
+      "coverage": 0.545483870967742,
+      "human_review_count": 1409,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1691,
+      "routed_error_count": 17,
+      "routing_error": 0.010053222945002957,
+      "routing_error_wilson95": [
+        0.006286181422892215,
+        0.01604125140201932
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.43733333333333335,
+      "threshold": 0.33
+    },
+    {
+      "coverage": 0.5296774193548387,
+      "human_review_count": 1458,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1642,
+      "routed_error_count": 17,
+      "routing_error": 0.010353227771010963,
+      "routing_error_wilson95": [
+        0.00647405368774502,
+        0.016518111576951204
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.45366666666666666,
+      "threshold": 0.34
+    },
+    {
+      "coverage": 0.5196774193548387,
+      "human_review_count": 1489,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1611,
+      "routed_error_count": 17,
+      "routing_error": 0.010552451893234015,
+      "routing_error_wilson95": [
+        0.006598823043916075,
+        0.01683472123003973
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.464,
+      "threshold": 0.35000000000000003
+    },
+    {
+      "coverage": 0.5087096774193548,
+      "human_review_count": 1523,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1577,
+      "routed_error_count": 16,
+      "routing_error": 0.010145846544071021,
+      "routing_error_wilson95": [
+        0.006254731187603588,
+        0.01641766180962449
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.47533333333333333,
+      "threshold": 0.36
+    },
+    {
+      "coverage": 0.49838709677419357,
+      "human_review_count": 1555,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1545,
+      "routed_error_count": 15,
+      "routing_error": 0.009708737864077669,
+      "routing_error_wilson95": [
+        0.005892401061457495,
+        0.015957129520233808
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.486,
+      "threshold": 0.37
+    },
+    {
+      "coverage": 0.48935483870967744,
+      "human_review_count": 1583,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1517,
+      "routed_error_count": 14,
+      "routing_error": 0.00922874093605801,
+      "routing_error_wilson95": [
+        0.005505283556426457,
+        0.015431454218584585
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.49533333333333335,
+      "threshold": 0.38
+    },
+    {
+      "coverage": 0.48096774193548386,
+      "human_review_count": 1609,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1491,
+      "routed_error_count": 14,
+      "routing_error": 0.009389671361502348,
+      "routing_error_wilson95": [
+        0.005601421319311938,
+        0.015699472252247416
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.504,
+      "threshold": 0.39
+    },
+    {
+      "coverage": 0.46806451612903227,
+      "human_review_count": 1649,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1451,
+      "routed_error_count": 14,
+      "routing_error": 0.009648518263266712,
+      "routing_error_wilson95": [
+        0.005756063000489926,
+        0.016130485961693936
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.5173333333333333,
+      "threshold": 0.4
+    },
+    {
+      "coverage": 0.4596774193548387,
+      "human_review_count": 1675,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1425,
+      "routed_error_count": 14,
+      "routing_error": 0.009824561403508772,
+      "routing_error_wilson95": [
+        0.005861242582471567,
+        0.016423566291267813
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.526,
+      "threshold": 0.41000000000000003
+    },
+    {
+      "coverage": 0.4529032258064516,
+      "human_review_count": 1696,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1404,
+      "routed_error_count": 14,
+      "routing_error": 0.009971509971509971,
+      "routing_error_wilson95": [
+        0.005949043497552528,
+        0.016668175665297488
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.533,
+      "threshold": 0.42
+    },
+    {
+      "coverage": 0.44516129032258067,
+      "human_review_count": 1720,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1380,
+      "routed_error_count": 14,
+      "routing_error": 0.010144927536231883,
+      "routing_error_wilson95": [
+        0.006052664537610697,
+        0.016956805671375037
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.541,
+      "threshold": 0.43
+    },
+    {
+      "coverage": 0.43612903225806454,
+      "human_review_count": 1748,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1352,
+      "routed_error_count": 14,
+      "routing_error": 0.010355029585798817,
+      "routing_error_wilson95": [
+        0.006178212743745256,
+        0.01730643482588262
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.5503333333333333,
+      "threshold": 0.44
+    },
+    {
+      "coverage": 0.42548387096774193,
+      "human_review_count": 1781,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1319,
+      "routed_error_count": 14,
+      "routing_error": 0.01061410159211524,
+      "routing_error_wilson95": [
+        0.006333034410793945,
+        0.017737468224556335
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.5613333333333334,
+      "threshold": 0.45
+    },
+    {
+      "coverage": 0.41870967741935483,
+      "human_review_count": 1802,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1298,
+      "routed_error_count": 14,
+      "routing_error": 0.01078582434514638,
+      "routing_error_wilson95": [
+        0.006435662817990873,
+        0.018023121010831505
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.5683333333333334,
+      "threshold": 0.46
+    },
+    {
+      "coverage": 0.4054838709677419,
+      "human_review_count": 1843,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1257,
+      "routed_error_count": 14,
+      "routing_error": 0.011137629276054098,
+      "routing_error_wilson95": [
+        0.00664593232944674,
+        0.01860820140634941
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.582,
+      "threshold": 0.47000000000000003
+    },
+    {
+      "coverage": 0.39838709677419354,
+      "human_review_count": 1865,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.97,
+      "oos_recall_wilson95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "routed_count": 1235,
+      "routed_error_count": 14,
+      "routing_error": 0.011336032388663968,
+      "routing_error_wilson95": [
+        0.006764525389206427,
+        0.018938084572689234
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.5893333333333334,
+      "threshold": 0.48
+    },
+    {
+      "coverage": 0.3896774193548387,
+      "human_review_count": 1892,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 1208,
+      "routed_error_count": 13,
+      "routing_error": 0.01076158940397351,
+      "routing_error_wilson95": [
+        0.006299825642563048,
+        0.01832506122154408
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.598,
+      "threshold": 0.49
+    },
+    {
+      "coverage": 0.3825806451612903,
+      "human_review_count": 1914,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 1186,
+      "routed_error_count": 11,
+      "routing_error": 0.00927487352445194,
+      "routing_error_wilson95": [
+        0.0051867488158631615,
+        0.016531656295273887
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.6053333333333333,
+      "threshold": 0.5
+    },
+    {
+      "coverage": 0.37225806451612903,
+      "human_review_count": 1946,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 1154,
+      "routed_error_count": 8,
+      "routing_error": 0.006932409012131715,
+      "routing_error_wilson95": [
+        0.003516874932750407,
+        0.013619718915688403
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.616,
+      "threshold": 0.51
+    },
+    {
+      "coverage": 0.3641935483870968,
+      "human_review_count": 1971,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 1129,
+      "routed_error_count": 8,
+      "routing_error": 0.0070859167404783,
+      "routing_error_wilson95": [
+        0.0035948427563241526,
+        0.013919928323248974
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.6243333333333333,
+      "threshold": 0.52
+    },
+    {
+      "coverage": 0.3574193548387097,
+      "human_review_count": 1992,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 1108,
+      "routed_error_count": 8,
+      "routing_error": 0.007220216606498195,
+      "routing_error_wilson95": [
+        0.0036630580266783586,
+        0.014182524779470577
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.6313333333333333,
+      "threshold": 0.53
+    },
+    {
+      "coverage": 0.3470967741935484,
+      "human_review_count": 2024,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 1076,
+      "routed_error_count": 7,
+      "routing_error": 0.006505576208178439,
+      "routing_error_wilson95": [
+        0.003154818618862053,
+        0.013367476089269421
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.642,
+      "threshold": 0.54
+    },
+    {
+      "coverage": 0.34,
+      "human_review_count": 2046,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 1054,
+      "routed_error_count": 7,
+      "routing_error": 0.006641366223908918,
+      "routing_error_wilson95": [
+        0.0032207426021898973,
+        0.013645167380752343
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.6493333333333333,
+      "threshold": 0.55
+    },
+    {
+      "coverage": 0.33225806451612905,
+      "human_review_count": 2070,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 1030,
+      "routed_error_count": 7,
+      "routing_error": 0.006796116504854369,
+      "routing_error_wilson95": [
+        0.0032958751983946186,
+        0.013961566615794117
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.6573333333333333,
+      "threshold": 0.56
+    },
+    {
+      "coverage": 0.3193548387096774,
+      "human_review_count": 2110,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 990,
+      "routed_error_count": 6,
+      "routing_error": 0.006060606060606061,
+      "routing_error_wilson95": [
+        0.002780502672957226,
+        0.013159120976363882
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.6706666666666666,
+      "threshold": 0.5700000000000001
+    },
+    {
+      "coverage": 0.3074193548387097,
+      "human_review_count": 2147,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 953,
+      "routed_error_count": 6,
+      "routing_error": 0.0062959076600209865,
+      "routing_error_wilson95": [
+        0.002888571171447589,
+        0.013667420079410943
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.683,
+      "threshold": 0.58
+    },
+    {
+      "coverage": 0.29838709677419356,
+      "human_review_count": 2175,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 925,
+      "routed_error_count": 6,
+      "routing_error": 0.006486486486486486,
+      "routing_error_wilson95": [
+        0.0029761059295587335,
+        0.014078967000548488
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.6923333333333334,
+      "threshold": 0.59
+    },
+    {
+      "coverage": 0.29,
+      "human_review_count": 2201,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 899,
+      "routed_error_count": 6,
+      "routing_error": 0.006674082313681869,
+      "routing_error_wilson95": [
+        0.003062276143348441,
+        0.014483948241812705
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.701,
+      "threshold": 0.6
+    },
+    {
+      "coverage": 0.28,
+      "human_review_count": 2232,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 868,
+      "routed_error_count": 6,
+      "routing_error": 0.0069124423963133645,
+      "routing_error_wilson95": [
+        0.003171772379190533,
+        0.014998341763032351
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.7113333333333334,
+      "threshold": 0.61
+    },
+    {
+      "coverage": 0.2719354838709677,
+      "human_review_count": 2257,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 843,
+      "routed_error_count": 6,
+      "routing_error": 0.0071174377224199285,
+      "routing_error_wilson95": [
+        0.003265948887940639,
+        0.015440573632525986
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.7196666666666667,
+      "threshold": 0.62
+    },
+    {
+      "coverage": 0.2645161290322581,
+      "human_review_count": 2280,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 820,
+      "routed_error_count": 5,
+      "routing_error": 0.006097560975609756,
+      "routing_error_wilson95": [
+        0.0026072428506517835,
+        0.01419387667604427
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.7273333333333334,
+      "threshold": 0.63
+    },
+    {
+      "coverage": 0.2561290322580645,
+      "human_review_count": 2306,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 794,
+      "routed_error_count": 5,
+      "routing_error": 0.006297229219143577,
+      "routing_error_wilson95": [
+        0.0026927110815528404,
+        0.014655922118272938
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.736,
+      "threshold": 0.64
+    },
+    {
+      "coverage": 0.24645161290322581,
+      "human_review_count": 2336,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 764,
+      "routed_error_count": 5,
+      "routing_error": 0.006544502617801047,
+      "routing_error_wilson95": [
+        0.0027985649087171076,
+        0.015227889200641387
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.746,
+      "threshold": 0.65
+    },
+    {
+      "coverage": 0.23548387096774193,
+      "human_review_count": 2370,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 730,
+      "routed_error_count": 5,
+      "routing_error": 0.00684931506849315,
+      "routing_error_wilson95": [
+        0.002929062710507163,
+        0.015932584658037232
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.7573333333333333,
+      "threshold": 0.66
+    },
+    {
+      "coverage": 0.2264516129032258,
+      "human_review_count": 2398,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 702,
+      "routed_error_count": 5,
+      "routing_error": 0.007122507122507123,
+      "routing_error_wilson95": [
+        0.00304603468836628,
+        0.01656383470612942
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.7666666666666667,
+      "threshold": 0.67
+    },
+    {
+      "coverage": 0.21645161290322582,
+      "human_review_count": 2429,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 671,
+      "routed_error_count": 5,
+      "routing_error": 0.007451564828614009,
+      "routing_error_wilson95": [
+        0.003186941159554523,
+        0.017323741223360264
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.777,
+      "threshold": 0.68
+    },
+    {
+      "coverage": 0.2064516129032258,
+      "human_review_count": 2460,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 640,
+      "routed_error_count": 4,
+      "routing_error": 0.00625,
+      "routing_error_wilson95": [
+        0.0024331082996141024,
+        0.015958777868113873
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.7873333333333333,
+      "threshold": 0.6900000000000001
+    },
+    {
+      "coverage": 0.19806451612903225,
+      "human_review_count": 2486,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 614,
+      "routed_error_count": 4,
+      "routing_error": 0.006514657980456026,
+      "routing_error_wilson95": [
+        0.002536254220770531,
+        0.01662959917355579
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.796,
+      "threshold": 0.7000000000000001
+    },
+    {
+      "coverage": 0.19161290322580646,
+      "human_review_count": 2506,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 594,
+      "routed_error_count": 4,
+      "routing_error": 0.006734006734006734,
+      "routing_error_wilson95": [
+        0.0026217487618547036,
+        0.01718527305970425
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.8026666666666666,
+      "threshold": 0.71
+    },
+    {
+      "coverage": 0.18451612903225806,
+      "human_review_count": 2528,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 572,
+      "routed_error_count": 4,
+      "routing_error": 0.006993006993006993,
+      "routing_error_wilson95": [
+        0.002722706391979905,
+        0.017841041909410334
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.81,
+      "threshold": 0.72
+    },
+    {
+      "coverage": 0.17483870967741935,
+      "human_review_count": 2558,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 542,
+      "routed_error_count": 4,
+      "routing_error": 0.007380073800738007,
+      "routing_error_wilson95": [
+        0.0028736008030395294,
+        0.018820351954374558
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.82,
+      "threshold": 0.73
+    },
+    {
+      "coverage": 0.16612903225806452,
+      "human_review_count": 2585,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 515,
+      "routed_error_count": 4,
+      "routing_error": 0.007766990291262136,
+      "routing_error_wilson95": [
+        0.0030244567069608493,
+        0.019798428047872133
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.829,
+      "threshold": 0.74
+    },
+    {
+      "coverage": 0.15870967741935485,
+      "human_review_count": 2608,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 492,
+      "routed_error_count": 4,
+      "routing_error": 0.008130081300813009,
+      "routing_error_wilson95": [
+        0.003166041509548096,
+        0.020715500886801273
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.8366666666666667,
+      "threshold": 0.75
+    },
+    {
+      "coverage": 0.14774193548387096,
+      "human_review_count": 2642,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 458,
+      "routed_error_count": 4,
+      "routing_error": 0.008733624454148471,
+      "routing_error_wilson95": [
+        0.003401428125762603,
+        0.022238233698732603
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.848,
+      "threshold": 0.76
+    },
+    {
+      "coverage": 0.13774193548387098,
+      "human_review_count": 2673,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 427,
+      "routed_error_count": 4,
+      "routing_error": 0.00936768149882904,
+      "routing_error_wilson95": [
+        0.0036487681322681237,
+        0.02383572431445868
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.8583333333333333,
+      "threshold": 0.77
+    },
+    {
+      "coverage": 0.12612903225806452,
+      "human_review_count": 2709,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 391,
+      "routed_error_count": 4,
+      "routing_error": 0.010230179028132993,
+      "routing_error_wilson95": [
+        0.003985307542992429,
+        0.02600510647295716
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.8703333333333333,
+      "threshold": 0.78
+    },
+    {
+      "coverage": 0.11580645161290322,
+      "human_review_count": 2741,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 359,
+      "routed_error_count": 4,
+      "routing_error": 0.011142061281337047,
+      "routing_error_wilson95": [
+        0.004341225376932932,
+        0.028294126876310645
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.881,
+      "threshold": 0.79
+    },
+    {
+      "coverage": 0.10612903225806451,
+      "human_review_count": 2771,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 329,
+      "routed_error_count": 4,
+      "routing_error": 0.0121580547112462,
+      "routing_error_wilson95": [
+        0.004737910948893297,
+        0.030838963586659288
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.891,
+      "threshold": 0.8
+    },
+    {
+      "coverage": 0.1003225806451613,
+      "human_review_count": 2789,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 311,
+      "routed_error_count": 4,
+      "routing_error": 0.012861736334405145,
+      "routing_error_wilson95": [
+        0.005012738782076495,
+        0.03259812372964238
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.897,
+      "threshold": 0.81
+    },
+    {
+      "coverage": 0.09161290322580645,
+      "human_review_count": 2816,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 284,
+      "routed_error_count": 4,
+      "routing_error": 0.014084507042253521,
+      "routing_error_wilson95": [
+        0.005490459587117717,
+        0.0356483633927594
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.906,
+      "threshold": 0.8200000000000001
+    },
+    {
+      "coverage": 0.08548387096774193,
+      "human_review_count": 2835,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 265,
+      "routed_error_count": 4,
+      "routing_error": 0.01509433962264151,
+      "routing_error_wilson95": [
+        0.005885140606357527,
+        0.0381611120536233
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.9123333333333333,
+      "threshold": 0.8300000000000001
+    },
+    {
+      "coverage": 0.07870967741935483,
+      "human_review_count": 2856,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 244,
+      "routed_error_count": 4,
+      "routing_error": 0.01639344262295082,
+      "routing_error_wilson95": [
+        0.006393082554145793,
+        0.04138527897196621
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.9193333333333333,
+      "threshold": 0.84
+    },
+    {
+      "coverage": 0.06935483870967742,
+      "human_review_count": 2885,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 215,
+      "routed_error_count": 3,
+      "routing_error": 0.013953488372093023,
+      "routing_error_wilson95": [
+        0.004756590127892701,
+        0.04021413376386146
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.929,
+      "threshold": 0.85
+    },
+    {
+      "coverage": 0.06387096774193549,
+      "human_review_count": 2902,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 198,
+      "routed_error_count": 3,
+      "routing_error": 0.015151515151515152,
+      "routing_error_wilson95": [
+        0.005166028935205846,
+        0.04359233259366512
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.9346666666666666,
+      "threshold": 0.86
+    },
+    {
+      "coverage": 0.05838709677419355,
+      "human_review_count": 2919,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 181,
+      "routed_error_count": 2,
+      "routing_error": 0.011049723756906077,
+      "routing_error_wilson95": [
+        0.003035481630522502,
+        0.03938713757365047
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.9403333333333334,
+      "threshold": 0.87
+    },
+    {
+      "coverage": 0.04967741935483871,
+      "human_review_count": 2946,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.98,
+      "oos_recall_wilson95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "routed_count": 154,
+      "routed_error_count": 2,
+      "routing_error": 0.012987012987012988,
+      "routing_error_wilson95": [
+        0.003568762647733807,
+        0.04611057305583393
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.9493333333333334,
+      "threshold": 0.88
+    },
+    {
+      "coverage": 0.043548387096774194,
+      "human_review_count": 2965,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.99,
+      "oos_recall_wilson95": [
+        0.9455138038212946,
+        0.9982325679358593
+      ],
+      "routed_count": 135,
+      "routed_error_count": 1,
+      "routing_error": 0.007407407407407408,
+      "routing_error_wilson95": [
+        0.001308788246274506,
+        0.040764083000620406
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.9553333333333334,
+      "threshold": 0.89
+    },
+    {
+      "coverage": 0.03774193548387097,
+      "human_review_count": 2983,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.99,
+      "oos_recall_wilson95": [
+        0.9455138038212946,
+        0.9982325679358593
+      ],
+      "routed_count": 117,
+      "routed_error_count": 1,
+      "routing_error": 0.008547008547008548,
+      "routing_error_wilson95": [
+        0.0015103535737964364,
+        0.046829503274189374
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.9613333333333334,
+      "threshold": 0.9
+    },
+    {
+      "coverage": 0.0332258064516129,
+      "human_review_count": 2997,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 0.99,
+      "oos_recall_wilson95": [
+        0.9455138038212946,
+        0.9982325679358593
+      ],
+      "routed_count": 103,
+      "routed_error_count": 1,
+      "routing_error": 0.009708737864077669,
+      "routing_error_wilson95": [
+        0.0017158914790501578,
+        0.052958191832536874
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.966,
+      "threshold": 0.91
+    },
+    {
+      "coverage": 0.027419354838709678,
+      "human_review_count": 3015,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 1.0,
+      "oos_recall_wilson95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "routed_count": 85,
+      "routed_error_count": 0,
+      "routing_error": 0.0,
+      "routing_error_wilson95": [
+        0.0,
+        0.04323948381405149
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.9716666666666667,
+      "threshold": 0.92
+    },
+    {
+      "coverage": 0.022903225806451613,
+      "human_review_count": 3029,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 1.0,
+      "oos_recall_wilson95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "routed_count": 71,
+      "routed_error_count": 0,
+      "routing_error": 0.0,
+      "routing_error_wilson95": [
+        0.0,
+        0.05132795219689034
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.9763333333333334,
+      "threshold": 0.93
+    },
+    {
+      "coverage": 0.01806451612903226,
+      "human_review_count": 3044,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 1.0,
+      "oos_recall_wilson95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "routed_count": 56,
+      "routed_error_count": 0,
+      "routing_error": 0.0,
+      "routing_error_wilson95": [
+        6.938893903907228e-18,
+        0.06419393671876342
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.9813333333333333,
+      "threshold": 0.9400000000000001
+    },
+    {
+      "coverage": 0.01129032258064516,
+      "human_review_count": 3065,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 1.0,
+      "oos_recall_wilson95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "routed_count": 35,
+      "routed_error_count": 0,
+      "routing_error": 0.0,
+      "routing_error_wilson95": [
+        6.938893903907228e-18,
+        0.09890099232440402
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.9883333333333333,
+      "threshold": 0.9500000000000001
+    },
+    {
+      "coverage": 0.008709677419354838,
+      "human_review_count": 3073,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 1.0,
+      "oos_recall_wilson95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "routed_count": 27,
+      "routed_error_count": 0,
+      "routing_error": 0.0,
+      "routing_error_wilson95": [
+        0.0,
+        0.12455502974186705
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.991,
+      "threshold": 0.96
+    },
+    {
+      "coverage": 0.004838709677419355,
+      "human_review_count": 3085,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 1.0,
+      "oos_recall_wilson95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "routed_count": 15,
+      "routed_error_count": 0,
+      "routing_error": 0.0,
+      "routing_error_wilson95": [
+        0.0,
+        0.20388330103584862
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.995,
+      "threshold": 0.97
+    },
+    {
+      "coverage": 0.0012903225806451613,
+      "human_review_count": 3096,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 1.0,
+      "oos_recall_wilson95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "routed_count": 4,
+      "routed_error_count": 0,
+      "routing_error": 0.0,
+      "routing_error_wilson95": [
+        0.0,
+        0.4898908364545973
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.9986666666666667,
+      "threshold": 0.98
+    },
+    {
+      "coverage": 0.0006451612903225806,
+      "human_review_count": 3098,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 1.0,
+      "oos_recall_wilson95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "routed_count": 2,
+      "routed_error_count": 0,
+      "routing_error": 0.0,
+      "routing_error_wilson95": [
+        0.0,
+        0.6576197724933469
+      ],
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 0.9993333333333333,
+      "threshold": 0.99
+    },
+    {
+      "coverage": 0.0,
+      "human_review_count": 3100,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 1.0,
+      "oos_recall_wilson95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "routed_count": 0,
+      "routed_error_count": 0,
+      "routing_error": null,
+      "routing_error_wilson95": null,
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 1.0,
+      "threshold": 1.0
+    },
+    {
+      "coverage": 0.0,
+      "human_review_count": 3100,
+      "infrastructure_failure_count": 0,
+      "oos_count": 100,
+      "oos_recall": 1.0,
+      "oos_recall_wilson95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "routed_count": 0,
+      "routed_error_count": 0,
+      "routing_error": null,
+      "routing_error_wilson95": null,
+      "sample_count": 3100,
+      "supported_count": 3000,
+      "supported_review_rate": 1.0,
+      "threshold": 1.0000000000000002
+    }
+  ],
+  "purpose": "exploratory diagnostic; no operating point selected",
+  "sample_count": 3100,
+  "split": "val"
+}

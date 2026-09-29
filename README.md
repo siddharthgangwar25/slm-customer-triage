@@ -1,8 +1,8 @@
 # Customer request triage
 
-A reproducible triage service and model comparison for the official CLINC150 benchmark. Milestones 1-3 implement a TF-IDF/logistic-regression baseline, frozen routing policy, local FastAPI service, and a genuine prompted Qwen3-4B validation benchmark. See the [project specification](Customer_Request_Triage_Project_Spec.md) and [implementation status](docs/implementation_status.md).
+A reproducible triage service and model comparison for the official CLINC150 benchmark. Milestones 1–4 implement a TF-IDF/logistic-regression baseline, frozen routing policy, local FastAPI service, prompted model benchmarks and a completed paired Qwen3-0.6B QLoRA experiment. See the [project specification](Customer_Request_Triage_Project_Spec.md) and [implementation status](docs/implementation_status.md).
 
-The measured validation result is **0.882634 supported macro-F1** across all 150 supported labels and **88.33% supported accuracy**. The evaluation includes 3,000 supported and 100 out-of-scope requests. This is public benchmark evidence, not production customer usage. [Report](reports/baseline-c1-v1-val/report.md) · [40 reviewed errors](reports/baseline-c1-v1-val/error_analysis.md) · [data provenance](reports/baseline-c1-v1-val/data_manifest.json).
+The baseline achieves **0.882634 supported macro-F1**; fine-tuned Qwen3-0.6B achieves **0.966217**, versus **0.272377** for its paired prompted base. Each validation evaluation includes 3,000 supported and 100 out-of-scope requests. C's selected policy routes **80.35%** at **2.25% error** and **90% oos review recall**. These are public, validation-selected benchmark results, not test or production guarantees. The API still uses the baseline. [Three-way report](reports/three-way-qwen3-06b-v1/report.md) · [changed errors](reports/three-way-qwen3-06b-v1/error_analysis.md) · [data provenance](reports/baseline-c1-v1-val/data_manifest.json).
 
 ## Reproduce from a fresh environment
 
@@ -59,7 +59,7 @@ The completed **3,100-request validation run** achieved **0.801038 supported mac
 
 ## Fine tuning
 
-Milestone 4 adds completion-only QLoRA training, checkpoint selection and A/B/C error analysis. Following the local hardware limitation and the approved smaller-model approach, both new B and C use pinned Qwen3-0.6B. Full training and validation are run in your terminal; the [fine-tuning runbook](docs/finetuning.md) provides the command, resume behavior and artifact locations. See [implementation status](docs/implementation_status.md) for checks actually executed and results still pending.
+Milestone 4 is complete: one epoch on 15,100 training requests took **11.69 hours** on the local GTX 1650. The selected checkpoint passed adapter reload and complete validation. Both B and C use pinned Qwen3-0.6B; original 4B results are retained separately. Raw oos correctness worsened after training, despite improved supported-intent accuracy; the [error analysis](reports/three-way-qwen3-06b-v1/error_analysis.md) explains the shared-gate tradeoff. The [runbook](docs/finetuning.md), [model card](docs/finetuned_model_card.md) and [verified execution status](docs/implementation_status.md) describe reproduction and limits. Serving and final test evaluation remain Milestone 5 work.
 
 ## Checks
 

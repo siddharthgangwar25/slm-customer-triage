@@ -1,0 +1,50 @@
+{
+  "algorithm": "shared-baseline-gate-v1",
+  "automatic_routing": true,
+  "candidate_metadata_sha256": "f2450c17cfa18d3424b19984e96ad9b148876906662769b07b9859cac580eccd",
+  "catalog_sha256": "99c5f251ce0a66c6ff21535e030ee5551bc801526330e7781c21377c7c611d44",
+  "config_sha256": "2fe7bafe54bebdd040d5f8258c7b2ca969a7bc174495e00c63835e80d21747c9",
+  "constraints": {
+    "max_routing_error": 0.05,
+    "min_coverage": 0.2,
+    "min_oos_recall": 0.9
+  },
+  "data_manifest_sha256": "0d36ac83b17181b9aa47a79748f421c62d79139e61104d738b99e1be027518e1",
+  "fixture": false,
+  "gate_model_version": "baseline-c1-v1-551714a82382",
+  "gate_reference": {
+    "predictions_sha256": "2075ef8fdf20ca7275dfdbeb1dcb013ca8ecc21f915576ef3f38a7b84f564108",
+    "source_predictions_sha256": "2075ef8fdf20ca7275dfdbeb1dcb013ca8ecc21f915576ef3f38a7b84f564108"
+  },
+  "model_version": "finetuned-qwen3-06b-qlora-v1-step944-bfe54e26195f",
+  "pipeline_sha256": "6db46c751230433d9c0057e1dccccf73697d53a5460db6074dd684efd269e43d",
+  "policy_version": "policy-v1-2fe7bafe54be",
+  "prediction_manifest_sha256": "9fd6eabad6d24c5be5331134aea34427d3e6ad82b089fe91b97fdba6fbb915f1",
+  "predictions_sha256": "3bac58c6a49db1a7a59e37c8a0bbef411217ef0494358bab64f4e4de47ec8a88",
+  "schema_version": 1,
+  "split": "val",
+  "status": "targets_met",
+  "threshold": 0.11417805060646902,
+  "validation": {
+    "coverage": 0.8035483870967742,
+    "human_review_count": 609,
+    "infrastructure_failure_count": 0,
+    "oos_count": 100,
+    "oos_recall": 0.9,
+    "oos_recall_wilson95": [
+      0.8256343384950865,
+      0.9447708629393249
+    ],
+    "routed_count": 2491,
+    "routed_error_count": 56,
+    "routing_error": 0.022480931352870333,
+    "routing_error_wilson95": [
+      0.017352947679543634,
+      0.029079445213050083
+    ],
+    "sample_count": 3100,
+    "supported_count": 3000,
+    "supported_review_rate": 0.173,
+    "threshold": 0.11417805060646902
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "checks": [
+    "training data/source/config/lock identity",
+    "all checkpoint file hashes",
+    "finite complete optimizer logs",
+    "selected adapter equals reloaded final adapter",
+    "all three complete canonical validation joins",
+    "raw metrics and exact policy recomputation",
+    "B/C pairing",
+    "byte-identical three-way metrics/bootstrap/error recomputation"
+  ],
+  "fixture": false,
+  "metrics": {
+    "baseline": {
+      "catalog_size": 150,
+      "infrastructure_failure_count": 0,
+      "infrastructure_failure_rate": 0.0,
+      "invalid_output_count": 0,
+      "invalid_output_rate": 0.0,
+      "model_calls": 3100,
+      "oos_count": 100,
+      "raw_supported_accuracy": 0.8833333333333333,
+      "raw_supported_macro_f1": 0.8826340782395509,
+      "sample_count": 3100,
+      "supported_count": 3000
+    },
+    "finetuned": {
+      "catalog_size": 150,
+      "infrastructure_failure_count": 0,
+      "infrastructure_failure_rate": 0.0,
+      "invalid_output_count": 1,
+      "invalid_output_rate": 0.0003225806451612903,
+      "model_calls": 3100,
+      "oos_count": 100,
+      "raw_supported_accuracy": 0.9653333333333334,
+      "raw_supported_macro_f1": 0.9662168898619922,
+      "sample_count": 3100,
+      "supported_count": 3000
+    },
+    "prompted": {
+      "catalog_size": 150,
+      "infrastructure_failure_count": 0,
+      "infrastructure_failure_rate": 0.0,
+      "invalid_output_count": 654,
+      "invalid_output_rate": 0.21096774193548387,
+      "model_calls": 3100,
+      "oos_count": 100,
+      "raw_supported_accuracy": 0.224,
+      "raw_supported_macro_f1": 0.27237703167248356,
+      "sample_count": 3100,
+      "supported_count": 3000
+    }
+  },
+  "optimizer_steps": 944,
+  "passed": true,
+  "prediction_sha256": {
+    "baseline": "2075ef8fdf20ca7275dfdbeb1dcb013ca8ecc21f915576ef3f38a7b84f564108",
+    "finetuned": "3bac58c6a49db1a7a59e37c8a0bbef411217ef0494358bab64f4e4de47ec8a88",
+    "prompted": "c6bf3abec7319110f45e269c89729b5e4db3b2052f28c8ef0ae9af3282333761"
+  },
+  "split": "val",
+  "training_examples": 15100,
+  "training_identity_sha256": "b98e07f2a40d12c00f02504c4181c784c72ae8eeeec00170b082e4d5a7ea638c",
+  "verified_bundles": {
+    "adapter": {
+      "bundle_sha256": "af3c1cef5b6a9751934ca5b6ea920de7cfaa5cf80eb48914ec63c77627034ce4",
+      "epoch": 1.0,
+      "step": 944
+    },
+    "checkpoint-100": {
+      "bundle_sha256": "19b03bca61f52ff35c377409f1487e00d130fac5148c632957f3cb6c0d360d98",
+      "epoch": 0.10596026490066225,
+      "step": 100
+    },
+    "checkpoint-200": {
+      "bundle_sha256": "7b5cfcfdade300cb0d0fcd4ed7966744d7f3e2093e37422f8404d151bb6f7206",
+      "epoch": 0.2119205298013245,
+      "step": 200
+    },
+    "checkpoint-300": {
+      "bundle_sha256": "06c3a47c0e03489d6700c8ccb49ad37cc219b68da2e0f8cb49bb55567337f86f",
+      "epoch": 0.31788079470198677,
+      "step": 300
+    },
+    "checkpoint-400": {
+      "bundle_sha256": "849f4da4e191b2b7959d816a4ed7eca0bc731d861563a73b1a7824c0caeab02d",
+      "epoch": 0.423841059602649,
+      "step": 400
+    },
+    "checkpoint-500": {
+      "bundle_sha256": "39d92bd2df4088ba30651dbc7611d7a90db5a3e836817524f7d7da5f43c04cb5",
+      "epoch": 0.5298013245033113,
+      "step": 500
+    },
+    "checkpoint-600": {
+      "bundle_sha256": "9a0357c92d53ea8114af7147d1f6669c24116c90a7b2ab13c5c189eabaf2530f",
+      "epoch": 0.6357615894039735,
+      "step": 600
+    },
+    "checkpoint-700": {
+      "bundle_sha256": "6a4ce7e3079109f33e7b0ee520190c07bfc17f1e4d93343c2bb7dd279a53cc1d",
+      "epoch": 0.7417218543046358,
+      "step": 700
+    },
+    "checkpoint-800": {
+      "bundle_sha256": "84cd0fcb00d322732a8d4b742b79ec70b42dd7a2fd3342bf4e91fb95cb2c29e3",
+      "epoch": 0.847682119205298,
+      "step": 800
+    },
+    "checkpoint-900": {
+      "bundle_sha256": "15beb3656c9a9d1acfa459fb92638767af470b3dbf7d69322cffd57550e53502",
+      "epoch": 0.9536423841059603,
+      "step": 900
+    },
+    "checkpoint-944": {
+      "bundle_sha256": "533fca5369c5f889f639896303760b678be240e5d8c306304cce395b7b8f1866",
+      "epoch": 1.0,
+      "step": 944
+    }
+  }
+}

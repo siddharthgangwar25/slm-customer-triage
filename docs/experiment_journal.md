@@ -1,5 +1,17 @@
 # Experiment journal
 
+## 2026-09-29 — finetuned-qwen3-06b-qlora-v1 (complete)
+
+Hypothesis: completion-only supervision will improve exact catalog-label adherence and supported-intent classification. The approved smaller-model substitution requires both a new 0.6B prompted control and a 0.6B adapter experiment; comparing this adapter directly to the old 4B run would confound model size and fine tuning.
+
+The user completed one epoch on 15,100 training examples in 11.69 hours on the GTX 1650. Ten preflight masks, finite training gradients, 944 updates, complete checkpoint hashes and zero-difference adapter reload were verified. A fresh process evaluated checkpoint 944 on all 3,100 validation requests. No configuration or prompt was changed after seeing these results; this remains one configuration and one seed.
+
+Supported macro-F1: A 0.882634, new B 0.272377, C 0.966217. C fixed 2,227 supported B errors and introduced three regressions. Most of B's 654 invalid outputs were invented labels, so improved taxonomy adherence contributes substantially. C's remaining errors include neighboring intent boundaries, ambiguous requests and occasional unrelated labels. Forty category-stratified examples were inspected and annotated; this is not a representative random sample or an independent human annotation study.
+
+The important tradeoff is raw oos correctness: B 67/100, C 55/100. C frequently chooses a related supported intent for unsupported requests. Its validation-selected shared gate nevertheless reviews 90/100 oos requests while routing 2,491/3,100 requests with 56 errors (80.35% coverage, 2.25% routing error). These point estimates satisfy the original constraints, but do not establish open-set reliability or future service performance.
+
+Decision: close Milestone 4 with the measured improvement and its limitations. Retain the original 4B negative result. C is worth evaluating in Milestone 5's serving/release workflow; A remains the current API adapter. No additional seed or adapter configuration was launched because the current question is resolved sufficiently to proceed to serving measurements. Keep the test split unused until release freeze. Full comparison, training audit and error review are linked in implementation status.
+
 ## 2026-09-27 — prompted-qwen3-4b-nf4-cache-v1 (complete)
 
 Hypothesis: a prompted language model may resolve semantic intent distinctions missed by the lexical baseline, while its ability to follow the exact 150-label output contract may limit that benefit. Keep the same baseline gate so the comparison measures candidate labels under the specified policy, rather than introducing a new uncertainty estimator.

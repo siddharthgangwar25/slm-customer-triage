@@ -1,8 +1,49 @@
 # Implementation status
 
-Last updated: **2026-09-28**. Milestones **1, 2 and 3 are implemented, executed, and locally verified**. **Milestone 4's workflow is implemented and smoke-tested; full training and paired validation are pending the user's terminal run.** Milestones 5-6 have not been implemented. Original baseline and 4B evidence remain unchanged. Test predictions remain unused.
+Last updated: **2026-09-29**. Milestones **1–4 are implemented, executed, and locally verified**. The user completed the terminal run; full training, adapter reload, paired validation, checkpoint selection and error analysis passed acceptance. Milestones 5–6 have not been implemented. Original baseline and 4B evidence remain unchanged. Test predictions remain unused.
 
-## Milestone 4 — implementation and smoke verified; long run pending
+## Milestone 4 — completed fine tuning and analysis
+
+The complete paired experiment uses **Qwen3-0.6B**, revision `c1899de289a04d12100db370d81485cdf75e47ca`, **596,049,920 base parameters**, and **10,092,544 trainable LoRA parameters**. The user ran `scripts/run_milestone4.ps1` on 28–29 September. Training processed exactly **15,000 supported + 100 oos training examples**, one epoch, **944 optimizer updates**, rank 16/alpha 32/dropout 0.05, learning rate 1e-4, microbatch 1/accumulation 16, seed 42. NF4 with FP32 training compute is the recorded GTX 1650 precision fallback; both B and C inference use NF4/FP16 with identical prompt/template/decoding and the same baseline gate.
+
+Training took **42,072.27 seconds (11.69 hours)**, within the 24-hour limit; full result elapsed scope is 42,080.26 seconds. Mean trainer loss was **0.0586019859**, with all 944 loss/gradient log records finite. All ten saved checkpoints plus final adapter verified (11 bundles). The selected checkpoint **944** is the sole completed epoch, selected by the configured macro-F1/invalid/earlier-step rule. Its weights equal the final adapter whose unload/reload probe logits matched exactly (**0.0** maximum difference). C's complete validation ran in a fresh process using that checkpoint.
+
+### Genuine validation results
+
+Each candidate includes **3,100 requests: 3,000 supported over 150 classes and 100 oos**, with one verified result per canonical ID and no inference infrastructure failures.
+
+| Measure | Baseline A | Prompted B, 0.6B | Fine-tuned C, 0.6B |
+| --- | ---: | ---: | ---: |
+| Raw supported macro-F1 | 0.882634 | 0.272377 | **0.966217** |
+| Supported accuracy | 88.3333% | 22.4000% | **96.5333%** |
+| Invalid outputs / 3,100 | 0 | 654 | 1 |
+| Selected routing coverage | 68.4194% | 0% | **80.3548%** |
+| Routed errors / routes | 101 / 2,121 | 0 / 0 | **56 / 2,491** |
+| Selected routing error | 4.7619% | Undefined | **2.2481%** |
+| Oos review recall | 90 / 100 | 100 / 100, review all | **90 / 100** |
+| Original policy constraints | Met | Unmet; routing disabled | **Met** |
+
+C's threshold is **0.11417805060646902**, policy `policy-v1-2fe7bafe54be`, model `finetuned-qwen3-06b-qlora-v1-step944-bfe54e26195f`. Paired macro-F1 differences (1,000 supported-sample resamples, seed 42): C−A **0.083583**, 95% interval **[0.073414, 0.096574]**; C−B **0.693840**, interval **[0.683129, 0.710616]**. Thresholds and checkpoint choice use validation; these are not independent test guarantees.
+
+C fixes **2,227** supported B errors and introduces **3** regressions. Compared with A, C alone is correct on **284** supported requests and A alone on **38**. B's failures include 1,139 false oos rejections and 630 invalid outputs on supported requests. Across all requests, 653 of B's 654 invalid outputs are unknown labels, so the improvement includes taxonomy adherence rather than only JSON syntax. C still has 104 supported errors (98 wrong labels, six false oos rejections).
+
+**Raw oos correctness declines from 67/100 (B) to 55/100 (C)**; the shared gate raises C's oos review recall to 90/100. Forty category-stratified examples were inspected and annotated, including all three supported regressions, remaining confusions and oos overgeneralization. See [error analysis](../reports/three-way-qwen3-06b-v1/error_analysis.md) and [review records](../reports/three-way-qwen3-06b-v1/error_review.json). This assistant-authored review is not an independent annotation study.
+
+### Runtime, verification and retained evidence
+
+- Peak training allocation: **2.21 GiB**; peak PyTorch reservation: **4.78 GiB** on the 4 GiB GTX 1650. Reservation exceeds dedicated VRAM; Windows shared-memory/paging behavior was not independently measured. Do not claim the entire job fit dedicated VRAM.
+- B validation: **40.87 minutes** summed inference time; C: **55.02 minutes**. Serial p95 model latency: B **1,078.43 ms**, C **1,306.89 ms**, A **0.7844 ms**. This excludes loading, cached-prefix prefill, gate and API overhead; it is not a service load test. A remains the current API adapter.
+- `scripts/verify_milestone4.py --output artifacts/milestone4-acceptance-v1` passed using the CPU interpreter. It verified current source/config/lock/data/prompt identity, checkpoint checksums, selected/final weight equality, canonical validation joins, recomputed raw metrics and policies, and **byte-identical** comparison/bootstrap/paired-error output. No test records or model weights were loaded for evaluation.
+- **141 tests passed in 11.12 seconds**. Ruff lint/format, mypy's five core modules, and offline training-lock consistency passed. Existing training/inference source was preserved to keep the executed experiment identity unchanged.
+- Genuine reports: [B validation](../reports/prompted-qwen3-06b-nf4-v1-val/report.md), [B policy](../reports/prompted-qwen3-06b-nf4-v1-policy/report.md), [C validation](../reports/finetuned-qwen3-06b-qlora-v1-val/report.md), [C policy](../reports/finetuned-qwen3-06b-qlora-v1-policy/report.md), [A/B/C comparison](../reports/three-way-qwen3-06b-v1/report.md), and [training/acceptance evidence](../reports/finetuning-run-v1/README.md). Per-class reports, confusion matrices, plots and every raw prediction are retained.
+
+This completes Milestone 4's required training, reproducible reload, three genuine reports and changed-error explanation. One configuration, epoch and seed were run; raw oos generalization, public-data contamination, known source duplicates and validation selection remain limitations. No paid resource, test evaluation, deployment replacement or cost-saving claim was made. GPU resume of a long interrupted run remains untested; the completed run was uninterrupted, and the earlier tiny CPU resume fixture remains the available resume evidence.
+
+**Next task: Milestone 5**, when requested. Prepare the serving artifact/backend and verify adapter parity, then service telemetry/load measurements and release configuration freeze before any final test evaluation. Keep the baseline API and test holdout unchanged until that work is authorized.
+
+## Milestone 4 prerequisite record — 2026-09-28
+
+The following records the earlier smoke and terminal handoff. Its pending-run instructions were fulfilled by the completed run and acceptance above.
 
 The user requested terminal commands for the long run. Run from the project root, with no environment activation required:
 
@@ -66,7 +107,7 @@ $env:HF_HUB_OFFLINE = '1'
 
 Installed TRL/PEFT source APIs were inspected. Early lint issues were fixed before acceptance. No training/test failure is hidden or treated as a benchmark success. The fresh adapter inference's two invalid completions are retained unchanged. The user-facing long-run script has been syntax checked; its full path has **not** been run, per the user's request to execute the long job themselves. GPU checkpoint resume over a long run and non-Windows execution remain unverified; only the tiny installed-stack resume fixture was executed.
 
-### Next concrete task
+### Next task recorded at the prerequisite handoff (now completed)
 
 The user runs `scripts/run_milestone4.ps1`, then asks Codex to continue. Verify the full 0.6B B predictions, completed C training and each epoch checkpoint, selected C report/policy, all input/source hashes and changed-error examples. Record actual quality/runtime/resource results, retain the genuine reports, and only then mark Milestone 4 complete. Test remains unused until Milestone 5's frozen release. The baseline API remains unchanged.
 

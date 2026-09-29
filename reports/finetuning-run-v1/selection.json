@@ -1,0 +1,43 @@
+{
+  "all_checkpoints": [
+    {
+      "catalog_size": 150,
+      "checkpoint": "artifacts\\finetuned-qwen3-06b-qlora-v1\\checkpoint-944",
+      "epoch": 1.0,
+      "infrastructure_failure_count": 0,
+      "infrastructure_failure_rate": 0.0,
+      "invalid_output_count": 1,
+      "invalid_output_rate": 0.0003225806451612903,
+      "model_calls": 3100,
+      "oos_count": 100,
+      "predictions": "artifacts\\finetuned-qwen3-06b-qlora-v1-selection\\checkpoint-944\\predictions.jsonl",
+      "predictions_sha256": "3bac58c6a49db1a7a59e37c8a0bbef411217ef0494358bab64f4e4de47ec8a88",
+      "raw_supported_accuracy": 0.9653333333333334,
+      "raw_supported_macro_f1": 0.9662168898619922,
+      "sample_count": 3100,
+      "step": 944,
+      "supported_count": 3000
+    }
+  ],
+  "rule": "highest raw supported macro-F1; fewer invalid outputs; earlier step",
+  "selected": {
+    "catalog_size": 150,
+    "checkpoint": "artifacts\\finetuned-qwen3-06b-qlora-v1\\checkpoint-944",
+    "epoch": 1.0,
+    "infrastructure_failure_count": 0,
+    "infrastructure_failure_rate": 0.0,
+    "invalid_output_count": 1,
+    "invalid_output_rate": 0.0003225806451612903,
+    "model_calls": 3100,
+    "oos_count": 100,
+    "predictions": "artifacts\\finetuned-qwen3-06b-qlora-v1-selection\\checkpoint-944\\predictions.jsonl",
+    "predictions_sha256": "3bac58c6a49db1a7a59e37c8a0bbef411217ef0494358bab64f4e4de47ec8a88",
+    "raw_supported_accuracy": 0.9653333333333334,
+    "raw_supported_macro_f1": 0.9662168898619922,
+    "sample_count": 3100,
+    "step": 944,
+    "supported_count": 3000
+  },
+  "split": "val",
+  "training_result_sha256": "088aa6bc9982c82b3e59b0efd9b309e9782342c2144e0230efc12fcbfd3fc9b2"
+}

@@ -1,0 +1,47 @@
+{
+  "algorithm": "shared-baseline-gate-v1",
+  "automatic_routing": false,
+  "candidate_metadata_sha256": "53ee7964f07b15c3dea47d8ac147247e09c342aac951918f45f708166433fa57",
+  "catalog_sha256": "99c5f251ce0a66c6ff21535e030ee5551bc801526330e7781c21377c7c611d44",
+  "config_sha256": "403b6fb85cb3fdb8ffbaa0a309d47766b0bc71393435c41888dcc02be9524ddb",
+  "constraints": {
+    "max_routing_error": 0.05,
+    "min_coverage": 0.2,
+    "min_oos_recall": 0.9
+  },
+  "data_manifest_sha256": "0d36ac83b17181b9aa47a79748f421c62d79139e61104d738b99e1be027518e1",
+  "fixture": false,
+  "gate_model_version": "baseline-c1-v1-551714a82382",
+  "gate_reference": {
+    "predictions_sha256": "2075ef8fdf20ca7275dfdbeb1dcb013ca8ecc21f915576ef3f38a7b84f564108",
+    "source_predictions_sha256": "2075ef8fdf20ca7275dfdbeb1dcb013ca8ecc21f915576ef3f38a7b84f564108"
+  },
+  "model_version": "prompted-qwen3-06b-nf4-v1-53f85eece67c",
+  "pipeline_sha256": "6db46c751230433d9c0057e1dccccf73697d53a5460db6074dd684efd269e43d",
+  "policy_version": "policy-v1-403b6fb85cb3",
+  "prediction_manifest_sha256": "0b313772fb28c8d85e5abe22eea2ec9f6eb4abf40956b5ee5d6b900c6ffa314b",
+  "predictions_sha256": "c6bf3abec7319110f45e269c89729b5e4db3b2052f28c8ef0ae9af3282333761",
+  "schema_version": 1,
+  "split": "val",
+  "status": "targets_unmet",
+  "threshold": 1.0000000000000002,
+  "validation": {
+    "coverage": 0.0,
+    "human_review_count": 3100,
+    "infrastructure_failure_count": 0,
+    "oos_count": 100,
+    "oos_recall": 1.0,
+    "oos_recall_wilson95": [
+      0.9630065017930143,
+      1.0
+    ],
+    "routed_count": 0,
+    "routed_error_count": 0,
+    "routing_error": null,
+    "routing_error_wilson95": null,
+    "sample_count": 3100,
+    "supported_count": 3000,
+    "supported_review_rate": 1.0,
+    "threshold": 1.0000000000000002
+  }
+}
