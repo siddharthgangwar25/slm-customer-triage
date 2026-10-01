@@ -1,8 +1,18 @@
 # Milestone 5 serving and release runbook
 
-The full native workflow completed on 1 October 2026 and was audited from saved evidence. See [the final report](../reports/milestone5-final-v1/README.md): C is disqualified for automatic release because its fixed-policy oos review recall is 89.6%, below 90%. **Do not repeat the completed test experiment or tune its thresholds.** The workflow commands below document how that run was produced. Docker is now installed and the CPU container has been exercised; GPU model/container parity and vLLM acceptance remain pending. No hosted CI success is claimed. The evaluated native backend is Transformers/NF4/PEFT in a separate process.
+The full native workflow completed on 1 October 2026 and was audited from saved evidence. See [the final report](../reports/milestone5-final-v1/README.md): C is disqualified for automatic release because its fixed-policy oos review recall is 89.6%, below 90%. **Do not repeat the completed test experiment or tune its thresholds.** CPU container acceptance and the [GPU container smoke](../reports/milestone5-container-gpu-smoke-v1/README.md) now pass; full GPU container parity/load and vLLM acceptance remain pending. No hosted CI success is claimed. The evaluated backend is Transformers/NF4/PEFT in separate worker/gateway processes.
 
-## Next terminal step: GPU container smoke
+## Next terminal step: full GPU container validation
+
+The six-output GPU smoke and 24-request-per-level load checks passed. Keep Docker Desktop running and reuse the built images:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/run_container_validation.py --stage gpu --full --skip-build --output artifacts/milestone5-container-gpu-full-v1
+```
+
+This checks all 3,100 validation outputs and 500 HTTP submissions per concurrency level. It skips image builds and does not use the test set. After completion, ask for an audit of the saved results. Do not change source/models/policies or rebuild the images during this run.
+
+## Completed GPU smoke workflow
 
 Keep Docker Desktop running. From the project root, without activating a venv:
 
@@ -12,13 +22,13 @@ Keep Docker Desktop running. From the project root, without activating a venv:
 
 This builds both images from committed locks, starts an authenticated worker on an internal Docker network, publishes only the gateway on a random localhost port, waits for the worker before starting the gateway, checks API contracts, compares six real validation outputs and sends 24 HTTP requests at each concurrency. The initial GPU image downloads several gigabytes of dependencies. Build progress is written to `build-cpu.log` / `build-gpu.log` inside the output directory; runtime progress appears in the terminal. It creates random secrets in child environments and removes only its own containers/networks on exit. Model/report mounts are read-only; new parity evidence has a separate writable mount. It does not train, activate a deployment or access test records.
 
-After the smoke passes, the longer validation-only command is:
+The smoke passed; the longer validation-only command is:
 
 ```powershell
 .\.venv\Scripts\python.exe scripts/run_container_validation.py --stage gpu --full --skip-build --output artifacts/milestone5-container-gpu-full-v1
 ```
 
-This performs 3,100 raw comparisons and 500 HTTP requests at concurrency 1/4/8. The Linux backend must demonstrate parity; a difference is a failed comparison to retain, not permission to adjust thresholds or repeat final testing. Use a fresh output directory for each attempt; this container wrapper does not resume interrupted runs. Share any error before proceeding. The GPU runner has been authored but not executed yet; GPU device visibility alone does not prove model compatibility.
+This performs 3,100 raw comparisons and 500 HTTP requests at concurrency 1/4/8. The Linux backend must demonstrate parity; a difference is a failed comparison to retain, not permission to adjust thresholds or repeat final testing. Use a fresh output directory for each attempt; this container wrapper does not resume interrupted runs. Share any error before proceeding. The GPU runner has executed successfully on the smoke; full acceptance remains pending.
 
 CPU reproduction, including a Linux-generated synthetic fixture and every genuine baseline validation decision:
 

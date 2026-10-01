@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "source, model, prompt/reference and Dockerfile identities",
+    "parity outcome checksum and raw/token equality",
+    "HTTP counts, all failures, decision/reason and mismatch flags",
+    "latency percentiles, throughput and metric deltas",
+    "completed final-test ledger unchanged; no active release pointer"
+  ],
+  "frozen_release_still_verifies": "release-a0bcea381506",
+  "inference_rerun": false,
+  "passed": true,
+  "scope": "six validation parity outcomes and 72 HTTP smoke submissions, not full acceptance",
+  "source_sha256": "2a91de5d0e0e4625c3b3fcb22a5898d16b387f6259568b9bdd2b21df3f48a4c4"
+}

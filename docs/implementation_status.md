@@ -1,16 +1,32 @@
 # Implementation status
 
-Last updated: **2026-10-01**. Milestones **1–4 are implemented, executed, and locally verified**. **Milestone 5's native benchmark and CPU container acceptance are verified; C remains disqualified for automatic release. GPU container parity and vLLM remain unverified.** Milestone 6 has not been implemented. Original baseline and 4B evidence remain unchanged. The genuine test split has been used once per frozen candidate; do not retune or repeat it.
+Last updated: **2026-10-01**. Milestones **1–4 are implemented, executed, and locally verified**. **Milestone 5's native benchmark, CPU container acceptance and GPU container smoke are verified; full GPU container parity/load and vLLM remain unverified. C remains disqualified for automatic release.** Milestone 6 has not been implemented. Original baseline and 4B evidence remain unchanged. The genuine test split has been used once per frozen candidate; do not retune or repeat it.
 
-## Milestone 5 — Docker ready; CPU acceptance passed; GPU terminal handoff
+## Milestone 5 — GPU container smoke passed; full validation handoff
+
+The user completed the GPU smoke command on 1 October. Both images built successfully; current image IDs match the saved run. The Linux/WSL2 GPU worker loaded the unchanged Qwen3-0.6B checkpoint 944 with NF4/FP16, PEFT and cached-prefix greedy decoding. **6/6** raw outputs/token counts/truncation flags exactly matched C's reference. Health/authentication/input/private-metrics checks passed. No test-set inference, training or activation occurred.
+
+The serial HTTP smoke completed **24/24**, with **zero** live intent/decision/reason mismatches, **6** gate short-circuits and **18** generation calls; **17** routes and **7** reviews. Throughput **1.411 completed/s**, p50/p95/p99 **903.57 / 1,159.29 / 1,241.84 ms**; startup **36.23 seconds**, warmup **13.55 seconds**. Concurrency 4 and 8 each completed **1/24**, with **23 HTTP 503 model_busy** failures. All failures are retained; this small smoke is not full serving acceptance or a performance-improvement claim.
+
+The saved evidence passed a CPU-only audit of all six parity records and their checksum, 72 HTTP outcomes, decision/reason accounting, percentiles, throughput, metric deltas, identities and unchanged final-test ledger. Confirmed that the runner cleaned up its containers/networks and the disqualified release remains inactive. Retained [GPU container smoke evidence](../reports/milestone5-container-gpu-smoke-v1/README.md) includes image identities and build logs; all 13 retained-file checksums verify. GPU image size is approximately **11.94 GB** locally, not a measured download total. This follow-up changes reports/documentation and pins retained log line endings to LF in `.gitattributes` so checkout preserves their checksums. Existing model/service source, configurations and dependency locks remain unchanged. Prior 153-test results remain valid; no redundant model or unit-suite rerun was performed.
+
+**Next command for the user**, from the project root, no venv activation:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/run_container_validation.py --stage gpu --full --skip-build --output artifacts/milestone5-container-gpu-full-v1
+```
+
+Keep Docker Desktop running. This reuses existing images, compares **3,100 validation** outputs and submits **500 requests at concurrency 1/4/8**. It does not rebuild/download dependencies, train, alter policies, activate or access the test split. Review the complete results before closing GPU container acceptance. The vLLM alternative remains unverified; C's original automatic-release disqualification is unchanged. Milestone 6 has not started.
+
+## Milestone 5 — earlier CPU acceptance and GPU smoke handoff (completed above)
 
 The user installed Docker Desktop and resolved its WSL startup issue. Verified Desktop **4.93.0**, Linux engine **29.8.1**, Compose **5.5.1**. Built `deployment/Dockerfile.cpu` from its pinned base and committed lock; the real container matches **all 3,100 baseline validation decisions** (2,121 routes, 979 reviews). A Linux-generated synthetic fixture matches 3/3. Health/model/authentication/input/private-metrics HTTP checks pass for both. The corrected Compose CPU profile separately passed readiness and an authenticated request. A temporary container sees the **GTX 1650, driver 617.14, 4,096 MiB**. This is GPU visibility, not GPU inference acceptance.
 
 Retained results and failure diagnostics: [CPU container evidence](../reports/milestone5-container-cpu-v1/README.md). First, Docker omitted published ports on an internal-only network. `deployment/compose.yaml` now uses a separate gateway frontend network while keeping the worker internal and unpublished. Second, the Windows synthetic fixture had a one-unit floating-point threshold mismatch on Linux (0.5923113658354859 vs 0.5923113658354858). Its failed result is preserved; CI fixture fitting/selection now runs inside the tested Linux image. Genuine baseline artifacts and thresholds were unchanged and passed parity both times.
 
-New `scripts/run_container_validation.py` owns temporary containers/networks, generates environment secrets, records identities/logs, checks HTTP behavior, and cleans up only its resources. CPU mode is executed; GPU mode is authored but unexecuted. Ruff lint/format and Git whitespace checks pass. The frozen release still verifies. Existing 153-test results remain recorded below; no core source/lock/model change required another full CPU suite. No real test inference or deployment activation occurred.
+New `scripts/run_container_validation.py` owns temporary containers/networks, generates environment secrets, records identities/logs, checks HTTP behavior, and cleans up only its resources. At this earlier handoff, CPU mode was executed and GPU mode was unexecuted; the GPU smoke subsequently passed as recorded above. Ruff lint/format and Git whitespace checks passed. The frozen release still verifies. Existing 153-test results remain recorded below; no core source/lock/model change required another full CPU suite. No real test inference or deployment activation occurred.
 
-**Next command for the user**, from the project root, no venv activation:
+The earlier smoke command, now completed:
 
 ```powershell
 .\.venv\Scripts\python.exe scripts/run_container_validation.py --stage gpu --output artifacts/milestone5-container-gpu-smoke-v1

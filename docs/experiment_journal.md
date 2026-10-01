@@ -1,5 +1,11 @@
 # Experiment journal
 
+## 2026-10-01 — GPU container smoke
+
+Hypothesis: the unchanged adapter representation can reproduce native reference outputs under Linux/WSL2. The user built both images and ran the container smoke. All six raw/token comparisons matched; all 24 serial requests completed with matching decisions, six actual gate rejections and 18 model calls. The 1.159-second p95 is a small-workload measurement, not a confirmed performance improvement. Concurrency 4/8 each rejected 23 of 24 requests as busy.
+
+Decision: proceed to full validation-only container parity/load using the built images. Preserve image/source identities and every failure. No new test experiment, policy adjustment or release activation is authorized by this smoke; the completed release remains disqualified. Full parity and the vLLM alternative are still unverified.
+
 ## 2026-10-01 — frozen Milestone 5 result and release rejection
 
 The user completed all 3,100 native worker parity comparisons, the 500-request HTTP workloads at concurrency 1/4/8, and the frozen 5,500-request test evaluation for A/B/C. A separate CPU audit verified source/artifact identity, canonical records, parsing, fixed-threshold metrics, bootstrap intervals, operating counts and cost arithmetic without generating new predictions.
