@@ -1,0 +1,11 @@
+{
+  "backend_executed": "separate-process Transformers with NF4/FP16 and PEFT",
+  "container_executed": false,
+  "date": "2026-09-29",
+  "docker_executable": null,
+  "genuine_test_records_accessed": false,
+  "hosted_ci_executed": false,
+  "platform": "Windows-10-10.0.26200-SP0",
+  "source_reference": "https://docs.vllm.ai/en/latest/getting_started/installation/gpu/",
+  "vllm_native_windows_supported": false
+}

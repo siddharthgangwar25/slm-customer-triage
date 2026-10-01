@@ -1,0 +1,19 @@
+release_name: triage-qwen3-06b-v1
+data_dir: data/clinc150
+baseline_bundle: artifacts/baseline-c1-v1
+adapter_bundle: artifacts/finetuned-qwen3-06b-qlora-v1/checkpoint-944
+service_config: configs/service-slm.yaml
+paid_cloud_enabled: false
+parity_evidence: artifacts/milestone5/parity/parity.json
+load_evidence: artifacts/milestone5/load/load.json
+cost_evidence: artifacts/milestone5/cost.json
+candidates:
+  baseline:
+    predictions: reports/baseline-c1-v1-val/predictions.jsonl
+    policy: reports/baseline-c1-v1-policy/policy.json
+  prompted:
+    predictions: reports/prompted-qwen3-06b-nf4-v1-val/predictions.jsonl
+    policy: reports/prompted-qwen3-06b-nf4-v1-policy/policy.json
+  finetuned:
+    predictions: reports/finetuned-qwen3-06b-qlora-v1-val/predictions.jsonl
+    policy: reports/finetuned-qwen3-06b-qlora-v1-policy/policy.json

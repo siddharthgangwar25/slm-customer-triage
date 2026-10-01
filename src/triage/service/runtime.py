@@ -2,6 +2,7 @@
 
 import asyncio
 import threading
+import time
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from importlib.metadata import version
@@ -11,6 +12,7 @@ from typing import Protocol
 from triage.evaluation.select_policy import load_policy
 from triage.io import object_hash, read_json, verify_hash
 from triage.policy import Decision, ModelOutput, Policy
+from triage.service.telemetry import Telemetry
 
 
 class ServiceError(Exception):
@@ -94,6 +96,7 @@ class BaselineAdapter:
 class Runtime:
     def __init__(self, adapter: Adapter, policy: Policy):
         self.adapter, self.policy = adapter, policy
+        self.telemetry = Telemetry()
         self.executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="triage-cpu")
         self.slot = threading.Lock()
         self.healthy = True
@@ -115,14 +118,30 @@ class Runtime:
         if self.adapter.input_tokens(text) > max_tokens:
             raise ServiceError("token_budget_exceeded", "Input exceeds the model token budget", 422)
         if not self.policy.automatic_routing:
+            self.telemetry.increment("gate_rejections")
             return self.policy.decide(0.0, ModelOutput(None, False), self.adapter.catalog)
         gate = self.adapter.gate(text)
         if self.policy.rejects(gate.score):
+            self.telemetry.increment("gate_rejections")
             return self.policy.decide(gate.score, ModelOutput(None, False), self.adapter.catalog)
+        self.telemetry.increment("model_calls")
         output = (
             gate.cached_output if gate.cached_output is not None else self.adapter.predict(text)
         )
+        if not output.valid:
+            self.telemetry.increment("invalid_outputs")
         return self.policy.decide(gate.score, output, self.adapter.catalog)
+
+    def _measured_infer(self, text, max_tokens):
+        started = time.perf_counter()
+        self.telemetry.active(1)
+        try:
+            result = self._infer(text, max_tokens)
+            self.telemetry.increment(result.decision)
+            return result
+        finally:
+            self.telemetry.active(-1)
+            self.telemetry.observe("inference", time.perf_counter() - started)
 
     async def infer(self, text: str, max_tokens: int, timeout: float) -> Decision:
         if not self.ready:
@@ -130,7 +149,7 @@ class Runtime:
         if not self.slot.acquire(blocking=False):
             raise ServiceError("model_busy", "Model is busy; retry later")
         try:
-            future = self.executor.submit(self._infer, text, max_tokens)
+            future = self.executor.submit(self._measured_infer, text, max_tokens)
         except RuntimeError:
             self.slot.release()
             raise ServiceError("model_unavailable", "Model is unavailable") from None
@@ -165,6 +184,10 @@ class Runtime:
         self.executor.shutdown(wait=False, cancel_futures=True)
 
 
-def load_runtime(bundle: Path, policy_path: Path) -> Runtime:
+def load_runtime(bundle: Path, policy_path: Path, worker_url=None, worker_key=None) -> Runtime:
     policy, frozen = load_policy(policy_path)
+    if worker_url:
+        from triage.service.remote import RemoteAdapter
+
+        return Runtime(RemoteAdapter(bundle, frozen, worker_url, worker_key), policy)
     return Runtime(BaselineAdapter(bundle, frozen), policy)

@@ -1,0 +1,66 @@
+services:
+  baseline:
+    profiles: [cpu]
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile.cpu
+    ports: ["127.0.0.1:8000:8000"]
+    environment:
+      TRIAGE_API_KEY: ${TRIAGE_API_KEY:?Set a local API key}
+      TRIAGE_METRICS_KEY: ${TRIAGE_METRICS_KEY:?Set a separate metrics key}
+    volumes:
+      - ../artifacts:/app/artifacts:ro
+      - ../reports:/app/reports:ro
+    networks: [private]
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+  worker:
+    profiles: [gpu]
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile.gpu
+    environment:
+      TRIAGE_WORKER_KEY: ${TRIAGE_WORKER_KEY:?Set a private worker key}
+    volumes:
+      - ../artifacts:/app/artifacts:ro
+      - ../reports:/app/reports:ro
+    networks: [private]
+    gpus: all
+    healthcheck:
+      test: ["CMD", "python", "-c", "import os,urllib.request; urllib.request.urlopen(urllib.request.Request('http://127.0.0.1:8001/health/ready',headers={'Authorization':'Bearer '+os.environ['TRIAGE_WORKER_KEY']}))"]
+      interval: 10s
+      start_period: 120s
+      timeout: 5s
+      retries: 6
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+  gateway:
+    profiles: [gpu]
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile.cpu
+    command: ["--bundle", "artifacts/baseline-c1-v1", "--policy", "reports/finetuned-qwen3-06b-qlora-v1-policy/policy.json", "--config", "configs/service-slm.yaml", "--worker-url", "http://worker:8001"]
+    ports: ["127.0.0.1:8000:8000"]
+    environment:
+      TRIAGE_API_KEY: ${TRIAGE_API_KEY:?Set a local API key}
+      TRIAGE_METRICS_KEY: ${TRIAGE_METRICS_KEY:?Set a separate metrics key}
+      TRIAGE_WORKER_KEY: ${TRIAGE_WORKER_KEY:?Set a private worker key}
+    volumes:
+      - ../artifacts:/app/artifacts:ro
+      - ../reports:/app/reports:ro
+    networks: [private]
+    depends_on:
+      worker:
+        condition: service_healthy
+    restart: on-failure:3
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+networks:
+  private:
+    internal: true

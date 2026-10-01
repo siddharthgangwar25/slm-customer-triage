@@ -1,5 +1,13 @@
 # Implementation decisions
 
+## 2026-09-29 — Milestone 5 implementation and native smoke
+
+- **Preserve the measured representation.** Implement an authenticated separate-process Transformers worker using the same NF4/FP16/PEFT adapter and decoder. Current vLLM documentation excludes native Windows and Docker is not installed here. This is a disclosed fallback; a vLLM/Linux/container result is not claimed. Backend changes require fresh parity/validation.
+- **Keep the gate real.** The CPU gateway validates the full input-token budget and uses the baseline score before generation. A smoke verified six skipped generations in 24 serial requests. Worker/baseline outputs remain distinct. Single-flight admission yields explicit 503 overload failures rather than an unbounded queue.
+- **Freeze before test use.** C wins validation coverage by more than one percentage point, so it does not require a cost tie-break with A. The freeze checks all three identities and full serving evidence; test runs register exposure before reading records and keep the validation thresholds. No deployment is automatically activated by the benchmark script.
+- **Report overload and uncertainty.** At each of concurrency 4/8 the small smoke completed one request and rejected 23 as busy. Retain both submitted and completed throughput/latencies. Full 500-request runs are user-terminal work, not completed evidence. Containers, vLLM, hosted CI and real final test results remain unverified.
+- **Cost is a scenario, not a bill.** Official AWS us-east-1 Linux g4dn.xlarge rate was $0.526/hour in the retrieved 2026-09-29 quote. Using local measured runtime at that price explicitly assumes hardware transferability; it is not EC2 performance evidence. Publish assumed demand, billed/idle hours, supporting allowance and training separately. Paid cloud stays disabled.
+
 ## 2026-09-29 — Milestone 4 acceptance
 
 - **Retain the completed single-epoch experiment.** The user ran the documented terminal workflow; current source/config/data/prompt/lock hashes match the run. All 11 bundles and every validation outcome verified. No post-result tuning was done. Step 944 is the only eligible epoch checkpoint; exact adapter reload and fresh-process full validation are recorded.

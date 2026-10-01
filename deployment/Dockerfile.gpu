@@ -1,0 +1,15 @@
+FROM python:3.11.16-slim@sha256:e41613d42d4891e4930f79523f93f81bbc7632584ec65e36ab055f41a800b41e
+WORKDIR /app
+RUN pip install --no-cache-dir uv==0.12.19
+COPY pyproject.toml uv.lock ./
+COPY src ./src
+COPY environments/training/pyproject.toml environments/training/uv.lock ./environments/training/
+RUN uv sync --locked --project environments/training --no-editable
+COPY configs ./configs
+COPY prompts ./prompts
+RUN useradd --uid 10001 --create-home triage
+USER 10001
+ENV PATH="/app/environments/training/.venv/bin:$PATH" HF_HUB_OFFLINE=1 PYTHONUNBUFFERED=1
+EXPOSE 8001
+ENTRYPOINT ["python", "-m", "triage.service.worker", "--host", "0.0.0.0"]
+CMD ["--predictions", "reports/finetuned-qwen3-06b-qlora-v1-val/predictions.jsonl"]

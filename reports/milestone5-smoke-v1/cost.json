@@ -1,0 +1,70 @@
+{
+  "hardware_price_scenario": "g4dn.xlarge Linux On-Demand, us-east-1",
+  "load_complete": false,
+  "measured_hardware": "local GTX 1650 + CPU gateway",
+  "quote": {
+    "currency": "USD",
+    "manifest": {
+      "ETLIngestionTriggerDate": "2026-09-25T17:45:21Z",
+      "accessType": "publish",
+      "currencyCode": "USD",
+      "hawkFilePublicationDate": "2026-09-25T17:45:21Z",
+      "serviceId": "ec2",
+      "source": "ec2-ondemand-without-sec-sel"
+    },
+    "quotes": [
+      {
+        "Instance Family": "General purpose",
+        "Instance Type": "t3.medium",
+        "License Model": "No License required",
+        "Location": "US East (N. Virginia)",
+        "Memory": "4 GiB",
+        "Network Performance": "Up to 5 Gigabit",
+        "Operating System": "Linux",
+        "Pre Installed S/W": "NA",
+        "Storage": "EBS only",
+        "plc:InstanceFamily": "General Purpose",
+        "plc:OperatingSystem": "Linux",
+        "price": "0.0416000000",
+        "rateCode": "NN4EGUUQRWVYP98C.JRTCKXETXF.6YS6EN2CT7",
+        "vCPU": "2"
+      },
+      {
+        "Instance Family": "GPU instance",
+        "Instance Type": "g4dn.xlarge",
+        "License Model": "No License required",
+        "Location": "US East (N. Virginia)",
+        "Memory": "16 GiB",
+        "Network Performance": "Up to 25 Gigabit",
+        "Operating System": "Linux",
+        "Pre Installed S/W": "NA",
+        "Storage": "125 GB NVMe SSD",
+        "plc:InstanceFamily": "Accelerated Computing",
+        "plc:OperatingSystem": "Linux",
+        "price": "0.5260000000",
+        "rateCode": "7TVXMFHQR6U7W5CV.JRTCKXETXF.6YS6EN2CT7",
+        "vCPU": "4"
+      }
+    ],
+    "region": "us-east-1",
+    "retrieved_date": "2026-09-29",
+    "scope": "Linux On-Demand hourly compute; excludes storage, IPv4, tax and supporting services",
+    "source_url": "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/ec2-ondemand-without-sec-sel/US%20East%20%28N.%20Virginia%29/Linux/index.json"
+  },
+  "scenario": {
+    "active_compute_usd_per_1000_submitted": 0.1331114941458573,
+    "active_hours_at_local_measured_rate": 25.306367708337888,
+    "billed_monthly_hours_assumed": 730,
+    "demand_fits_assumed_capacity": true,
+    "hosting_usd_per_1000_submitted": 3.9398000000000004,
+    "hosting_usd_per_month": 393.98,
+    "idle_hours_at_local_measured_rate": 704.6936322916621,
+    "limitation": "Cloud runtime is unmeasured. Local GTX 1650 runtime at a T4 host price is an explicit what-if, not a cloud performance/cost claim. Supporting allowance is assumed; excludes taxes. No spending occurred.",
+    "measured_cloud_cost": false,
+    "monthly_submitted_requests_assumed": 100000,
+    "supporting_monthly_usd_assumed": 10,
+    "training_amortization_one_month_usd_per_1000": 0.06147225629020833,
+    "training_hours_local": 11.686740739583334,
+    "training_usd_at_scenario_rate": 6.147225629020833
+  }
+}

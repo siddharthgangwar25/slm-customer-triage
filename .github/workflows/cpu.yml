@@ -18,3 +18,26 @@ jobs:
       - run: uv run --locked ruff format --check .
       - run: uv run --locked mypy
       - run: uv run --locked pytest -q
+  container:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff
+        with:
+          version: "0.12.19"
+      - run: uv sync --locked
+      - run: uv run --locked python scripts/create_container_fixture.py --output artifacts/container-fixture
+      - run: docker build -f deployment/Dockerfile.cpu -t triage-cpu .
+      - name: Exercise real container HTTP contracts with synthetic bundle
+        shell: bash
+        run: |
+          docker run -d --name triage-smoke -p 127.0.0.1:8000:8000 -v "$PWD/artifacts/container-fixture:/app/fixture:ro" triage-cpu --bundle fixture/bundle --policy fixture/policy/policy.json
+          trap 'docker rm -f triage-smoke' EXIT
+          for n in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:8000/health/ready; then break; fi
+            sleep 1
+          done
+          curl --fail http://127.0.0.1:8000/health/live
+          curl --fail http://127.0.0.1:8000/health/ready
+          curl --fail -H 'Content-Type: application/json' -d '{"text":"pay bill"}' http://127.0.0.1:8000/v1/triage

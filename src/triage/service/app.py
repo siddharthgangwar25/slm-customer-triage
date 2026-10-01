@@ -12,7 +12,7 @@ from uuid import uuid4
 
 from fastapi import Depends, FastAPI, Request
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, PlainTextResponse
 from fastapi.security import HTTPBearer
 from starlette.exceptions import HTTPException
 
@@ -24,6 +24,7 @@ from triage.service.schemas import (
     TriageRequest,
     TriageResponse,
 )
+from triage.service.telemetry import Telemetry
 
 logger = logging.getLogger("triage.service")
 
@@ -37,8 +38,9 @@ def error_response(request_id, code, message, status):
 class RequestBoundary:
     """ASGI body cap before JSON parsing, including chunked bodies with no Content-Length."""
 
-    def __init__(self, app, *, max_body_bytes, api_key):
+    def __init__(self, app, *, max_body_bytes, api_key, telemetry):
         self.app, self.max_body_bytes, self.api_key = app, max_body_bytes, api_key
+        self.telemetry = telemetry
 
     async def __call__(self, scope, receive, send):
         if scope["type"] != "http":
@@ -96,6 +98,9 @@ class RequestBoundary:
 
             await self.app(scope, replay, tracked_send)
         finally:
+            if scope["path"] == "/v1/triage":
+                self.telemetry.increment(f"http_{status // 100}xx")
+                self.telemetry.observe("request", time.perf_counter() - start)
             # Do not log text, client IDs, raw paths/query strings, headers, or exception messages.
             logger.info(
                 json.dumps(
@@ -103,6 +108,9 @@ class RequestBoundary:
                         "event": "request",
                         "status": status,
                         "latency_ms": round((time.perf_counter() - start) * 1000, 3),
+                        "model_version": scope["state"].get("model_version"),
+                        "outcome": scope["state"].get("outcome"),
+                        "reason": scope["state"].get("reason"),
                     }
                 )
             )
@@ -115,8 +123,12 @@ def create_app(
     settings: ServiceSettings | None = None,
     api_key: str | None = None,
     runtime: Runtime | None = None,
+    worker_url: str | None = None,
+    worker_key: str | None = None,
+    metrics_key: str | None = None,
 ):
     settings = settings or ServiceSettings()
+    telemetry = runtime.telemetry if runtime else Telemetry()
 
     @asynccontextmanager
     async def lifespan(app):
@@ -125,11 +137,17 @@ def create_app(
             try:
                 if bundle is None or policy_path is None:
                     raise ValueError("Missing bundle or policy")
-                app.state.runtime = await asyncio.to_thread(load_runtime, bundle, policy_path)
+                app.state.runtime = await asyncio.to_thread(
+                    load_runtime, bundle, policy_path, worker_url, worker_key
+                )
+                app.state.runtime.telemetry = telemetry
             except Exception as exc:
                 logger.error(
                     json.dumps({"event": "bundle_unavailable", "type": type(exc).__name__})
                 )
+        if app.state.runtime is not None:
+            active = app.state.runtime
+            telemetry.model_info = (active.adapter.model_version, active.policy.policy_version)
         yield
         if app.state.runtime is not None:
             app.state.runtime.close()
@@ -137,7 +155,12 @@ def create_app(
 
     app = FastAPI(title="Customer request triage", version="0.2.0", lifespan=lifespan)
     app.state.runtime = None
-    app.add_middleware(RequestBoundary, max_body_bytes=settings.max_body_bytes, api_key=api_key)
+    app.add_middleware(
+        RequestBoundary,
+        max_body_bytes=settings.max_body_bytes,
+        api_key=api_key,
+        telemetry=telemetry,
+    )
     admitted = deque()
     bearer = HTTPBearer(auto_error=False)
 
@@ -149,6 +172,8 @@ def create_app(
 
     @app.exception_handler(ServiceError)
     async def service_error(request: Request, exc: ServiceError):
+        request.state.outcome = "error"
+        request.state.reason = exc.code
         response = error_response(request.state.request_id, exc.code, exc.message, exc.status)
         if exc.status == 429:
             response.headers["Retry-After"] = str(int(settings.rate_limit_window_seconds) + 1)
@@ -172,7 +197,9 @@ def create_app(
 
     @app.get("/health/ready", responses={503: {"model": ErrorResponse}})
     async def ready():
-        require_runtime()
+        active = require_runtime()
+        if hasattr(active.adapter, "health"):
+            await asyncio.to_thread(active.adapter.health)
         return {"status": "ready"}
 
     @app.get(
@@ -189,6 +216,7 @@ def create_app(
             automatic_routing=active.policy.automatic_routing,
             supported_intent_count=len(active.adapter.catalog),
             fixture=active.adapter.fixture,
+            model_type=getattr(active.adapter, "model_type", "baseline"),
         )
 
     @app.post(
@@ -207,9 +235,12 @@ def create_app(
                 raise ServiceError("rate_limited", "Request rate limit exceeded", 429)
             admitted.append(now)
         active = require_runtime()
+        request.state.model_version = active.adapter.model_version
         decision = await active.infer(
             body.text, settings.max_input_tokens, settings.inference_timeout_seconds
         )
+        request.state.outcome = decision.decision
+        request.state.reason = decision.reason
         return TriageResponse(
             request_id=request.state.request_id,
             intent=decision.intent,
@@ -220,5 +251,16 @@ def create_app(
             latency_ms=(time.perf_counter() - start) * 1000,
         )
 
-    # /metrics is intentionally absent until the private telemetry endpoint is implemented.
+    if metrics_key:
+
+        @app.get("/metrics", include_in_schema=False)
+        async def metrics(request: Request):
+            if not secrets.compare_digest(
+                request.headers.get("authorization", ""), "Bearer " + metrics_key
+            ):
+                return error_response(
+                    request.state.request_id, "unauthorized", "Authentication failed", 401
+                )
+            return PlainTextResponse(telemetry.render(), media_type="text/plain; version=0.0.4")
+
     return app

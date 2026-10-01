@@ -65,5 +65,5 @@ class ModelInfo(BaseModel):
     policy_version: str
     automatic_routing: bool
     supported_intent_count: int
-    model_type: Literal["baseline"] = "baseline"
+    model_type: Literal["baseline", "prompted", "finetuned"] = "baseline"
     fixture: bool

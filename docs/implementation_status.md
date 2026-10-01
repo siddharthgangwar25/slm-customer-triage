@@ -1,6 +1,67 @@
 # Implementation status
 
-Last updated: **2026-09-29**. Milestones **1–4 are implemented, executed, and locally verified**. The user completed the terminal run; full training, adapter reload, paired validation, checkpoint selection and error analysis passed acceptance. Milestones 5–6 have not been implemented. Original baseline and 4B evidence remain unchanged. Test predictions remain unused.
+Last updated: **2026-10-01**. Milestones **1–4 are implemented, executed, and locally verified**. **Milestone 5's native serving/release workflow is implemented and smoke-tested; full terminal benchmarks and container/backend acceptance remain pending.** Milestone 6 has not been implemented. Original baseline and 4B evidence remain unchanged. Real test predictions remain unused.
+
+## Milestone 5 — implementation and smoke complete; acceptance pending
+
+The user requested terminal commands for the longer runs. From the project root, without activating a venv:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/run_milestone5.py
+```
+
+This owns and cleans up a localhost worker/gateway, runs all 3,100 validation parity checks, warms up and submits 500 HTTP requests at concurrency 1/4/8, records cost/resource evidence, freezes all three candidates using validation selection, then records test use and runs the official 5,500-request test split through each frozen candidate once. It does not retrain, deploy automatically or spend money. Expect several hours; no exact completion-time claim is made from the small smoke. Stage/resume instructions and container checks are in [the runbook](release_benchmark.md).
+
+### Implemented
+
+- Separate authenticated Transformers/NF4/FP16/PEFT worker, preserving C's evaluated base/adapter/prompt/decoder; CPU gateway uses A's frozen gate and skips generation for low scores. Baseline classification is never substituted for the SLM result. Full token-budget checks and explicit unavailable/busy/timeout failures remain enforced.
+- Private Prometheus-compatible counters/histograms and model identity; JSON status/timing/outcome logs without request content. Optional nvidia-smi whole-GPU utilization/memory samples and worker allocator metadata. Single-flight admission stays bounded; overload is reported as 503, not fictional review.
+- Resumable complete validation raw-output/token parity, real HTTP load harness with warmup/cold-start separation, complete failure accounting, successful decision checks, submitted/completed throughput and separate latency percentiles. All-request percentiles cannot be interpreted as successful-request latency under overload.
+- Validation-only release selection, input/source/lock/model/tokenizer/gate/policy hashes, source commit, full serving prerequisites and unchanged-threshold final evaluation. Exclusive test-use ledgers, prior-exposure disclosure, partial-prefix checksums and writer lock prevent accidental concurrent/repeated tests. Tests can disqualify an automatic release but do not trigger tuning.
+- Atomic activation/rollback pointers and explicit restart workflow. Activation checks final test completion/quality; the script does not activate it. The current baseline API configuration remains unchanged.
+- CPU/GPU Dockerfiles with a registry-verified immutable Python base digest, optional private-network GPU compose profile, localhost gateway binding, read-only artifacts and non-root users. CPU CI container fixture build/health job is authored. No Docker executable is available here, so image builds/runtime behavior and hosted CI are unverified.
+- Dated official AWS Linux On-Demand quote and explicit cost model: active runtime, idle allocation, demand, supporting allowance and separate training amortization. AWS deployment/cleanup runbook has no provisioning automation or implicit spending authorization.
+
+### Executed and verified
+
+Evidence: [reports/milestone5-smoke-v1](../reports/milestone5-smoke-v1/README.md). The source identity in the retained later smoke matches the recorded implementation.
+
+| Check | Actual result |
+| --- | --- |
+| Real native worker parity | **6/6** raw outputs and token counts equal to C reference; not full parity |
+| Startup-to-readiness | **17.14 seconds** for worker plus gateway |
+| Serial HTTP smoke | **24/24** complete, **0** decision mismatches; **6** gate rejections and **18** generation calls |
+| Serial smoke throughput/p95 | **1.098 completed/s**, **1,473.88 ms** p95, small validation workload |
+| Concurrency 4 and 8 | At each: **1 complete, 23 busy failures / 24 submissions**; all failures retained |
+| Resource sampling | **32** whole-GPU samples plus worker allocator metadata |
+| Release guard | Refused smoke evidence before freeze; no real test-use ledger created |
+| Automated checks | **153 passed in 41.84 seconds** on 1 October; Ruff lint/format and mypy passed |
+| Synthetic final-run integration | All three fixture candidates evaluated with fixed thresholds; interrupted B resumed successfully; completed replay rejected; fixture explicitly marked |
+| Other contract tests | Validation selection/tie rules, artifact mutation, prior exposure, resume restrictions, atomic rollback, private metrics, actual gate short-circuit and cost arithmetic |
+| Container fixture preparation | Synthetic baseline artifacts created successfully; container itself not executed |
+| Price/image metadata | Official AWS feed retrieved; official Python image tag resolved to immutable digest |
+
+Commands actually executed included:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/run_milestone5.py --stage smoke
+.\.venv\Scripts\python.exe scripts/run_milestone5.py --stage smoke --smoke-id smoke-v2
+.\.venv\Scripts\python.exe scripts/create_container_fixture.py --output artifacts/container-fixture-m5
+.\.venv\Scripts\pytest.exe -q
+.\.venv\Scripts\ruff.exe check .
+.\.venv\Scripts\ruff.exe format --check .
+.\.venv\Scripts\mypy.exe
+```
+
+Also executed: current-hardware inspection; read-only AWS pricing and Docker registry digest lookups; source/evidence identity comparison; explicit rejection of smoke evidence by `release.freeze`; confirmation that no genuine test-use registry exists. Early lint errors and a missing `Path` import in the new synthetic test were fixed before the full passing suite. The first guessed AWS feed URL returned 404; the correct official feed was located and its gzip payload decoded. No failed experiment was described as successful.
+
+### Material limitations and next task
+
+**Milestone 5 is not complete.** The full 3,100-example serving parity, 500-per-level HTTP benchmark, actual release freeze and genuine final test report await the user's terminal run. After it finishes, audit the ledger/configuration hashes, final raw and fixed-policy metrics, API failures, resources and cost assumptions. Do not tune on those test results.
+
+Docker is not installed, so CPU/GPU image builds and container health/parity are unverified. Native Windows vLLM is unsupported by its current documentation; the implemented and exercised fallback is a separate-process Transformers worker. vLLM's Qwen3 support does not establish compatibility of this exact quantized adapter. Its Linux/WSL deployment path remains unexecuted; do not claim a vLLM result. These limitations are documented in [the serving runbook](release_benchmark.md) and [AWS runbook](../deployment/aws_runbook.md).
+
+The service currently supports one active model request; concurrent workloads mostly fail fast in the smoke. No production capacity, measured cloud throughput, local energy bill or cost saving is claimed. The illustrative hosting scenario uses a verified $0.526/hour us-east-1 quote but assumed demand/uptime/support costs. Preserve every failed request in the full benchmark and do not use its fast latency as evidence of improvement.
 
 ## Milestone 4 — completed fine tuning and analysis
 

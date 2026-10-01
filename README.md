@@ -63,6 +63,8 @@ Milestone 4 is complete: one epoch on 15,100 training requests took **11.69 hour
 
 ## Checks
 
+Milestone 5's [serving/release runbook](docs/release_benchmark.md) provides the terminal workflow for separate-process inference, private metrics, full parity/load testing, release freeze and one-time test evaluation. Its native smoke and 153-test CPU suite pass. Full benchmark execution and Docker/vLLM acceptance remain pending; the existing API remains the baseline until an accepted release is explicitly activated.
+
 ```console
 uv run --locked ruff check .
 uv run --locked ruff format --check .

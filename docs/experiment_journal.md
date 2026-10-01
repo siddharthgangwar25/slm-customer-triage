@@ -1,5 +1,13 @@
 # Experiment journal
 
+## 2026-10-01 — Milestone 5 serving implementation and terminal handoff
+
+Hypothesis: moving the evaluated adapter into an authenticated worker can preserve its predictions while allowing the CPU gateway to reject low-gate requests before GPU generation. The 29 September native smoke matched all six reference outputs and token counts. All 24 serial HTTP requests completed with matching decisions; six skipped generation and 18 called the model. This verifies the small integration probe, not complete validation parity.
+
+The single-flight service rejected 23 of 24 requests at each concurrency 4 and 8. Those failures are retained, and completed throughput/latency are reported separately so fast failures do not imply better capacity. Docker and the vLLM alternative remain unverified; the measured backend is Transformers with the existing quantized adapter.
+
+Decision: keep the model, prompt, decoder and validation thresholds unchanged. Hand the longer parity/load/frozen-test workflow to the user as requested. Require full serving evidence and committed source before freezing, record test use before reading test records, and never retune from final results. Milestone 5 acceptance remains pending. Cost figures are explicitly hypothetical hosting scenarios based on a dated regional quote, not measured cloud bills. No paid resources or real test predictions were used during implementation.
+
 ## 2026-09-29 — finetuned-qwen3-06b-qlora-v1 (complete)
 
 Hypothesis: completion-only supervision will improve exact catalog-label adherence and supported-intent classification. The approved smaller-model substitution requires both a new 0.6B prompted control and a 0.6B adapter experiment; comparing this adapter directly to the old 4B run would confound model size and fine tuning.

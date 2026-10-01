@@ -35,6 +35,20 @@ def parser():
     checkpoint.add_argument("--config", type=Path, required=True)
     checkpoint.add_argument("--output", type=Path, required=True)
     checkpoint.add_argument("--resume", action="store_true")
+    release = commands.add_parser("release").add_subparsers(dest="action", required=True)
+    freeze = release.add_parser("freeze")
+    freeze.add_argument("--config", type=Path, required=True)
+    freeze.add_argument("--output", type=Path, required=True)
+    activate = release.add_parser("activate")
+    activate.add_argument("--release", type=Path, required=True)
+    activate.add_argument("--pointer", type=Path, default=Path("artifacts/active-release.json"))
+    rollback = release.add_parser("rollback")
+    rollback.add_argument("--pointer", type=Path, default=Path("artifacts/active-release.json"))
+    benchmark = commands.add_parser("benchmark").add_subparsers(dest="action", required=True)
+    final = benchmark.add_parser("final")
+    final.add_argument("--release", type=Path, required=True)
+    final.add_argument("--output", type=Path)
+    final.add_argument("--resume", action="store_true")
     predict = commands.add_parser("predict")
     predict.add_argument("--config", type=Path, required=True)
     predict.add_argument("--split", choices=["val"], required=True)
@@ -58,10 +72,12 @@ def parser():
     select.add_argument("--split", choices=["val"], required=True)
     select.add_argument("--output", type=Path, default=Path("artifacts/policy-v1"))
     serve = commands.add_parser("serve")
-    serve.add_argument("--bundle", type=Path, required=True)
+    serve.add_argument("--bundle", type=Path)
+    serve.add_argument("--active", type=Path, help="Atomic active-release pointer")
     serve.add_argument("--policy", type=Path, help="Defaults to policy.json inside the bundle")
     serve.add_argument("--config", type=Path, default=Path("configs/service.yaml"))
-    serve.add_argument("--host", choices=["127.0.0.1", "::1"], default="127.0.0.1")
+    serve.add_argument("--host", choices=["127.0.0.1", "::1", "0.0.0.0"], default="127.0.0.1")
+    serve.add_argument("--worker-url", help="Private authenticated SLM worker URL")
     serve.add_argument("--port", type=int, default=8000)
     return root
 
@@ -69,7 +85,31 @@ def parser():
 def main():
     args = parser().parse_args()
     try:
-        if args.command == "data" and args.action == "sft":
+        if args.command == "release":
+            from triage.release import activate, freeze, rollback
+
+            if args.action == "activate":
+                result = activate(args.release, args.pointer)
+            elif args.action == "rollback":
+                result = rollback(args.pointer)
+            else:
+                result = freeze(config(args.config), args.output)
+        elif args.command == "benchmark":
+            from datetime import UTC, datetime
+
+            from triage.evaluation.final import run
+            from triage.io import read_json
+
+            output = args.output
+            if output is None:
+                if args.resume:
+                    output = Path(read_json(args.release.parent / "test_use.json")["output"])
+                else:
+                    output = Path("artifacts") / (
+                        "final-" + datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
+                    )
+            result = run(args.release, output, resume=args.resume)
+        elif args.command == "data" and args.action == "sft":
             from triage.training.data import prepare
 
             cfg = config(args.config)
@@ -151,17 +191,33 @@ def main():
 
             result = select_policy(args.predictions, args.split, args.output)
         elif args.command == "serve":
+            import logging
+
             import uvicorn
 
             from triage.service.app import create_app
             from triage.service.schemas import ServiceSettings
 
             settings = ServiceSettings(**config(args.config))
+            logging.basicConfig(level=logging.INFO, format="%(message)s")
+            if args.active:
+                from triage.release import active_bundle
+
+                args.bundle, args.policy, requires_worker = active_bundle(args.active)
+                if requires_worker and not args.worker_url:
+                    raise ValueError("Active SLM release requires its private worker URL")
+                if not requires_worker:
+                    args.worker_url = None
+            if args.bundle is None:
+                raise ValueError("Provide --bundle or --active")
             app = create_app(
                 args.bundle,
                 args.policy or args.bundle / "policy.json",
                 settings=settings,
                 api_key=os.environ.get("TRIAGE_API_KEY"),
+                metrics_key=os.environ.get("TRIAGE_METRICS_KEY"),
+                worker_url=args.worker_url,
+                worker_key=os.environ.get("TRIAGE_WORKER_KEY"),
             )
             uvicorn.run(app, host=args.host, port=args.port, access_log=False)
             return 0
