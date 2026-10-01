@@ -1,6 +1,22 @@
 # Implementation status
 
-Last updated: **2026-10-01**. Milestones **1–4 are implemented, executed, and locally verified**. **Milestone 5's full native parity/load/frozen-test run is complete and audited; C is disqualified for automatic release, and container/backend acceptance remains unverified.** Milestone 6 has not been implemented. Original baseline and 4B evidence remain unchanged. The genuine test split has now been used once per frozen candidate; do not retune or repeat it.
+Last updated: **2026-10-01**. Milestones **1–4 are implemented, executed, and locally verified**. **Milestone 5's native benchmark and CPU container acceptance are verified; C remains disqualified for automatic release. GPU container parity and vLLM remain unverified.** Milestone 6 has not been implemented. Original baseline and 4B evidence remain unchanged. The genuine test split has been used once per frozen candidate; do not retune or repeat it.
+
+## Milestone 5 — Docker ready; CPU acceptance passed; GPU terminal handoff
+
+The user installed Docker Desktop and resolved its WSL startup issue. Verified Desktop **4.93.0**, Linux engine **29.8.1**, Compose **5.5.1**. Built `deployment/Dockerfile.cpu` from its pinned base and committed lock; the real container matches **all 3,100 baseline validation decisions** (2,121 routes, 979 reviews). A Linux-generated synthetic fixture matches 3/3. Health/model/authentication/input/private-metrics HTTP checks pass for both. The corrected Compose CPU profile separately passed readiness and an authenticated request. A temporary container sees the **GTX 1650, driver 617.14, 4,096 MiB**. This is GPU visibility, not GPU inference acceptance.
+
+Retained results and failure diagnostics: [CPU container evidence](../reports/milestone5-container-cpu-v1/README.md). First, Docker omitted published ports on an internal-only network. `deployment/compose.yaml` now uses a separate gateway frontend network while keeping the worker internal and unpublished. Second, the Windows synthetic fixture had a one-unit floating-point threshold mismatch on Linux (0.5923113658354859 vs 0.5923113658354858). Its failed result is preserved; CI fixture fitting/selection now runs inside the tested Linux image. Genuine baseline artifacts and thresholds were unchanged and passed parity both times.
+
+New `scripts/run_container_validation.py` owns temporary containers/networks, generates environment secrets, records identities/logs, checks HTTP behavior, and cleans up only its resources. CPU mode is executed; GPU mode is authored but unexecuted. Ruff lint/format and Git whitespace checks pass. The frozen release still verifies. Existing 153-test results remain recorded below; no core source/lock/model change required another full CPU suite. No real test inference or deployment activation occurred.
+
+**Next command for the user**, from the project root, no venv activation:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/run_container_validation.py --stage gpu --output artifacts/milestone5-container-gpu-smoke-v1
+```
+
+Keep Docker Desktop running. The first GPU image build downloads several gigabytes; inspect the output directory's build logs for progress. This checks six validation outputs and small HTTP workloads. After it passes, use the full validation-only command in [the runbook](release_benchmark.md). No final-test rerun is needed or permitted by this workflow. Milestone 5 remains incomplete until GPU serving acceptance is resolved; vLLM is still an unverified alternative. The release's failed 90% oos recall criterion remains unchanged regardless of container results.
 
 ## Milestone 5 — full local benchmark audited; automatic release disqualified
 
@@ -46,7 +62,7 @@ Executed successfully:
 
 The CPU-only auditor verifies all frozen hashes, completed ledger/registry, validation selection, canonical test joins, strict output parsing, raw/per-class/fixed-policy metrics, exact paired bootstrap results, all parity records, 1,500 HTTP outcomes, counter deltas, cost arithmetic and the activation guard. It does not run model inference or tune on test. An initial audit check used the wrong expected error-code spelling (`busy`); corrected to the actual API contract `model_busy`, then the full audit passed. No experiment evidence was edited to pass the check. Copies and checksums are retained under `reports/milestone5-final-v1/`; all **46 retained-file checksums** verified after copying. **153 tests passed in 22.34 seconds**; Ruff lint/format and mypy passed. The new audit script, retained evidence, README, decisions, journal and runbook/status notes are the changes in this follow-up; frozen implementation/configuration/locks remain unchanged.
 
-**Local benchmark acceptance is complete; full Milestone 5 container/backend acceptance remains pending.** Docker is still unavailable in this environment; no container build, hosted CI success or Linux/WSL vLLM run is claimed. Keep the disqualified release inactive. The next concrete work is the CPU container build/health workflow, then GPU-container parity or a separately evaluated supported backend in an available Docker/Linux environment, using validation only. Commands are in [the runbook](release_benchmark.md). Do not rerun the completed final test workflow. Milestone 6 remains outside this turn's scope.
+**Local benchmark acceptance is complete; GPU container/backend acceptance remains pending.** CPU container checks subsequently passed as recorded above; hosted CI and Linux/WSL vLLM remain unverified. Keep the disqualified release inactive. Complete GPU-container parity or a separately evaluated supported backend using validation only. Commands are in [the runbook](release_benchmark.md). Do not rerun the completed final test workflow. Milestone 6 remains outside this turn's scope.
 
 ## Milestone 5 — earlier implementation and smoke handoff (superseded by full run above)
 

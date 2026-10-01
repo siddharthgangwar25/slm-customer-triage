@@ -63,7 +63,7 @@ Milestone 4 is complete: one epoch on 15,100 training requests took **11.69 hour
 
 ## Checks
 
-Milestone 5's [final benchmark](reports/milestone5-final-v1/README.md) is complete and audited locally: 3,100 parity matches, 500/500 serial HTTP completions, and 5,500 frozen test results per candidate. C reaches 0.956794 supported macro-F1 but is **disqualified for automatic release** because oos review recall is 89.6%, below 90%. Thresholds remain unchanged; do not rerun the completed test experiment. The 153-test CPU suite passes. Docker/vLLM acceptance remains unverified, and the baseline configuration remains unchanged. See the [serving/release runbook](docs/release_benchmark.md) for remaining container checks.
+Milestone 5's [final benchmark](reports/milestone5-final-v1/README.md) is complete and audited locally: 3,100 parity matches, 500/500 serial HTTP completions, and 5,500 frozen test results per candidate. C reaches 0.956794 supported macro-F1 but is **disqualified for automatic release** because oos review recall is 89.6%, below 90%. Thresholds remain unchanged; do not rerun the completed test experiment. The 153-test CPU suite passes. [CPU Docker acceptance](reports/milestone5-container-cpu-v1/README.md) now passes, including all 3,100 baseline validation decisions; GPU device visibility is verified, while GPU model/container parity and vLLM remain unverified. See the [serving/release runbook](docs/release_benchmark.md) for the next terminal command.
 
 ```console
 uv run --locked ruff check .

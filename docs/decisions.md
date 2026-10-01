@@ -1,5 +1,11 @@
 # Implementation decisions
 
+## 2026-10-01 — CPU Docker acceptance
+
+- **Separate gateway and worker networks.** An internal-only network omitted published ports on Docker 29.8.1. Give the gateway a frontend network with localhost binding; the GPU gateway additionally joins the worker's internal network. The worker has no published port. CPU Compose health/request checks verify the fix.
+- **Keep floating-point fixture evidence explicit.** A Windows-generated two-class fixture differed by one representable float at its exact threshold on Linux. Preserve the failure and fit/select CI fixtures in their tested Linux runtime. Do not round or change real gate thresholds. All 3,100 real baseline decisions match under the original policy.
+- **Device visibility precedes model acceptance.** The GTX 1650 is visible in a temporary container, but GPU image/model/parity execution is user-terminal work. The completed final test release remains disqualified and must not be rerun to validate containers.
+
 ## 2026-10-01 — Milestone 5 frozen test audit
 
 - **Accept the experiment, reject automatic release.** C's supported test macro-F1 is 0.956794 with 70.65% routing coverage and 4.76% routing error, but 89.6% oos recall fails the fixed 90% requirement. Verified activation refusal; keep thresholds and the selected candidate unchanged. A also fails its routing-error target, so it is not an accepted replacement selected after test.

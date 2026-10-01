@@ -1,0 +1,7 @@
+{
+  "compose_sha256": "8df6738aa6e96454496e07ae172b9f5a7bf4d45a3da0d717f0745c94786448f4",
+  "cpu_dockerfile_sha256": "34a38f545a7041019eb93b496133ecc048ba0f17ca111907df125d3a4f87abc4",
+  "gpu_model_run": false,
+  "runner_sha256": "e946e0d1b05de391306dd8d8668267757886344b3cf31ac08a16fe0771d6126f",
+  "test_inference": false
+}

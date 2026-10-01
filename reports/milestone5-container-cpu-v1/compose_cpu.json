@@ -1,0 +1,16 @@
+{
+  "health_ready": 200,
+  "passed": true,
+  "purpose": "Compose CPU smoke; not a benchmark",
+  "request_status": 200,
+  "response": {
+    "decision": "route",
+    "intent": "pay_bill",
+    "latency_ms": 28.850540999997065,
+    "model_version": "baseline-c1-v1-551714a82382",
+    "policy_version": "policy-v1-51f9c25a5c5c",
+    "reason": "supported_intent",
+    "request_id": "afd38106-20b2-4f96-8c80-d0288247b9b0"
+  },
+  "worker_started": false
+}

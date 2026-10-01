@@ -1,0 +1,144 @@
+{
+  "checks": {
+    "baseline": {
+      "contracts": {
+        "empty_input": 422,
+        "live": 200,
+        "metrics_authenticated": 200,
+        "metrics_separate_key": 401,
+        "metrics_unauthenticated": 401,
+        "model": 200,
+        "oversized_text": 422,
+        "ready": 200,
+        "unauthenticated": 401
+      },
+      "fixture": false,
+      "mismatch_records": [],
+      "mismatches": 0,
+      "outcomes": {
+        "human_review": 979,
+        "route": 2121
+      },
+      "sample_count": 3100
+    },
+    "fixture": {
+      "contracts": {
+        "empty_input": 422,
+        "live": 200,
+        "metrics_authenticated": 200,
+        "metrics_separate_key": 401,
+        "metrics_unauthenticated": 401,
+        "model": 200,
+        "oversized_text": 422,
+        "ready": 200,
+        "unauthenticated": 401
+      },
+      "fixture": true,
+      "mismatch_records": [
+        {
+          "actual": {
+            "decision": "human_review",
+            "intent": null,
+            "latency_ms": 9.324412000012217,
+            "model_version": "CONTAINER-TEST-FIXTURE-0347e9d4eae8",
+            "policy_version": "policy-v1-f3c7f4221d2b",
+            "reason": "low_gate_score",
+            "request_id": "8b28edff-df7e-4620-a75e-0e92d58ba55e"
+          },
+          "expected": {
+            "decision": "route",
+            "intent": "weather",
+            "reason": "supported_intent"
+          },
+          "reference_gate_score": 0.5923113658354859,
+          "sample_id": "11c07f30c888f259085e700b333574b2d40fe5a03b56a2ad87124f9c6b013a8c",
+          "status": 200
+        }
+      ],
+      "mismatches": 1,
+      "outcomes": {
+        "human_review": 2,
+        "route": 1
+      },
+      "sample_count": 3
+    },
+    "gpu_visibility": "NVIDIA GeForce GTX 1650, 617.14, 4096 MiB"
+  },
+  "docker": {
+    "Client": {
+      "ApiVersion": "1.56",
+      "Arch": "amd64",
+      "BuildTime": "Tue Sep 15 16:28:39 2026",
+      "Context": "desktop-linux",
+      "DefaultAPIVersion": "1.56",
+      "GitCommit": "4a63305",
+      "GoVersion": "go1.26.8",
+      "Os": "windows",
+      "Version": "29.8.1"
+    },
+    "Server": {
+      "ApiVersion": "1.56",
+      "Arch": "amd64",
+      "BuildTime": "2026-09-15T16:25:38.000000000+00:00",
+      "Components": [
+        {
+          "Details": {
+            "ApiVersion": "1.56",
+            "Arch": "amd64",
+            "BuildTime": "Tue Sep 15 16:25:38 2026",
+            "Experimental": "false",
+            "GitCommit": "464cd50",
+            "GoVersion": "go1.26.8",
+            "KernelVersion": "6.18.40.1-microsoft-standard-WSL2",
+            "MinAPIVersion": "1.40",
+            "Module": "github.com/moby/moby/v2",
+            "ModuleVersion": "v2.0.0+unknown",
+            "Os": "linux"
+          },
+          "Name": "Engine",
+          "Version": "29.8.1"
+        },
+        {
+          "Details": {
+            "GitCommit": "1294c24a7da8e5a793ed378161673abe94118892"
+          },
+          "Name": "containerd",
+          "Version": "v2.3.5"
+        },
+        {
+          "Details": {
+            "GitCommit": "v1.5.1-0-g8f2685a4"
+          },
+          "Name": "runc",
+          "Version": "1.5.1"
+        },
+        {
+          "Details": {
+            "GitCommit": "de40ad0"
+          },
+          "Name": "docker-init",
+          "Version": "0.19.0"
+        }
+      ],
+      "GitCommit": "464cd50",
+      "GoVersion": "go1.26.8",
+      "KernelVersion": "6.18.40.1-microsoft-standard-WSL2",
+      "MinAPIVersion": "1.40",
+      "Os": "linux",
+      "Platform": {
+        "Name": "Docker Desktop 4.93.0 (240920)"
+      },
+      "Version": "29.8.1"
+    }
+  },
+  "dockerfiles_sha256": {
+    "cpu": "34a38f545a7041019eb93b496133ecc048ba0f17ca111907df125d3a4f87abc4"
+  },
+  "images": {
+    "cpu": "sha256:f8af784dcdcc3b98547c65c8b9162ee5f6600e12dd586bbfe126a617382fad59"
+  },
+  "passed": false,
+  "source_sha256": "2a91de5d0e0e4625c3b3fcb22a5898d16b387f6259568b9bdd2b21df3f48a4c4",
+  "stage": "cpu",
+  "test_inference": false
+}

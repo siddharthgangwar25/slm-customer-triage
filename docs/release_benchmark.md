@@ -1,6 +1,30 @@
 # Milestone 5 serving and release runbook
 
-The full native workflow completed on 1 October 2026 and was audited from saved evidence. See [the final report](../reports/milestone5-final-v1/README.md): C is disqualified for automatic release because its fixed-policy oos review recall is 89.6%, below 90%. **Do not repeat the completed test experiment or tune its thresholds.** The workflow commands below document how that run was produced; the remaining work is container/backend acceptance. Docker is not installed on the inspected Windows host. Containers and hosted CI are authored but unverified here. The exercised backend is the existing Transformers/NF4/PEFT representation in a separate process; no vLLM result is claimed.
+The full native workflow completed on 1 October 2026 and was audited from saved evidence. See [the final report](../reports/milestone5-final-v1/README.md): C is disqualified for automatic release because its fixed-policy oos review recall is 89.6%, below 90%. **Do not repeat the completed test experiment or tune its thresholds.** The workflow commands below document how that run was produced. Docker is now installed and the CPU container has been exercised; GPU model/container parity and vLLM acceptance remain pending. No hosted CI success is claimed. The evaluated native backend is Transformers/NF4/PEFT in a separate process.
+
+## Next terminal step: GPU container smoke
+
+Keep Docker Desktop running. From the project root, without activating a venv:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/run_container_validation.py --stage gpu --output artifacts/milestone5-container-gpu-smoke-v1
+```
+
+This builds both images from committed locks, starts an authenticated worker on an internal Docker network, publishes only the gateway on a random localhost port, waits for the worker before starting the gateway, checks API contracts, compares six real validation outputs and sends 24 HTTP requests at each concurrency. The initial GPU image downloads several gigabytes of dependencies. Build progress is written to `build-cpu.log` / `build-gpu.log` inside the output directory; runtime progress appears in the terminal. It creates random secrets in child environments and removes only its own containers/networks on exit. Model/report mounts are read-only; new parity evidence has a separate writable mount. It does not train, activate a deployment or access test records.
+
+After the smoke passes, the longer validation-only command is:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/run_container_validation.py --stage gpu --full --skip-build --output artifacts/milestone5-container-gpu-full-v1
+```
+
+This performs 3,100 raw comparisons and 500 HTTP requests at concurrency 1/4/8. The Linux backend must demonstrate parity; a difference is a failed comparison to retain, not permission to adjust thresholds or repeat final testing. Use a fresh output directory for each attempt; this container wrapper does not resume interrupted runs. Share any error before proceeding. The GPU runner has been authored but not executed yet; GPU device visibility alone does not prove model compatibility.
+
+CPU reproduction, including a Linux-generated synthetic fixture and every genuine baseline validation decision:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/run_container_validation.py --stage cpu --output artifacts/milestone5-container-cpu-repeat
+```
 
 ## Run the long workflow
 
@@ -62,9 +86,9 @@ Keep the previous known-working source/environment and model bundle. Roll back t
 
 The first activation records the known baseline configuration as its previous state. Later activations retain the previous pointer. A pointer is not hot reload, an artifact signature or permission to load an untrusted pickle. Release paths are trusted project-controlled files.
 
-## Docker acceptance (unexecuted here)
+## Docker compose and remaining GPU acceptance
 
-Dockerfiles pin the official Python image by immutable digest and install committed locks; CPU/GPU environments remain separate. Large data/models are mounted read-only, not baked into images. Set three distinct secret environment values in your terminal without putting them in source control. Use Docker Desktop's Linux engine with NVIDIA support for the GPU profile:
+Dockerfiles pin the official Python image by immutable digest and install committed locks; CPU/GPU environments remain separate. Large data/models are mounted read-only, not baked into images. The worker joins only the internal `private` network; the gateway also joins `frontend` so Docker can publish its localhost port. An internal-only network omitted port mappings on the tested Docker engine. Set three distinct secret environment values in your terminal without putting them in source control. Use Docker Desktop's Linux engine with NVIDIA support for the GPU profile:
 
 ```powershell
 docker compose -f deployment/compose.yaml --profile cpu build
@@ -78,7 +102,7 @@ curl.exe --fail http://127.0.0.1:8000/health/ready
 docker compose -f deployment/compose.yaml --profile gpu down
 ```
 
-Build/run the CPU fixture health workflow in `.github/workflows/cpu.yml` before treating that container as verified. GPU-container parity must also be measured against the frozen validation outputs; native-process smoke does not establish Linux/container parity. If container output differs, treat it as a new evaluated serving variant. No hosted CI result or Docker build is claimed yet.
+The CPU image build and local container HTTP checks have now run successfully; hosted CI remains unverified. GPU-container parity must still be measured against the frozen validation outputs; native-process smoke does not establish Linux/container parity. If container output differs, treat it as a new serving variant requiring validation. This does not change the completed release's test disqualification.
 
 ## vLLM feasibility and cost scope
 
