@@ -1,5 +1,11 @@
 # Implementation decisions
 
+## 2026-10-01 — Milestone 5 frozen test audit
+
+- **Accept the experiment, reject automatic release.** C's supported test macro-F1 is 0.956794 with 70.65% routing coverage and 4.76% routing error, but 89.6% oos recall fails the fixed 90% requirement. Verified activation refusal; keep thresholds and the selected candidate unchanged. A also fails its routing-error target, so it is not an accepted replacement selected after test.
+- **Preserve exposure and evidence.** All three completed test runs, the frozen manifest, ledger, raw predictions and independently recomputed metrics are retained. No inference rerun or test-based selection occurred during the audit. Diagnostic test curves must not become a tuning loop.
+- **Keep infrastructure claims bounded.** Full native parity and HTTP accounting pass, but concurrency 4/8 each completed only one of 500 submissions. Docker/container/vLLM acceptance remains unverified. Remaining backend checks use validation; they do not authorize repeating the frozen test experiment or overriding its disqualification.
+
 ## 2026-09-29 — Milestone 5 implementation and native smoke
 
 - **Preserve the measured representation.** Implement an authenticated separate-process Transformers worker using the same NF4/FP16/PEFT adapter and decoder. Current vLLM documentation excludes native Windows and Docker is not installed here. This is a disclosed fallback; a vLLM/Linux/container result is not claimed. Backend changes require fresh parity/validation.

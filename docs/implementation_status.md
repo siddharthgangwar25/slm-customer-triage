@@ -1,10 +1,56 @@
 # Implementation status
 
-Last updated: **2026-10-01**. Milestones **1–4 are implemented, executed, and locally verified**. **Milestone 5's native serving/release workflow is implemented and smoke-tested; full terminal benchmarks and container/backend acceptance remain pending.** Milestone 6 has not been implemented. Original baseline and 4B evidence remain unchanged. Real test predictions remain unused.
+Last updated: **2026-10-01**. Milestones **1–4 are implemented, executed, and locally verified**. **Milestone 5's full native parity/load/frozen-test run is complete and audited; C is disqualified for automatic release, and container/backend acceptance remains unverified.** Milestone 6 has not been implemented. Original baseline and 4B evidence remain unchanged. The genuine test split has now been used once per frozen candidate; do not retune or repeat it.
 
-## Milestone 5 — implementation and smoke complete; acceptance pending
+## Milestone 5 — full local benchmark audited; automatic release disqualified
 
-The user requested terminal commands for the longer runs. From the project root, without activating a venv:
+The user completed `scripts/run_milestone5.py` on 1 October. Frozen release **release-a0bcea381506**, source commit **82ed8d7**, selected C from validation before test. The completed ledger points to `artifacts/final-20261001T074028Z`; source, model/adapter, prompt, data, policy and lock hashes all verify. No configuration or threshold changed after test exposure. The retained [final benchmark and audit](../reports/milestone5-final-v1/README.md) contains all predictions, manifests, per-class reports, uncertainty intervals and operating evidence.
+
+### Genuine final test results
+
+Each candidate contains exactly **5,500 requests: 4,500 supported + 1,000 oos**, canonical one-to-one joins, no missing records and zero infrastructure failures.
+
+| Measure | Baseline A | Prompted B | Fine-tuned C |
+| --- | ---: | ---: | ---: |
+| Supported macro-F1 | 0.886628 | 0.278546 | **0.956794** |
+| Invalid outputs | 0 | 1,032 | 44 |
+| Frozen-policy coverage | 60.05% | 0% | **70.65%** |
+| Routed errors / routes | 198 / 3,303 | 0 / 0 | 185 / 3,886 |
+| Routing error | 5.99% | Undefined | **4.76%** |
+| Oos review recall | 92.7% | 100%, review all | **89.6%** |
+
+**Automatic release is disqualified.** C reviews 896 oos requests, four fewer than the fixed 900/1,000 requirement. Its recall interval (87.55–91.34%) does not waive the prespecified point-estimate rule. C improves macro-F1 over A by **0.070166**, paired bootstrap 95% interval **[0.061720, 0.080052]**, and over B by **0.678248**, interval **[0.668722, 0.691655]**. Its routing-error interval is **4.13–5.48%**. A also misses the 5% error constraint. B's review-only result is not successful automatic routing. No candidate was substituted after test, no threshold was retuned and no deployment pointer changed. Actual activation of C was tested against a fresh audit-only pointer and correctly refused before any pointer write.
+
+C's raw oos correctness is 470/1,000 versus B's 718/1,000; 42 of C's 44 invalid outputs occur on oos requests. Supported classification improved while open-set handling remains a limitation. Validation/test oos proportions differ, so coverage changes need that context. Generated test curves are retrospective diagnostics only, not selection evidence.
+
+### Complete native serving results
+
+- **3,100/3,100** exact worker/reference raw outputs, token counts and truncation flags matched. Windows/GTX 1650, unchanged Qwen3-0.6B checkpoint 944, NF4/FP16, separate Transformers worker, cached prefix, greedy decoding, batch size 1.
+- HTTP workload: seed 42, sampling with replacement, **484 supported + 16 oos**, identical at concurrency 1/4/8; 20 warmups excluded. Cold start **52.41 seconds**, warmup **18.79 seconds**.
+- Serial: **500/500** completed, **1.043 completed/s**, p50/p95/p99 **1,130.36 / 1,442.35 / 1,722.14 ms**; zero live decision mismatches, **97** gate short-circuits and **403** model calls, **402** routes and **98** reviews.
+- Concurrency 4 and 8: at each, **1/500** completed and **499 HTTP 503 model_busy** failures. These measure overload, not scalable serving; all-request fast percentiles must not be presented as successful latency. The harness checked intent live; retained outcomes permit rechecking decision/reason, mismatch flags and complete failure accounting.
+- **2,059** whole-GPU samples across startup/parity/load: maximum **2,598 MiB** used and **97%** utilization, including desktop activity. Worker peak allocation **851,771,392 bytes**, reservation **1,400,897,536 bytes**, peak RSS **2,501,709,824 bytes**.
+- Cost arithmetic verified: **$3.9398/1,000 submitted** under the explicitly hypothetical 100,000/month, 730 billed hours, $10 supporting allowance and dated $0.526/hour g4dn.xlarge scenario. Local measured runtime is not measured EC2 throughput. Training cost is separate; no cloud bill or savings claim.
+
+### Acceptance audit and remaining work
+
+Executed successfully:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/verify_milestone5.py --output artifacts/milestone5-acceptance-v1
+.\.venv\Scripts\pytest.exe -q
+.\.venv\Scripts\ruff.exe check .
+.\.venv\Scripts\ruff.exe format --check .
+.\.venv\Scripts\mypy.exe
+```
+
+The CPU-only auditor verifies all frozen hashes, completed ledger/registry, validation selection, canonical test joins, strict output parsing, raw/per-class/fixed-policy metrics, exact paired bootstrap results, all parity records, 1,500 HTTP outcomes, counter deltas, cost arithmetic and the activation guard. It does not run model inference or tune on test. An initial audit check used the wrong expected error-code spelling (`busy`); corrected to the actual API contract `model_busy`, then the full audit passed. No experiment evidence was edited to pass the check. Copies and checksums are retained under `reports/milestone5-final-v1/`; all **46 retained-file checksums** verified after copying. **153 tests passed in 22.34 seconds**; Ruff lint/format and mypy passed. The new audit script, retained evidence, README, decisions, journal and runbook/status notes are the changes in this follow-up; frozen implementation/configuration/locks remain unchanged.
+
+**Local benchmark acceptance is complete; full Milestone 5 container/backend acceptance remains pending.** Docker is still unavailable in this environment; no container build, hosted CI success or Linux/WSL vLLM run is claimed. Keep the disqualified release inactive. The next concrete work is the CPU container build/health workflow, then GPU-container parity or a separately evaluated supported backend in an available Docker/Linux environment, using validation only. Commands are in [the runbook](release_benchmark.md). Do not rerun the completed final test workflow. Milestone 6 remains outside this turn's scope.
+
+## Milestone 5 — earlier implementation and smoke handoff (superseded by full run above)
+
+The user requested terminal commands for the longer runs. The following command was handed off and has now completed; retained here as execution history:
 
 ```powershell
 .\.venv\Scripts\python.exe scripts/run_milestone5.py

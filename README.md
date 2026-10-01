@@ -63,7 +63,7 @@ Milestone 4 is complete: one epoch on 15,100 training requests took **11.69 hour
 
 ## Checks
 
-Milestone 5's [serving/release runbook](docs/release_benchmark.md) provides the terminal workflow for separate-process inference, private metrics, full parity/load testing, release freeze and one-time test evaluation. Its native smoke and 153-test CPU suite pass. Full benchmark execution and Docker/vLLM acceptance remain pending; the existing API remains the baseline until an accepted release is explicitly activated.
+Milestone 5's [final benchmark](reports/milestone5-final-v1/README.md) is complete and audited locally: 3,100 parity matches, 500/500 serial HTTP completions, and 5,500 frozen test results per candidate. C reaches 0.956794 supported macro-F1 but is **disqualified for automatic release** because oos review recall is 89.6%, below 90%. Thresholds remain unchanged; do not rerun the completed test experiment. The 153-test CPU suite passes. Docker/vLLM acceptance remains unverified, and the baseline configuration remains unchanged. See the [serving/release runbook](docs/release_benchmark.md) for remaining container checks.
 
 ```console
 uv run --locked ruff check .

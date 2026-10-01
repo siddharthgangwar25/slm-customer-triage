@@ -1,0 +1,79 @@
+{
+  "activation_guard_verified": true,
+  "automatic_release_disqualified": true,
+  "candidate_details": {
+    "baseline": {
+      "execution": {
+        "last_session_seconds": 81.01901079999516
+      },
+      "invalid_oos": 0,
+      "invalid_supported": 0,
+      "predictions_sha256": "3d8cc1a34c087d462e8d8f9e3e9edc2b75299c699c75ac7ab31a927f5685c22c",
+      "raw_oos_correct": 0,
+      "summed_inference_seconds": 32.347825800199644
+    },
+    "finetuned": {
+      "execution": {
+        "last_session_seconds": 6103.47230980001,
+        "peak_gpu_allocated_bytes": 852586496,
+        "peak_gpu_reserved_bytes": 1400897536,
+        "peak_process_rss_bytes": 2924859392,
+        "process_rss_bytes": 627175424
+      },
+      "invalid_oos": 42,
+      "invalid_supported": 2,
+      "predictions_sha256": "db18fc2860ce4e3f82b1ed4876b8356ca2e1ff8f771f90f10e043cde880f3e1c",
+      "raw_oos_correct": 470,
+      "summed_inference_seconds": 6051.483407000732
+    },
+    "prompted": {
+      "execution": {
+        "last_session_seconds": 4615.825052,
+        "peak_gpu_allocated_bytes": 733040128,
+        "peak_gpu_reserved_bytes": 1321205760,
+        "peak_process_rss_bytes": 2521661440,
+        "process_rss_bytes": 1399455744
+      },
+      "invalid_oos": 163,
+      "invalid_supported": 869,
+      "predictions_sha256": "02407bec56260177ef0044a15f961fb5e6bdbdd75c12b70b0d7f7bdf47502e6e",
+      "raw_oos_correct": 718,
+      "summed_inference_seconds": 4564.803777000162
+    }
+  },
+  "checks": [
+    "frozen inputs/source/weights/locks",
+    "complete test ledger and registry",
+    "validation-only selection",
+    "5500 canonical test joins per candidate",
+    "raw output parsing",
+    "fixed-policy and per-class metrics",
+    "paired bootstrap recomputation",
+    "3100 raw worker comparisons",
+    "1500 HTTP outcomes and metric accounting",
+    "cost arithmetic",
+    "disqualification and activation guard"
+  ],
+  "fixture": false,
+  "gpu": {
+    "error": null,
+    "memory_used_mib": {
+      "max": 2598.0,
+      "mean": 1925.3030597377367,
+      "min": 0.0
+    },
+    "sample_count": 2059,
+    "scope": "whole GPU, includes unrelated desktop processes; 2-second sampling",
+    "utilization_percent": {
+      "max": 97.0,
+      "mean": 37.75619232637202,
+      "min": 0.0
+    }
+  },
+  "inference_rerun": false,
+  "passed": true,
+  "release_id": "release-a0bcea381506",
+  "release_sha256": "a0bcea381506e434316c71e28fa40c98a2f6d91dd194735e45e6c2bacbb77c7e",
+  "selected_before_test": "finetuned",
+  "source_commit": "82ed8d754bab6c3c300a50e92b0ac294b4660877"
+}

@@ -1,6 +1,6 @@
 # Milestone 5 serving and release runbook
 
-The implementation is ready for local terminal execution. Full parity, load testing and the final test report are separate from the executed smoke; consult `implementation_status.md` for actual evidence. Docker is not installed on the inspected Windows host. Containers and hosted CI are authored but unverified here. Native Windows vLLM is unsupported; the exercised backend is the existing Transformers/NF4/PEFT representation in a separate process. This is a disclosed environment-driven deviation, not a claim that vLLM or a new export was validated.
+The full native workflow completed on 1 October 2026 and was audited from saved evidence. See [the final report](../reports/milestone5-final-v1/README.md): C is disqualified for automatic release because its fixed-policy oos review recall is 89.6%, below 90%. **Do not repeat the completed test experiment or tune its thresholds.** The workflow commands below document how that run was produced; the remaining work is container/backend acceptance. Docker is not installed on the inspected Windows host. Containers and hosted CI are authored but unverified here. The exercised backend is the existing Transformers/NF4/PEFT representation in a separate process; no vLLM result is claimed.
 
 ## Run the long workflow
 

@@ -1,5 +1,13 @@
 # Experiment journal
 
+## 2026-10-01 — frozen Milestone 5 result and release rejection
+
+The user completed all 3,100 native worker parity comparisons, the 500-request HTTP workloads at concurrency 1/4/8, and the frozen 5,500-request test evaluation for A/B/C. A separate CPU audit verified source/artifact identity, canonical records, parsing, fixed-threshold metrics, bootstrap intervals, operating counts and cost arithmetic without generating new predictions.
+
+C improves supported test macro-F1 to 0.956794 (A 0.886628, B 0.278546). It routes 70.65% with 4.76% error, but reviews only 896/1,000 oos requests, below the prespecified 90% minimum. Its raw oos correctness is only 470/1,000, versus B's 718. Decision: retain this negative release outcome and reject activation; do not change the threshold or substitute another candidate after seeing test results. The recall interval overlapping the target is not a reason to change the acceptance rule.
+
+Serial serving completes all 500 requests at 1.043/s, with 97 actual gate short-circuits and 1.442-second p95. At concurrency 4/8, the single-flight service rejects 499 of 500 requests at each level. This establishes limited local capacity and explicit overload behavior, not concurrent production readiness. The cost scenario is hypothetical, and Docker/vLLM checks remain unverified. Preserve the complete evidence and test-use registry; any future model research must disclose this exposure and use independent evaluation.
+
 ## 2026-10-01 — Milestone 5 serving implementation and terminal handoff
 
 Hypothesis: moving the evaluated adapter into an authenticated worker can preserve its predictions while allowing the CPU gateway to reject low-gate requests before GPU generation. The 29 September native smoke matched all six reference outputs and token counts. All 24 serial HTTP requests completed with matching decisions; six skipped generation and 18 called the model. This verifies the small integration probe, not complete validation parity.
