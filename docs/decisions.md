@@ -1,5 +1,11 @@
 # Implementation decisions
 
+## 2026-10-01 — full GPU container acceptance
+
+- **Accept the measured Transformers path.** All 3,100 validation worker outputs and all completed API decisions match. Serial 500/500 completions, 1.345/s and 1.117-second p95 establish this workload's result. Concurrency 4/8 mostly rejects requests, so no scaling or production-readiness claim follows.
+- **Preserve the release decision.** The original final-test report, policy thresholds, ledger and exposure registry remain unchanged. Infrastructure parity does not cure C's 89.6% oos-recall failure. No release was activated.
+- **Keep remaining scope explicit.** Section 9's vLLM runtime experiment is still unexecuted. Current documentation lists Linux/WSL, Qwen3 and BitsAndBytes capabilities; that is not an executed adapter compatibility result. Docker now removes the original native-Windows obstacle. A separate validation-only vLLM experiment or explicit deferral must resolve this before claiming full specification compliance. No extra Transformers run is necessary.
+
 ## 2026-10-01 — CPU Docker acceptance
 
 - **Separate gateway and worker networks.** An internal-only network omitted published ports on Docker 29.8.1. Give the gateway a frontend network with localhost binding; the GPU gateway additionally joins the worker's internal network. The worker has no published port. CPU Compose health/request checks verify the fix.

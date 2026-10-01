@@ -1,16 +1,16 @@
 # Milestone 5 serving and release runbook
 
-The full native workflow completed on 1 October 2026 and was audited from saved evidence. See [the final report](../reports/milestone5-final-v1/README.md): C is disqualified for automatic release because its fixed-policy oos review recall is 89.6%, below 90%. **Do not repeat the completed test experiment or tune its thresholds.** CPU container acceptance and the [GPU container smoke](../reports/milestone5-container-gpu-smoke-v1/README.md) now pass; full GPU container parity/load and vLLM acceptance remain pending. No hosted CI success is claimed. The evaluated backend is Transformers/NF4/PEFT in separate worker/gateway processes.
+The full native workflow and CPU/GPU container acceptance completed on 1 October 2026 and were audited from saved evidence. See [full GPU container results](../reports/milestone5-container-gpu-full-v1/README.md): 3,100 exact parity matches and 500/500 serial HTTP completions. The [original final report](../reports/milestone5-final-v1/README.md) still disqualifies C because its fixed-policy oos review recall is 89.6%, below 90%. **Do not repeat the completed test experiment or tune its thresholds.** The local Transformers/NF4/PEFT path is verified; Section 9's vLLM runtime experiment and hosted CI remain unexecuted. The commands below are completed-run history, not outstanding terminal tasks.
 
-## Next terminal step: full GPU container validation
+## Completed full GPU container validation
 
-The six-output GPU smoke and 24-request-per-level load checks passed. Keep Docker Desktop running and reuse the built images:
+The six-output smoke and subsequent full run passed. The full run used the built images:
 
 ```powershell
 .\.venv\Scripts\python.exe scripts/run_container_validation.py --stage gpu --full --skip-build --output artifacts/milestone5-container-gpu-full-v1
 ```
 
-This checks all 3,100 validation outputs and 500 HTTP submissions per concurrency level. It skips image builds and does not use the test set. After completion, ask for an audit of the saved results. Do not change source/models/policies or rebuild the images during this run.
+This checked all 3,100 validation outputs and 500 HTTP submissions per concurrency level. It skipped image builds and did not use the test set. Its saved results have been audited and retained. No additional run is needed for the existing Transformers delivery.
 
 ## Completed GPU smoke workflow
 
@@ -28,7 +28,7 @@ The smoke passed; the longer validation-only command is:
 .\.venv\Scripts\python.exe scripts/run_container_validation.py --stage gpu --full --skip-build --output artifacts/milestone5-container-gpu-full-v1
 ```
 
-This performs 3,100 raw comparisons and 500 HTTP requests at concurrency 1/4/8. The Linux backend must demonstrate parity; a difference is a failed comparison to retain, not permission to adjust thresholds or repeat final testing. Use a fresh output directory for each attempt; this container wrapper does not resume interrupted runs. Share any error before proceeding. The GPU runner has executed successfully on the smoke; full acceptance remains pending.
+This performed 3,100 raw comparisons and 500 HTTP requests at concurrency 1/4/8. The Linux backend demonstrated full parity. A future backend difference must be retained, not used to justify changing thresholds or repeating final testing. Use a fresh output directory for any separately justified validation attempt; this wrapper does not resume interrupted runs. Both smoke and full acceptance are now verified.
 
 CPU reproduction, including a Linux-generated synthetic fixture and every genuine baseline validation decision:
 
@@ -112,10 +112,10 @@ curl.exe --fail http://127.0.0.1:8000/health/ready
 docker compose -f deployment/compose.yaml --profile gpu down
 ```
 
-The CPU image build and local container HTTP checks have now run successfully; hosted CI remains unverified. GPU-container parity must still be measured against the frozen validation outputs; native-process smoke does not establish Linux/container parity. If container output differs, treat it as a new serving variant requiring validation. This does not change the completed release's test disqualification.
+CPU image/Compose checks and full GPU worker/gateway parity/load now pass locally; hosted CI remains unverified. The full GPU run uses the runner's equivalent worker/gateway topology; the GPU Compose profile itself has not been separately executed. Future backend changes require validation. None of these infrastructure checks changes the completed release's test disqualification.
 
 ## vLLM feasibility and cost scope
 
-The [vLLM GPU installation guide](https://docs.vllm.ai/en/latest/getting_started/installation/gpu/) states Windows is not natively supported. Its [supported-model table](https://docs.vllm.ai/en/latest/models/supported_models/) includes Qwen3, but architecture support alone does not verify this exact bitsandbytes/LoRA stack. A Linux/WSL or remote host with adequate memory is required to evaluate that alternative. No vLLM package combination, weight conversion, merged adapter or constrained decoder has been claimed tested; the current release path deliberately preserves the measured representation.
+Rechecked on 1 October: the [vLLM GPU installation guide](https://docs.vllm.ai/en/latest/getting_started/installation/gpu/) documents Linux/WSL and NVIDIA compute capability 7.5 or higher, and the [supported-model table](https://docs.vllm.ai/en/latest/models/supported_models/) lists Qwen3. The [BitsAndBytes guide](https://docs.vllm.ai/en/stable/features/quantization/bnb/) describes that quantization path. These are feasibility signals, not proof that this exact adapter, memory budget and decoder work together. Docker/WSL2 is now available, so the earlier native-Windows limitation no longer rules out a trial. Section 9's runtime experiment remains unexecuted and must be separately completed or explicitly deferred; the verified Transformers backend must not be labeled vLLM. No package combination, weight conversion, merged adapter or constrained decoder has been claimed tested.
 
 `deployment/pricing/ec2-us-east-1-2026-09-29.json` records an official AWS quote retrieved 2026-09-29 (feed publication 2026-09-25): Linux On-Demand g4dn.xlarge **$0.526/hour**, us-east-1. The cost report is an explicit scenario using local measured active duration at that hourly price, **not measured EC2 throughput or a bill**. It assumes 100,000 submitted requests/month, 730 billed hours and a separately labeled $10/month allowance for storage/network/logging/registry support. It reports idle time, hosting per 1,000 submitted, active-only compute, training separately and one-month training amortization. Cloud training duration is also unmeasured. Local electricity/hardware cost was not measured. Price quote, workload assumptions and exclusions remain visible; no paid resource was used.

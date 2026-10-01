@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "source/model/adapter/prompt/environment/reference/Dockerfile identities",
+    "3100 parity raw outputs, IDs, token counts, truncation flags and checksum",
+    "1500 HTTP submissions, identical workload/mix and complete failure accounting",
+    "latency percentiles, throughput, decisions/reasons and metric deltas",
+    "original final-test report checksum and ledger unchanged; no active pointer"
+  ],
+  "frozen_release_still_verifies": "release-a0bcea381506",
+  "inference_rerun": false,
+  "original_release_disqualified": true,
+  "passed": true,
+  "scope": "complete Linux-container validation parity and HTTP benchmark",
+  "source_sha256": "2a91de5d0e0e4625c3b3fcb22a5898d16b387f6259568b9bdd2b21df3f48a4c4",
+  "test_use_registry_count": 1
+}

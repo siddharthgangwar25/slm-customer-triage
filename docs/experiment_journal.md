@@ -1,5 +1,11 @@
 # Experiment journal
 
+## 2026-10-01 — full Linux GPU container validation
+
+The full run resolved the smoke's main uncertainty: all 3,100 validation worker outputs and token counts match the native reference exactly. All 500 serial HTTP submissions completed with matching decisions, 97 gate short-circuits and 403 model calls. Completed throughput was 1.345/s and p95 1.117 seconds for this one seed-42 workload. Concurrency 4/8 completed only one/two requests and rejected 499/498 as busy. A numerically higher two-request throughput is not evidence of scaling.
+
+Decision: accept the existing Transformers container implementation and preserve its measured limits. Leave the final-test policy and release rejection unchanged. No further model run is needed to demonstrate this path. Section 9's separate vLLM runtime experiment remains unexecuted; Docker/WSL2 now makes a Linux trial possible in principle, but documentation support alone is not proof of adapter/hardware compatibility. Explicitly resolve or defer that scope before claiming full specification compliance.
+
 ## 2026-10-01 — GPU container smoke
 
 Hypothesis: the unchanged adapter representation can reproduce native reference outputs under Linux/WSL2. The user built both images and ran the container smoke. All six raw/token comparisons matched; all 24 serial requests completed with matching decisions, six actual gate rejections and 18 model calls. The 1.159-second p95 is a small-workload measurement, not a confirmed performance improvement. Concurrency 4/8 each rejected 23 of 24 requests as busy.

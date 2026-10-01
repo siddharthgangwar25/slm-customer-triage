@@ -1,8 +1,26 @@
 # Implementation status
 
-Last updated: **2026-10-01**. Milestones **1–4 are implemented, executed, and locally verified**. **Milestone 5's native benchmark, CPU container acceptance and GPU container smoke are verified; full GPU container parity/load and vLLM remain unverified. C remains disqualified for automatic release.** Milestone 6 has not been implemented. Original baseline and 4B evidence remain unchanged. The genuine test split has been used once per frozen candidate; do not retune or repeat it.
+Last updated: **2026-10-01**. Milestones **1–4 are implemented, executed, and locally verified**. **Milestone 5's full native benchmark and CPU/GPU Transformers container acceptance are verified. Section 9's vLLM runtime experiment remains unexecuted; C remains disqualified for automatic release.** Milestone 6 has not been implemented. Original baseline and 4B evidence remain unchanged. The genuine test split has been used once per frozen candidate; do not retune or repeat it.
 
-## Milestone 5 — GPU container smoke passed; full validation handoff
+## Milestone 5 — full GPU container acceptance passed
+
+The user completed the full Docker workflow. **3,100/3,100** raw worker outputs, input/output token counts and truncation flags exactly match the native reference, with no inference errors. Image IDs match the smoke; source, adapter, prompt, dependency and policy identities remain unchanged. No real test prediction was rerun. Complete [GPU container evidence](../reports/milestone5-container-gpu-full-v1/README.md) is retained.
+
+| Concurrency | Submitted | Completed | Busy failures | Completed/s | Completed p95 ms |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 1 | 500 | **500** | 0 | **1.345** | **1,116.87** |
+| 4 | 500 | 1 | 499 | 0.834 | 1,196.20 |
+| 8 | 500 | 2 | 498 | 1.470 | 1,190.41 |
+
+All completed responses matched the frozen policy in the live harness. Serial counts: **97** gate rejections, **403** model calls, **402** routes, **98** reviews. Serial p50/p99 **878.14 / 1,330.25 ms**, cold startup **36.45 seconds**, warmup **14.53 seconds**. Workload: 484 supported/16 oos, seed 42, replacement sampling, identical across concurrency, 20 warmups excluded. The 997 concurrent busy failures remain in the reports; these levels demonstrate overload rather than scalable serving. Startup allocator metadata is retained but is not a full-load resource peak.
+
+A CPU-only audit rechecked all 3,100 parity records/checksum, all 1,500 HTTP submissions, identities, workload mix, parsing-independent decision/reason accounting, latency/throughput calculations, metric deltas and the unchanged completed final-test report/ledger. Generated a separate container cost scenario: **$3.9398/1,000 submitted** at assumed 100,000/month, 730 billed hours and $10 support, using the dated $0.526/hour quote. Its active-only estimate is **$0.1087/1,000** at local measured speed; cloud runtime remains unmeasured. Current Docker image IDs match and temporary resources were cleaned up. No deployment pointer exists.
+
+**The local Transformers serving deliverable is complete.** Its failed final-test oos-recall requirement still prevents automatic release. Do not claim full compliance with Section 9's vLLM experiment: it remains unexecuted. With Docker/WSL2 available, the previous native-Windows limitation no longer rules out a Linux trial. The next scope choice is a separate validation-only vLLM experiment, or explicit deferral of that backend when proceeding to Milestone 6. No more runs are needed to verify the existing Transformers path. Hosted CI and paid cloud remain unverified; Milestone 6 has not started.
+
+This follow-up changes reports/documentation only. Existing 153-test results remain the latest suite result; source/configuration/lock/model files are unchanged, so no redundant training, inference or unit-suite run was performed.
+
+## Milestone 5 — earlier GPU smoke and full-run handoff (completed above)
 
 The user completed the GPU smoke command on 1 October. Both images built successfully; current image IDs match the saved run. The Linux/WSL2 GPU worker loaded the unchanged Qwen3-0.6B checkpoint 944 with NF4/FP16, PEFT and cached-prefix greedy decoding. **6/6** raw outputs/token counts/truncation flags exactly matched C's reference. Health/authentication/input/private-metrics checks passed. No test-set inference, training or activation occurred.
 
