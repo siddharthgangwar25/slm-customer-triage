@@ -1,0 +1,24 @@
+{
+  "fixture": false,
+  "mismatch_count": 0,
+  "mismatches": [],
+  "model": {
+    "automatic_routing": true,
+    "fixture": false,
+    "model_type": "baseline",
+    "model_version": "milestone6-cpu-reproduction-21a2ab3db7cd",
+    "policy_version": "policy-v1-8aea8b0db3a5",
+    "supported_intent_count": 150
+  },
+  "outcomes": {
+    "human_review": 979,
+    "route": 2121
+  },
+  "policy_sha256": "f5759f36df7893d188154e5819b4fd592a980cc06256841172e05f87c11c02c8",
+  "predictions_sha256": "bbe59f5bea47ee19ad015b8db3e2b1e7837ed1e58e0d3be45720b2775bd1015e",
+  "purpose": "Validation API/offline decision parity; not a network load benchmark",
+  "rate_limit_requests": 0,
+  "sample_count": 3100,
+  "service_dependency_lock_sha256": "38fda39dd158abfa51f462b4d899e8a970bb345e178c094824f09a4a2913a03c",
+  "split": "val"
+}

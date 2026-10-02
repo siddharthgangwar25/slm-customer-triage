@@ -1,0 +1,53 @@
+{
+  "files": {
+    "earlier-failure/prepare.log": {
+      "retained_lf_sha256": "5ead9ea81249752b77cecf396fb8920133dff8c134d57bd3917b6a14c96f75b6",
+      "source_bytes_sha256": "1cf767f67ca9606ac7bc968599891eb90d96183cf3b55319ed3e34f366fc6dfc"
+    },
+    "fresh-demo/service.log": {
+      "retained_lf_sha256": "d5243d0ec041a79b7bffadd330ca9333cb4edafa87b4317580533a035965c515",
+      "source_bytes_sha256": "5d7cb10efc499a04574e974864245c7d3a05d44b15aebb93ac362759232bbd9e"
+    },
+    "original-demo/service.log": {
+      "retained_lf_sha256": "9008b0756044a5c706fd8e50805c97f9f9117014f4aae53ce0bde0d48d5a9963",
+      "source_bytes_sha256": "a4c55746c082fdcb1bcd35a97c12df5042c3ba605f4a9af632be388cbe63b82d"
+    },
+    "reproduction/api-parity.log": {
+      "retained_lf_sha256": "d13a8a53ecf2fb0de672766258cbc0cbd0ad202e8f25c8a0381b947905707366",
+      "source_bytes_sha256": "c701df321fbf1908c419b9764b816a6f6087db39d3bb367eb8abd363d8ee1c19"
+    },
+    "reproduction/baseline.json": {
+      "retained_lf_sha256": "2b971f90f75009e9ea062ccdc003b8942657c36544a20198fee76ab1baba852a",
+      "source_bytes_sha256": "39306670c1c5b8acdc3803e59694461432fd430cb63700abff193cdbd3bcc47b"
+    },
+    "reproduction/commands.json": {
+      "retained_lf_sha256": "fa9322897fbe7416a2158688fe23a3e691d913c08d86cddc19001f9b159c8f48",
+      "source_bytes_sha256": "298988aba13512ca4048ddaac64f087742dddd92ac48303d2537f188e715aeae"
+    },
+    "reproduction/demo.log": {
+      "retained_lf_sha256": "28eaafea3c59e1383ad1fa7e19c5962da44a5b729b42dbf6035770ea39eece48",
+      "source_bytes_sha256": "8f4095368535fbd6048fd1ba6bc86a3c2edc6b3aef5edf08ee565b8cdc3480f5"
+    },
+    "reproduction/evaluate.log": {
+      "retained_lf_sha256": "03da0756793b142cb0715fecb3a9805099ed92543cd83ac75c438d846bb322f5",
+      "source_bytes_sha256": "036dd6a8dd43b30d9b55251d23d7ddeb886c72046b539a8ff115f3148ce63e41"
+    },
+    "reproduction/policy.log": {
+      "retained_lf_sha256": "8a4d92be8bb61416706d2ac645f85e21b5a38fa61e0942b2aad51df7280ba7ef",
+      "source_bytes_sha256": "0ebb8f544f565d6ad4c9d23e76a4fb082a6c28f2aaf558bf572d5efc82841121"
+    },
+    "reproduction/predict.log": {
+      "retained_lf_sha256": "7b96397ef763cd5ce9f0327e72794ba732426411673b6640c7133fcf4b454c71",
+      "source_bytes_sha256": "0aed4294dddd104c6f728f13f4e48381e01a2bbaf37a4381b6301bb13c4359d3"
+    },
+    "reproduction/prepare.log": {
+      "retained_lf_sha256": "14c1aaeb4f6f9a7f9e5da67b36660a3e7cb8a2532f97db121902c523541bfbcf",
+      "source_bytes_sha256": "1bc64f8352168be95c0c87865b3e20ae30b0c6d1328a635b4df392f4fea4fee1"
+    },
+    "reproduction/train.log": {
+      "retained_lf_sha256": "090ef2dac7d0cbf9ebda6117128fa07ea2274972da3ce7698fca1101bb248547",
+      "source_bytes_sha256": "cb386afebb9dbcaacd4151b1a12200b07fa53a0c259d89680b1437bf6a56318a"
+    }
+  },
+  "transformation": "CRLF to LF in retained text copies only; original artifacts unchanged"
+}

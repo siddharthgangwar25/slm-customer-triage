@@ -1,0 +1,22 @@
+{
+  "commit": "828f8093932c8fe6ca7936c3d2e52903b1c523de",
+  "splits": {
+    "train": 15100,
+    "val": 3100,
+    "test": 5500
+  },
+  "duplicate_summary": {
+    "exact": {
+      "group_count": 5,
+      "cross_split_groups": 5,
+      "within_split_groups": 0,
+      "conflicting_label_groups": 4
+    },
+    "normalized": {
+      "group_count": 5,
+      "cross_split_groups": 5,
+      "within_split_groups": 0,
+      "conflicting_label_groups": 4
+    }
+  }
+}

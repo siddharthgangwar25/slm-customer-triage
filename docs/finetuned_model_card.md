@@ -2,7 +2,7 @@
 
 ## Identity and purpose
 
-Research candidate C for English, single-intent request classification into 150 CLINC150 intents or `oos`. The raw adapter returns an intent JSON object; the separate frozen baseline gate recommends route or human review. It does not execute business actions. It is not yet deployed by the project's API.
+Research candidate C for English, single-intent request classification into 150 CLINC150 intents or `oos`. The raw adapter returns an intent JSON object; the frozen baseline gate recommends route or review. It executes no business actions. Training, validation, frozen test and local Transformers serving checks are complete. **Automatic release is disqualified** because test oos review recall is 89.6%, below the fixed 90% requirement. No deployment is active. See the [complete model/release card](model_card.md).
 
 - Base: `Qwen/Qwen3-0.6B`, revision `c1899de289a04d12100db370d81485cdf75e47ca`, 596,049,920 parameters.
 - Adapter: `artifacts/finetuned-qwen3-06b-qlora-v1/checkpoint-944`; model version `finetuned-qwen3-06b-qlora-v1-step944-bfe54e26195f`.
@@ -11,7 +11,7 @@ Research candidate C for English, single-intent request classification into 150 
 
 ## Data and training
 
-Official CLINC150 full source commit `828f8093932c8fe6ca7936c3d2e52903b1c523de`; 15,000 supported and 100 oos training examples. No validation examples enter fitting. Test predictions remain unused. Original data attribution and CC BY 3.0 license are retained with the [baseline data report](../reports/baseline-c1-v1-val/CLINC_LICENSE.txt).
+Official CLINC150 full source commit `828f8093932c8fe6ca7936c3d2e52903b1c523de`; 15,000 supported and 100 oos training examples. No validation examples enter fitting. The final test has now been used once per frozen candidate; do not rerun or tune on it. Attribution and CC BY 3.0 license are retained in the [data card](data_card.md).
 
 Completion-only conversational SFT, all 150 labels in the system prompt, JSON+EOS targets, explicit Qwen non-thinking behavior. All records fit within the 1,024-token training limit without truncation. Ten masks and the installed TRL collator were inspected before training. QLoRA rank 16, alpha 32, dropout 0.05 on attention/feed-forward linear projections, learning rate 1e-4, microbatch 1, accumulation 16, seed 42, one epoch/944 steps. This is one configuration and seed, with a single eligible epoch checkpoint.
 
@@ -27,4 +27,4 @@ The paired prompted base scores 0.272377 macro-F1 and the CPU baseline 0.882634.
 
 Only 100 training oos examples, public benchmark contamination risk, known source duplicates, ambiguous labels, one seed/epoch, and validation-based checkpoint/threshold selection limit generalization. The adapter can invent unknown labels and overassign supported intents to unsupported requests. Strict parsing and the frozen policy must be retained; human review is a recommendation, not a submitted ticket.
 
-C has not passed service-backend/export parity, API load testing, final frozen test evaluation, cost measurement or a deployment release. Its offline p95 serial latency is 1,306.89 ms, excluding loading/prefix prefill/gate/API overhead. A remains the current serving adapter. Revalidate any changed model representation, decoding or prompt under Milestone 5 before release.
+C's final test supported macro-F1 is **0.956794**, with **3,886/5,500 routes**, **185 routed errors (4.76%)**, **896/1,000 oos reviewed** and **44 invalid outputs**. Raw oos correctness is 470/1,000 versus B's 718/1,000. Native and Linux Transformers workers each match all 3,100 reference validation outputs. Linux serial HTTP load completes 500/500 requests at 1.345/s and 1,116.87 ms p95; concurrent load mostly fails busy. These results do not override the failed release criterion. vLLM changes five C validation outputs and is not adopted. Hosting figures are assumptions using local measurements, not measured cloud bills. Full evidence, upstream licensing, limits and maintenance guidance are in the [model card](model_card.md).

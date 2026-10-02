@@ -1,0 +1,44 @@
+{
+  "sample_count": 3100,
+  "supported_count": 3000,
+  "oos_count": 100,
+  "catalog_size": 150,
+  "raw_supported_macro_f1": 0.8826340782395509,
+  "raw_supported_accuracy": 0.8833333333333333,
+  "invalid_output_count": 0,
+  "model_calls": 3100,
+  "invalid_output_rate": 0.0,
+  "infrastructure_failure_count": 0,
+  "infrastructure_failure_rate": 0.0,
+  "serial_model_latency_ms": {
+    "p50": 0.643899998976849,
+    "p95": 0.8642150030937045,
+    "p99": 1.1748229961085594
+  },
+  "timing_scope": "serial per-record vectorization + predict_proba + argmax; no API",
+  "split": "val",
+  "fixture": false,
+  "model_version": "milestone6-cpu-reproduction-21a2ab3db7cd",
+  "ungated_routing_diagnostic": {
+    "threshold": 0.0,
+    "sample_count": 3100,
+    "supported_count": 3000,
+    "oos_count": 100,
+    "routed_count": 3100,
+    "routed_error_count": 450,
+    "coverage": 1.0,
+    "routing_error": 0.14516129032258066,
+    "routing_error_wilson95": [
+      0.13319997940443973,
+      0.15800093108410984
+    ],
+    "oos_recall": 0.0,
+    "oos_recall_wilson95": [
+      3.469446951953614e-18,
+      0.03699349820698568
+    ],
+    "supported_review_rate": 0.0,
+    "human_review_count": 0,
+    "infrastructure_failure_count": 0
+  }
+}

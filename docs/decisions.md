@@ -1,5 +1,12 @@
 # Implementation decisions
 
+## 2026-10-02 - Milestone 6 handoff
+
+- Complete the mandatory local handoff without changing frozen model/service source: executable CPU reproduction and authenticated live demo, current cards, architecture/error analysis and setup/deployment guides. The demo uses explicit trusted bundle paths and clearly identifies itself as research, not release approval.
+- Verify reproducibility with a fresh locked environment, pinned cached raw sources, a newly trained baseline and all 3,100 API/reference matches. Preserve the initial helper invocation failure and rerun to a fresh directory after correcting it. This is not a claim of an uncached internet installation or new GPU training.
+- Keep the historical source/locks and completed final-test ledger intact. New helper scripts and documents live outside frozen source/configuration. Small demo examples are authored illustrations; no accuracy score or independent-review claim follows from them.
+- Omit cloud execution because no budget/account/region/host/session was authorized; retain an explicitly unverified plan. Defer the optional 100+ request independent challenge set because an independent reviewer is unavailable. Supply a collection protocol rather than passing off unreviewed synthetic prompts as that evaluation.
+
 ## 2026-10-02 - full vLLM comparison complete; keep Transformers
 
 - **Close the validation experiment without adopting the alternative.** All 6,200 generations completed, but exact matches are B 3,005/3,100 and C 3,095/3,100. C changes three routed labels. The backend is demonstrably feasible, not interchangeable with the frozen reference.

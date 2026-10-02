@@ -1,0 +1,15 @@
+{
+  "experiment_id": "milestone6-cpu-reproduction",
+  "data_dir": "artifacts/milestone6-cpu-reproduction-v2/data",
+  "bundle": "artifacts/milestone6-cpu-reproduction-v2/bundle",
+  "prediction_output": "artifacts/milestone6-cpu-reproduction-v2/predictions",
+  "C": 1.0,
+  "seed": 42,
+  "max_iter": 2000,
+  "ngram_range": [
+    1,
+    2
+  ],
+  "sublinear_tf": true,
+  "threads": 1
+}

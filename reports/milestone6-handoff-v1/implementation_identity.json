@@ -1,0 +1,11 @@
+{
+  "files": {
+    "examples/demo_requests.json": "4fecd00a7a63a6aff7670fcac14902cee7bca9b10d691222812448bed770705a",
+    "scripts/reproduce_cpu.py": "b28a8d25da6fe21dac4c984054676c65151b911a9f688b24265f1686b2ce4988",
+    "scripts/run_demo.py": "0fc1fdc8aeccf2bcfbda87c101b5592a288ecd3e2506e54ab8eb26458b9c0268",
+    "scripts/verify_handoff.py": "85a8933cf7de7b60233632447bc32f550171bd0606ae11bcb9357f0cab0e20f1",
+    "tests/test_demo.py": "cbbbdeb6430485122e3a3c773a99b0d720c9322c6ef00985b27f125a3b98b29a",
+    "uv.lock": "38fda39dd158abfa51f462b4d899e8a970bb345e178c094824f09a4a2913a03c"
+  },
+  "source_sha256": "2a91de5d0e0e4625c3b3fcb22a5898d16b387f6259568b9bdd2b21df3f48a4c4"
+}

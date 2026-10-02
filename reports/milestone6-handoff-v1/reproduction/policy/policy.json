@@ -1,0 +1,45 @@
+{
+  "algorithm": "shared-baseline-gate-v1",
+  "automatic_routing": true,
+  "catalog_sha256": "99c5f251ce0a66c6ff21535e030ee5551bc801526330e7781c21377c7c611d44",
+  "config_sha256": "8aea8b0db3a5a6ccecbe6324da1eac9d60df8ce5bb0a81d9071cee598e773886",
+  "constraints": {
+    "max_routing_error": 0.05,
+    "min_coverage": 0.2,
+    "min_oos_recall": 0.9
+  },
+  "data_manifest_sha256": "0d36ac83b17181b9aa47a79748f421c62d79139e61104d738b99e1be027518e1",
+  "fixture": false,
+  "gate_model_version": "milestone6-cpu-reproduction-21a2ab3db7cd",
+  "model_version": "milestone6-cpu-reproduction-21a2ab3db7cd",
+  "pipeline_sha256": "b5d9534beb0058b72eceadb25b988a465fda2defb99856ee828f83f8291dc87f",
+  "policy_version": "policy-v1-8aea8b0db3a5",
+  "prediction_manifest_sha256": "21909578e61379548657b36f463cec08ad3e08032518f6700a17534f8bd1df20",
+  "predictions_sha256": "bbe59f5bea47ee19ad015b8db3e2b1e7837ed1e58e0d3be45720b2775bd1015e",
+  "schema_version": 1,
+  "split": "val",
+  "status": "targets_met",
+  "threshold": 0.2088413160728636,
+  "validation": {
+    "coverage": 0.6841935483870968,
+    "human_review_count": 979,
+    "infrastructure_failure_count": 0,
+    "oos_count": 100,
+    "oos_recall": 0.9,
+    "oos_recall_wilson95": [
+      0.8256343384950865,
+      0.9447708629393249
+    ],
+    "routed_count": 2121,
+    "routed_error_count": 101,
+    "routing_error": 0.047619047619047616,
+    "routing_error_wilson95": [
+      0.03934520353417957,
+      0.05752859284540443
+    ],
+    "sample_count": 3100,
+    "supported_count": 3000,
+    "supported_review_rate": 0.29633333333333334,
+    "threshold": 0.2088413160728636
+  }
+}

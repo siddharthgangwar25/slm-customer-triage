@@ -1,0 +1,13 @@
+{
+  "model_version": "milestone6-cpu-reproduction-21a2ab3db7cd",
+  "fit": {
+    "fit_seconds": 10.570398800002295,
+    "fit_count": 15000,
+    "excluded_oos_count": 100,
+    "warnings": [],
+    "converged": true,
+    "iterations": [
+      21
+    ]
+  }
+}

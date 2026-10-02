@@ -1,0 +1,6 @@
+LOCAL RESEARCH DEMO: no candidate qualified for automatic production release.
+These are demonstration prompts, not an independently reviewed challenge set.
+supported: route / balance / supported_intent
+unfamiliar: human_review / None / low_gate_score
+instruction_like: human_review / None / low_gate_score
+Demo finished and service stopped. Evidence: C:\Users\gangw\Documents\Projects\slm-customer-triage\artifacts\milestone6-cpu-reproduction-v2\demo

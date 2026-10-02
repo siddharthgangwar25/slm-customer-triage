@@ -1,5 +1,11 @@
 # Experiment journal
 
+## 2026-10-02 - Milestone 6 reproduction and live demonstration
+
+Question: can another developer reproduce the CPU path and demonstrate the service without the original model files or a GPU? A fresh locked environment prepared verified cached CLINC sources, trained a new baseline and matched all 3,100 original validation labels/gate scores plus all 3,100 API decisions. Macro-F1 remains 0.8826340782. All eight stages took 64.45 seconds on this machine, including the live demo; source downloads were cached. An early helper invocation used the wrong Python module and failed before preparation. Corrected it and preserved that failure separately from the successful rerun.
+
+The fresh and original CPU bundles both served real localhost requests: the balance illustration routed, and two unfamiliar/instruction-like illustrations were reviewed. Authentication/input/metrics checks passed, no request text appeared in service logs, and both processes stopped. These are demonstrations, not a new challenge benchmark. Updated all handoff materials around the completed negative release decision and current serving evidence. Cloud remains unexecuted and the independent challenge set deferred; no final-test inference, source/model change or threshold retuning occurred.
+
 ## 2026-10-02 - full paired vLLM validation
 
 The user completed both 3,100-example validation runs. Every request completed with no inference failure. B changed 95 raw outputs; C changed five. C fixed two routed mistakes, regressed one raw supported prediction that the gate already reviewed, changed another gated mistake, and routed one oos request to a different wrong label. Three full policy responses changed even though route/review counts stayed identical.

@@ -1,0 +1,14 @@
+INFO:     Started server process [6908]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:49643 (Press CTRL+C to quit)
+{"event": "request", "status": 200, "latency_ms": 1.579, "model_version": null, "outcome": null, "reason": null}
+{"event": "request", "status": 200, "latency_ms": 2.001, "model_version": null, "outcome": null, "reason": null}
+{"event": "request", "status": 200, "latency_ms": 0.932, "model_version": null, "outcome": null, "reason": null}
+{"event": "request", "status": 200, "latency_ms": 44.354, "model_version": "milestone6-cpu-reproduction-21a2ab3db7cd", "outcome": "route", "reason": "supported_intent"}
+{"event": "request", "status": 200, "latency_ms": 6.136, "model_version": "milestone6-cpu-reproduction-21a2ab3db7cd", "outcome": "human_review", "reason": "low_gate_score"}
+{"event": "request", "status": 200, "latency_ms": 5.733, "model_version": "milestone6-cpu-reproduction-21a2ab3db7cd", "outcome": "human_review", "reason": "low_gate_score"}
+{"event": "request", "status": 401, "latency_ms": 0.337, "model_version": null, "outcome": null, "reason": null}
+{"event": "request", "status": 422, "latency_ms": 1.081, "model_version": null, "outcome": null, "reason": null}
+{"event": "request", "status": 401, "latency_ms": 0.729, "model_version": null, "outcome": null, "reason": null}
+{"event": "request", "status": 200, "latency_ms": 0.341, "model_version": null, "outcome": null, "reason": null}

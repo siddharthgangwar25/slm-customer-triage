@@ -66,7 +66,7 @@ Error response schema:
 | 422 | Malformed JSON, extra fields, non-string/empty text, text >2,000 characters, body >configured byte limit, or model token budget exceeded |
 | 429 | Configured per-process triage rate limit; includes `Retry-After` |
 | 503 | Missing/corrupt/incompatible model or policy, unavailable model, full inference slot, or inference deadline exceeded |
-| 404 | Unsupported endpoint, including `/metrics` in this milestone |
+| 404 | Unsupported endpoint, including `/metrics` when no metrics key is configured |
 
 The character cap applies to submitted text; valid text is trimmed before token counting and inference. The body cap also checks chunked bodies without trusting `Content-Length`. Pydantic errors are converted to the standard envelope without echoing submitted content. `/v1/model` returns only versions, model type, catalog size, automatic-routing state, and the fixture marker.
 
@@ -74,11 +74,11 @@ The character cap applies to submitted text; valid text is trimmed before token 
 
 One bounded worker thread serves CPU inference. Concurrent work beyond its single slot receives `503 model_busy`; there is no unbounded queue. A baseline request computes class probabilities once and reuses the label returned with its gate score. A generic adapter below threshold is not called for a final prediction. Disabled routing skips gate/model calls after input validation and readiness checks.
 
-The inference deadline includes token counting, gate computation, and model prediction. Python cannot terminate a running native sklearn operation when its awaiting request times out. The slot remains occupied and readiness is false until that operation finishes; no replacement work is queued. A late inference failure marks the runtime unhealthy until restart. A permanently stuck native operation requires stopping the process. Process-isolated inference and load tuning belong to later serving work.
+The inference deadline includes token counting, gate computation, and model prediction. Python cannot terminate a running native sklearn operation when its awaiting request times out. The slot remains occupied and readiness is false until that operation finishes; no replacement work is queued. A late inference failure marks the runtime unhealthy until restart. A permanently stuck native operation requires stopping the process. The GPU path now uses a separate authenticated Transformers worker; measured concurrent load still mostly fails busy. See the serving report.
 
 Rate limiting is global to this single local process, not distributed or per-account. Health checks are exempt. No remote deployment or multi-worker coordination is claimed. `latency_ms` measures the server handler path from body receipt to decision construction; it excludes network transfer and final response transmission.
 
-Default application logs contain only an event name, HTTP status, and duration; startup failures log an exception class, not messages or paths. Raw text, client request IDs, authentication headers, query strings, and secrets are not logged. Uvicorn access logging is disabled by the CLI. Prometheus metrics and production telemetry remain deferred; no public `/metrics` endpoint exists.
+Default application logs contain event name, HTTP status, duration, model version and outcome/reason; startup failures log an exception class, not messages or paths. Raw text, client request IDs, authentication headers, query strings, and secrets are not logged. Uvicorn access logging is disabled by the CLI. With `TRIAGE_METRICS_KEY`, `/metrics` exposes private Prometheus-compatible counters and bounded timing summaries. It requires its own bearer key; the API key does not grant metrics access. Without that configuration the endpoint is absent. See [architecture](architecture.md) and [deployment](deployment.md).
 
 ## Re-run API/offline parity
 

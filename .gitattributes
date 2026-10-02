@@ -16,3 +16,4 @@ environments/vllm/requirements.in text eol=lf
 # Preserve original runtime log bytes, including trailing progress-line spaces.
 reports/vllm-smoke-v1/*.log whitespace=-blank-at-eol
 reports/vllm-validation-v1/*.log whitespace=-blank-at-eol
+reports/milestone6-handoff-v1/**/*.log whitespace=-blank-at-eol
