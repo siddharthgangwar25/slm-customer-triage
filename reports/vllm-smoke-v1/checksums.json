@@ -1,0 +1,16 @@
+{
+  "B-comparison.jsonl": "c647651e7c7340bb4e2aa9cd8614aba647cddb4abee591c18c05b7df98818fc0",
+  "B-predictions.jsonl": "29ae4450d97f3b3cd0040b5b2c3e1ea46616d14a4d42aae307bc6db56279e9c8",
+  "C-comparison.jsonl": "0a877054c6313d00bb241e711ef6abaf703e78163fc0b8fc2aafd91503833fd5",
+  "C-predictions.jsonl": "5aa620c2fbae83af8e774d4922aa69b0a794230770845f197c99224532f97f46",
+  "container_state.json": "45d7ff51b94cf573e44564d4a3a2673a9cf4b45918eb5c3ba5b1e885b5c44547",
+  "frozen_release_check.json": "6e6b8fb9e69377ab019f768a0b3cbc5e1b71b2d6907c4f6353ce864da9e69902",
+  "host.json": "1783bc41433a71b7680718d13c2688d34721563fa59a88533b422012273ed01a",
+  "inputs/identity.json": "eb3dce58ac55ce34c438b33f876531646102ed72143c4d6827af63501d14ecd5",
+  "inputs/prompt.txt": "c93ba6e353461dd53869df91ff394ddf89f89af01f654c7c2e6bfdb71a6edec2",
+  "resources-end.json": "9d9d2788ec2800fa60a077c7e1ec843b4ca8f633f6f4ec676dbb850862cf4ec3",
+  "resources-start.json": "305bfdf5095cb975e4af89b62ff4d1bf962dcf6be6c40b9cf474a598dff3f5f5",
+  "runtime.json": "a63877fd2e00ec7f11fa087e23c801e06cd2e60ab7c801740e4bbf1439bb3cbf",
+  "summary.json": "3839594c0644a528435f518df7fe347c01cb17faa26f8bd50407b373f9ef4ca5",
+  "worker.log": "f311fce8101e7249c088aa69c4e36f2abbb0475328000424dfa1314618d5fd17"
+}

@@ -1,0 +1,5 @@
+{
+  "returncode": 0,
+  "scope": "instantaneous whole GPU, includes other processes; not workload peak",
+  "whole_gpu_sample": "NVIDIA GeForce GTX 1650, 3719, 4096, 89"
+}

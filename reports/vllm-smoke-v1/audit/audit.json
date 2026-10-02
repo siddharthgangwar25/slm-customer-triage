@@ -1,0 +1,27 @@
+{
+  "auth_check": "passed",
+  "candidates": {
+    "B": {
+      "classification_and_frozen_threshold_metrics_verified": true,
+      "completed": 6,
+      "generation_exact_matches": 5,
+      "mismatch_fields": {
+        "output_tokens": 1,
+        "raw_output": 1
+      },
+      "original_exact_matches": 3,
+      "submitted": 6
+    },
+    "C": {
+      "classification_and_frozen_threshold_metrics_verified": true,
+      "completed": 6,
+      "generation_exact_matches": 6,
+      "mismatch_fields": {},
+      "original_exact_matches": 6,
+      "submitted": 6
+    }
+  },
+  "checksums_verified": 14,
+  "frozen_release_and_ledger_unchanged": true,
+  "test_inference": false
+}

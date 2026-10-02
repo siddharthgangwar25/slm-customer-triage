@@ -1,0 +1,208 @@
+docker.exe : #0 building with "desktop-linux" instance using docker driver
+At line:2 char:79
++ ... | Out-Null; & 'C:/Users/gangw/AppData/Local/Programs/DockerDesktop/re ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (#0 building wit...g docker driver:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+#1 [internal] load build definition from Dockerfile.vllm
+#1 transferring dockerfile: 942B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/triage-m5-gpu:82ed8d7
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 159B done
+#3 DONE 0.0s
+
+#4 [1/4] FROM 
+docker.io/library/triage-m5-gpu:82ed8d7@sha256:031350c8fef591b8e2129056cb96a94e1bf5516a636a9c691fa69964bf9d7dbc
+#4 resolve 
+docker.io/library/triage-m5-gpu:82ed8d7@sha256:031350c8fef591b8e2129056cb96a94e1bf5516a636a9c691fa69964bf9d7dbc 0.0s 
+done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 357.54kB 0.0s done
+#5 DONE 0.0s
+
+#6 [2/4] RUN apt-get update && apt-get install -y --no-install-recommends gcc g++ libnuma1     && rm -rf 
+/var/lib/apt/lists/*
+#6 CACHED
+
+#7 [3/4] COPY environments/vllm/requirements.lock /experiment/requirements.lock
+#7 DONE 0.0s
+
+#8 [4/4] RUN uv pip install --python /app/environments/training/.venv/bin/python     --require-hashes --no-deps 
+--no-cache -r /experiment/requirements.lock     && uv pip check --python /app/environments/training/.venv/bin/python
+#8 0.408 Using Python 3.11.16 environment at: environments/training/.venv
+#8 2.680 Resolved 163 packages in 2.23s
+#8 2.846 Downloading soundfile (1.3MiB)
+#8 2.865 Downloading uvloop (3.8MiB)
+#8 2.902 Downloading openai (2.0MiB)
+#8 2.904 Downloading pygments (1.2MiB)
+#8 2.906 Downloading xformers (111.8MiB)
+#8 2.907 Downloading pycountry (7.7MiB)
+#8 2.908 Downloading ray (74.7MiB)
+#8 2.909 Downloading vllm (416.2MiB)
+#8 2.910 Downloading outlines-core (2.2MiB)
+#8 2.910 Downloading xgrammar (7.5MiB)
+#8 2.911 Downloading llvmlite (40.4MiB)
+#8 2.912 Downloading llguidance (14.3MiB)
+#8 2.913 Downloading cupy-cuda12x (130.3MiB)
+#8 2.914 Downloading torchvision (8.2MiB)
+#8 2.915 Downloading tiktoken (1.2MiB)
+#8 2.915 Downloading sentencepiece (1.3MiB)
+#8 2.917 Downloading numba (3.7MiB)
+#8 2.917 Downloading numpy (16.0MiB)
+#8 2.919 Downloading opencv-python-headless (58.4MiB)
+#8 2.919 Downloading mistral-common (6.3MiB)
+#8 2.920 Downloading openai-harmony (2.8MiB)
+#8 2.921 Downloading torchaudio (3.8MiB)
+#8 8.598  Downloaded pygments
+#8 8.638  Downloaded tiktoken
+#8 8.640  Downloaded soundfile
+#8 8.861  Downloaded sentencepiece
+#8 10.47  Downloaded openai
+#8 10.83  Downloaded outlines-core
+#8 12.56  Downloaded openai-harmony
+#8 14.27  Downloaded numba
+#8 14.38  Downloaded uvloop
+#8 14.61  Downloaded torchaudio
+#8 18.80  Downloaded mistral-common
+#8 19.93  Downloaded xgrammar
+#8 20.64  Downloaded pycountry
+#8 21.02  Downloaded torchvision
+#8 28.09  Downloaded llguidance
+#8 29.96  Downloaded numpy
+#8 49.84  Downloaded llvmlite
+#8 63.07  Downloaded opencv-python-headless
+#8 72.41  Downloaded ray
+#8 87.21  Downloaded xformers
+#8 92.07  Downloaded cupy-cuda12x
+#8 131.3  Downloaded vllm
+#8 131.3 Prepared 95 packages in 2m 08s
+#8 131.5 Uninstalled 5 packages in 229ms
+#8 131.9 Installed 95 packages in 344ms
+#8 131.9  + agent-detector==2.0.0
+#8 131.9  + astor==0.8.1
+#8 131.9  + blake3==1.0.10
+#8 131.9  + cachetools==7.2.0
+#8 131.9  + cbor2==6.1.5
+#8 131.9  + cffi==2.1.1
+#8 131.9  - charset-normalizer==3.5.1
+#8 131.9  + charset-normalizer==3.5.2
+#8 131.9  + compressed-tensors==0.11.0
+#8 131.9  + cuda-pathfinder==1.8.2
+#8 131.9  + cupy-cuda12x==14.2.0
+#8 131.9  + depyf==0.19.0
+#8 131.9  + detect-installer==0.2.1
+#8 131.9  + diskcache==5.6.3
+#8 131.9  + dnspython==2.8.0
+#8 131.9  + einops==0.8.2
+#8 131.9  + email-validator==2.3.0
+#8 131.9  - fastapi==0.141.1
+#8 131.9  + fastapi==0.142.2
+#8 131.9  + fastapi-cli==0.0.32
+#8 131.9  + fastapi-cloud-cli==0.26.0
+#8 131.9  + fastar==0.12.0
+#8 131.9  - filelock==4.0.4
+#8 131.9  + filelock==4.0.8
+#8 131.9  + frozendict==2.4.7
+#8 131.9  + gguf==0.19.0
+#8 131.9  + googleapis-common-protos==1.75.5
+#8 131.9  + httpcore2==2.13.1
+#8 131.9  + httptools==0.8.0
+#8 131.9  + httpx2==2.13.1
+#8 131.9  + interegular==0.3.3
+#8 131.9  + jiter==0.17.0
+#8 131.9  + jsonschema==4.26.0
+#8 131.9  + jsonschema-specifications==2025.9.1
+#8 131.9  + lark==1.2.2
+#8 131.9  + llguidance==0.7.30
+#8 131.9  + llvmlite==0.44.0
+#8 131.9  + lm-format-enforcer==0.11.3
+#8 131.9  + markdown-it-py==4.2.0
+#8 131.9  + mdurl==0.1.2
+#8 131.9  + mistral-common==1.12.0
+#8 131.9  + msgpack==1.2.3
+#8 131.9  + msgspec==0.22.0
+#8 131.9  + ninja==1.13.2
+#8 131.9  + numba==0.61.2
+#8 131.9  - numpy==2.4.6
+#8 131.9  + numpy==2.2.6
+#8 131.9  + openai==3.22.1
+#8 131.9  + openai-harmony==0.0.8
+#8 131.9  + opencv-python-headless==5.0.0.93
+#8 131.9  + opentelemetry-api==1.45.0
+#8 131.9  + opentelemetry-exporter-http-transport==0.66b0
+#8 131.9  + opentelemetry-exporter-otlp-common==0.66b0
+#8 131.9  + opentelemetry-exporter-otlp-proto-common==1.45.0
+#8 131.9  + opentelemetry-exporter-otlp-proto-http==1.45.0
+#8 131.9  + opentelemetry-proto==1.45.0
+#8 131.9  + opentelemetry-sdk==1.45.0
+#8 131.9  + opentelemetry-semantic-conventions==0.66b0
+#8 131.9  + outlines-core==0.2.11
+#8 131.9  + partial-json-parser==0.2.1.1.post7
+#8 131.9  + prometheus-client==0.26.0
+#8 131.9  + prometheus-fastapi-instrumentator==8.1.0
+#8 131.9  + protobuf==7.36.2
+#8 131.9  + py-cpuinfo==9.0.0
+#8 131.9  + pybase64==1.5.0
+#8 131.9  + pycountry==26.2.16
+#8 131.9  + pycparser==3.0
+#8 131.9  + pydantic-extra-types==2.11.1
+#8 131.9  + pydantic-settings==2.15.0
+#8 131.9  + pygments==2.21.0
+#8 131.9  + python-dotenv==1.2.4
+#8 131.9  + python-json-logger==4.2.0
+#8 131.9  + python-multipart==0.0.32
+#8 131.9  + pyzmq==27.2.0
+#8 131.9  + ray==2.58.0
+#8 131.9  + referencing==0.37.0
+#8 131.9  - regex==2026.9.10
+#8 131.9  + regex==2026.9.29
+#8 131.9  + rich==15.0.0
+#8 131.9  + rich-toolkit==0.20.5
+#8 131.9  + rignore==0.8.1
+#8 131.9  + rpds-py==2026.6.3
+#8 131.9  + sentencepiece==0.2.2
+#8 131.9  + sentry-sdk==2.71.0
+#8 131.9  + setproctitle==1.3.7
+#8 131.9  + shellingham==1.5.4
+#8 131.9  + sniffio==1.3.1
+#8 131.9  + soundfile==0.14.0
+#8 131.9  + soxr==1.1.0
+#8 131.9  + tiktoken==0.14.0
+#8 131.9  + torchaudio==2.8.0
+#8 131.9  + torchvision==0.23.0
+#8 131.9  + truststore==0.10.4
+#8 131.9  + typer==0.27.2
+#8 131.9  + uvloop==0.23.0
+#8 131.9  + vllm==0.10.2
+#8 131.9  + watchfiles==1.3.0
+#8 131.9  + websockets==17.1
+#8 131.9  + xformers==0.0.32.post1
+#8 131.9  + xgrammar==0.1.23
+#8 132.2 Using Python 3.11.16 environment at: environments/training/.venv
+#8 132.2 Checked 178 packages in 45ms
+#8 132.2 All installed packages are compatible
+#8 DONE 132.5s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 89.5s done
+#9 exporting manifest sha256:8443bd98c0b2eb33c93aee4d6b53067aa31bf2e61a21967474cafc071026b9ff 0.0s done
+#9 exporting config sha256:abdbfd75990f5d735dadd1d6e8e60f5513ef920ca4caaab6af8a7248e8214125 done
+#9 exporting attestation manifest sha256:1e357fab2fd2fefa8004527f994e672f83e54df510b630dcb42808fcfd33970b 0.0s done
+#9 exporting manifest list sha256:a34b46ec3436ed26dfbe32970bb10f2aa945d0adee6e2aea00353887203c3115 0.0s done
+#9 naming to docker.io/library/triage-vllm:0.10.2 done
+#9 unpacking to docker.io/library/triage-vllm:0.10.2
+#9 unpacking to docker.io/library/triage-vllm:0.10.2 15.9s done
+#9 DONE 105.5s
+WARNING: current commit information was not captured by the build: failed to read current commit information with git 
+rev-parse --is-inside-work-tree
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/nnr0f4wmkx31s2wwwfyeyjicq

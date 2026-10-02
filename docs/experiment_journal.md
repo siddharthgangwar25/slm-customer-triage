@@ -1,5 +1,13 @@
 # Experiment journal
 
+## 2026-10-02 - vLLM smoke audit
+
+Hypothesis: the unchanged paired Qwen3-0.6B base and LoRA adapter can execute under a separate vLLM NF4/FP16 Linux runtime on the 4 GiB GTX 1650.
+
+The 1 October smoke completed after the chat was interrupted. Twelve requests completed with no inference failures. C matched all six reference generations; B matched five. One B answer changed from invalid catalog label `question` to `oos`. Two additional reported B differences were an accounting bug: comparing parser errors in reference predictions with worker generation errors. A CPU-only audit corrected the comparison, verified original evidence and metrics, and retained both the original and corrected results.
+
+The runtime is feasible for these examples, but full validation and warmed serving performance remain unknown. vLLM selected FlexAttention; chunked prefill was enabled in the runtime despite a disabled request flag. Whole-GPU snapshots around 3.7 GiB leave limited headroom and are not workload peaks. Next: the user's terminal run of 3,100 validation examples for each candidate. The original failed release requirement remains unchanged. [Evidence](../reports/vllm-smoke-v1/README.md).
+
 ## 2026-10-01 — full Linux GPU container validation
 
 The full run resolved the smoke's main uncertainty: all 3,100 validation worker outputs and token counts match the native reference exactly. All 500 serial HTTP submissions completed with matching decisions, 97 gate short-circuits and 403 model calls. Completed throughput was 1.345/s and p95 1.117 seconds for this one seed-42 workload. Concurrency 4/8 completed only one/two requests and rejected 499/498 as busy. A numerically higher two-request throughput is not evidence of scaling.

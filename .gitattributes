@@ -11,3 +11,7 @@
 *.csv text eol=lf
 reports/**/*.log text eol=lf
 *.png binary
+deployment/Dockerfile.vllm text eol=lf
+environments/vllm/requirements.in text eol=lf
+# Preserve original runtime log bytes, including trailing progress-line spaces.
+reports/vllm-smoke-v1/*.log whitespace=-blank-at-eol

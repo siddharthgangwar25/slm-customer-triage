@@ -1,0 +1,16 @@
+# Reuse the audited torch/CUDA layers; install only in this new image.
+# The runner verifies the local base image ID before building.
+FROM triage-m5-gpu:82ed8d7
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends gcc g++ libnuma1 \
+    && rm -rf /var/lib/apt/lists/*
+COPY environments/vllm/requirements.lock /experiment/requirements.lock
+RUN uv pip install --python /app/environments/training/.venv/bin/python \
+    --require-hashes --no-deps --no-cache -r /experiment/requirements.lock \
+    && uv pip check --python /app/environments/training/.venv/bin/python
+USER 10001
+ENV HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 VLLM_NO_USAGE_STATS=1 DO_NOT_TRACK=1 \
+    HF_HOME=/tmp/huggingface VLLM_CACHE_ROOT=/tmp/vllm \
+    TRITON_CACHE_DIR=/tmp/triton TORCHINDUCTOR_CACHE_DIR=/tmp/torchinductor \
+    XDG_CACHE_HOME=/tmp/cache VLLM_USE_V1=1 OMP_NUM_THREADS=4
+ENTRYPOINT ["python"]

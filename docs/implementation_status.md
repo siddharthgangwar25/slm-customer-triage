@@ -1,6 +1,24 @@
 # Implementation status
 
-Last updated: **2026-10-01**. Milestones **1–4 are implemented, executed, and locally verified**. **Milestone 5's full native benchmark and CPU/GPU Transformers container acceptance are verified. Section 9's vLLM runtime experiment remains unexecuted; C remains disqualified for automatic release.** Milestone 6 has not been implemented. Original baseline and 4B evidence remain unchanged. The genuine test split has been used once per frozen candidate; do not retune or repeat it.
+Last updated: **2026-10-02**. Milestones **1–4 are implemented, executed, and locally verified**. **Milestone 5's full native benchmark and CPU/GPU Transformers container acceptance are verified. Section 9's separate vLLM smoke is executed and audited; full vLLM validation remains pending. C remains disqualified for automatic release.** Milestone 6 has not been implemented. Original baseline and 4B evidence remain unchanged. The genuine test split has been used once per frozen candidate; do not retune or repeat it.
+
+## Section 9 - vLLM smoke executed; full validation handoff
+
+The interrupted run finished on 1 October and was audited on 2 October. The separate Linux/WSL2 vLLM 0.10.2 image loads Qwen3-0.6B NF4/FP16 and checkpoint-944 LoRA on the GTX 1650. All **12/12 HTTP requests completed**, with no inference failures. Generation parity: **B 5/6, C 6/6**. Each received the same three supported and three oos validation examples. One B output changed from invalid `question` to `oos`; six examples cannot establish full quality or parity. [Retained evidence and audit](../reports/vllm-smoke-v1/README.md).
+
+The original B summary counted two identical invalid outputs as mismatches by mixing parser errors with inference errors. Preserved that original evidence and executed runner; fixed the comparison boundary and saved a separate CPU audit. All 14 original checksums, reference joins, token/EOS accounting, strict parsing, classification and fixed-threshold diagnostics verify. No inference was repeated for this correction. The full CPU suite passes: **158 tests in 16.44 seconds**, including five focused vLLM tests and the parser-error regression. Ruff lint/format, mypy and Git whitespace checks pass. The existing frozen release still verifies, and its release/test-ledger hashes are unchanged.
+
+Runtime selected V1 **FlexAttention** and **PunicaWrapperGPU**. Logs show chunked prefill enabled despite the requested disabled flag. Model/engine loading took **55.34 seconds**, HTTP readiness **80.67 seconds**. Whole-GPU snapshots were **3,703/3,719 MiB**, including other processes, not workload peaks. First-use timings are not a warmed load benchmark. The runner cleaned up its temporary container; Docker is currently stopped, so a fresh daemon check was unavailable on 2 October.
+
+The isolated Dockerfile, dependency hash lock, authenticated experiment worker, paired comparison runner, CPU auditor and runbook are implemented. Frozen source/configuration/locks/models and original Docker images remain unchanged. Full vLLM validation, vLLM load testing and Milestone 6 remain unexecuted. The original C release remains disqualified.
+
+**Next step for the user:** start Docker Desktop, then run from the project root without activating a venv:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/run_vllm_experiment.py --full --skip-build --output artifacts/vllm-validation-v1
+```
+
+This reuses the image/weights and compares **3,100 validation examples per candidate** (6,200 generations total). It does not access the test split, train, retune or activate a release. Audit the complete comparison before deciding on further vLLM serving/load work. See [the vLLM runbook](vllm_experiment.md). Longer GPU work remains a user-terminal handoff, as previously requested.
 
 ## Milestone 5 — full GPU container acceptance passed
 

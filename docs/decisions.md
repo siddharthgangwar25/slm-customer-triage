@@ -1,5 +1,12 @@
 # Implementation decisions
 
+## 2026-10-02 - separate vLLM runtime experiment
+
+- Pin vLLM 0.10.2 to match the existing PyTorch 2.8/CUDA 12.8 base and its documented Turing/V1 support. Resolve an isolated hash lock; do not modify frozen runtime identities. Current documentation and pinned APIs are linked in [the runbook](vllm_experiment.md).
+- Preserve B/C pairing: unchanged base/adapter, catalog, tokenization and greedy decoding, no merging or constrained JSON. Treat the backend as a new variant even if a small sample matches. The actual V1 runtime enables chunked prefill despite the requested setting; the log is authoritative.
+- Audit backend generation errors separately from parser outcomes. Preserve the original smoke and executed code, retain the corrected 5/6 B and 6/6 C audit, and add a regression check instead of rerunning inference to repair accounting.
+- Hand off longer validation through a terminal command, respecting the user's preference. No final-test reuse, policy tuning, release activation or paid deployment is authorized by this experiment.
+
 ## 2026-10-01 — full GPU container acceptance
 
 - **Accept the measured Transformers path.** All 3,100 validation worker outputs and all completed API decisions match. Serial 500/500 completions, 1.345/s and 1.117-second p95 establish this workload's result. Concurrency 4/8 mostly rejects requests, so no scaling or production-readiness claim follows.
