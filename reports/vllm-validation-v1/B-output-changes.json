@@ -1,0 +1,1712 @@
+[
+  {
+    "gate_score": 0.6210051368782775,
+    "label": "translate",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"hello\"}",
+    "sample_id": "1f026b8f627ceb8bca44a207057f6a0bee374d5a707192919b193b1aac025592",
+    "text": "how do you say hello in mexico",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"how_do_you_say_hello\"}"
+  },
+  {
+    "gate_score": 0.32216756234257865,
+    "label": "translate",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"translate\"}",
+    "sample_id": "321e327946273ca137156fe211cb98276aae22d58153a908ec31faec8a2ee09a",
+    "text": "would you translate a phrase into mandarin for me",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.1569167274381639,
+    "label": "transfer",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"move a dollar\"}",
+    "sample_id": "416f56a51c37eb3c74d5519902085f45b115dc38ea0f29ae4dd0779eb33c4aa4",
+    "text": "move a dollar from my checkings to my savings",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"move_a_dollar\"}"
+  },
+  {
+    "gate_score": 0.7916326266308983,
+    "label": "definition",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"meaning_of_life\"}",
+    "sample_id": "1c312034976c857fbd09d67c929afb26b50f091bec8d524999f684f7b4828496",
+    "text": "what does unsavory mean",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"what_is_your_name\"}"
+  },
+  {
+    "gate_score": 0.7916326266308983,
+    "label": "definition",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"idiosyncratic\"}",
+    "sample_id": "c9445589647952ac99306a51005887ee32dd71f5387557d075657910166bd78f",
+    "text": "what does idiosyncratic mean",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"meaning_of_life\"}"
+  },
+  {
+    "gate_score": 0.9197587678300008,
+    "label": "meaning_of_life",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"what_are_your_hobbies\"}",
+    "sample_id": "bbc74dc8c7928e2638a54a14f3df794216c715b26f3bd1413cebe324c3331c30",
+    "text": "what's your opinion on the meaning of life",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.8013903974300154,
+    "label": "meaning_of_life",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"fun_fact\"}",
+    "sample_id": "34fd2871d2af12561b8af36ee81f76cb203896f4147ff68bd9679d842799cf1a",
+    "text": "do you know the deeper meaning of life",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"meaning_of_life\"}"
+  },
+  {
+    "gate_score": 0.5113978431203177,
+    "label": "travel_alert",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"travel_alert\"}",
+    "sample_id": "6b18cb6970138f275c36a52c0046e07469f1477121b54c6e9941b41407060bdd",
+    "text": "does greece currently have any travel alerts in place",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.566939314643788,
+    "label": "improve_credit_score",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"what_can_i_ask_you\"}",
+    "sample_id": "e6c22286b6163f4fad7557582dd06f4aea794c7ad7ae9bf00d689c4f6f59e84a",
+    "text": "what can i do to get a better credit score",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"what_can_i_do_to_get_a_better_credit_score\"}"
+  },
+  {
+    "gate_score": 0.39251638947374295,
+    "label": "improve_credit_score",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"question\"}",
+    "sample_id": "615f4658e3ca9f3bcfc86cf495ed4f97f9050b7466a9595a0d2c14cd4559535a",
+    "text": "will getting a credit card help my credit score",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.7008119809250984,
+    "label": "improve_credit_score",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"what_are_your_hobbies\"}",
+    "sample_id": "d211dff95bd3ad4e4284e9550e61ae14a733feb702529a774e8e6c430bdad52d",
+    "text": "what are some easy ways to make my credit score better",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.6079573916573601,
+    "label": "improve_credit_score",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"credit_score\"}",
+    "sample_id": "4cffa5aac1abf92a50ba39de598a7aa01fd78da0210c96f093417a9ebb7bb418",
+    "text": "what is the best way to keep my credit score from going down",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"what_are_your_hobbies\"}"
+  },
+  {
+    "gate_score": 0.6178973301720052,
+    "label": "change_language",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"language\"}",
+    "sample_id": "811af78b68de3b1fe195109be5aa2ec020f01471785025f25d228f0036edf8e7",
+    "text": "please change your language setting to russian",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"change_language\"}"
+  },
+  {
+    "gate_score": 0.9223986973252494,
+    "label": "application_status",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"credit_limit\"}",
+    "sample_id": "afe9c6cd9ffbc40ae582f313044f4cdc6dffc6d1ce3e6b4684735978fc5cee93",
+    "text": "has my credit card application processed yet",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.5008286005744385,
+    "label": "flight_status",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"is flight\"}",
+    "sample_id": "58325dd0996214d67167a3542b7bd398e0d6e9cb3bbbef5ccb79f37383904ec9",
+    "text": "is flight dl123 due to land as schedule",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"is\"}"
+  },
+  {
+    "gate_score": 0.7780791414962455,
+    "label": "flight_status",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"flight_status\"}",
+    "sample_id": "1e25b1c66dc9406861138a567bbf2e21f184d89d962d1f74905af58173c00ca4",
+    "text": "for flight dl123 what's the status",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.2855896336077595,
+    "label": "what_can_i_ask_you",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"what_can_i_ask_the_ai\"}",
+    "sample_id": "f55eca36746fe5c577ec0146125d2a1eef26f20dfee1eb5c83d95674cb2fde20",
+    "text": "what can i ask the ai",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"what_can_i_ask\"}"
+  },
+  {
+    "gate_score": 0.4554209699783295,
+    "label": "what_can_i_ask_you",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"what_are_your_hobbies\"}",
+    "sample_id": "5641b23a9b30b7d5a668b1e948f9cb354271fb6d988a183d98fabb5444cf3405",
+    "text": "what kind of questions can you answer",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.2574162440015913,
+    "label": "oil_change_how",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"how_to_change_oil\"}",
+    "sample_id": "522e409e9ce809ac4a328e7a5c28cfd05317572c634c13095bfa63a0b11cfb4c",
+    "text": "i want to know how to change oil, tell me the steps one at a time while i work through it",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.3890811423792173,
+    "label": "oil_change_how",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"change\"}",
+    "sample_id": "2d7d54d29119b6bfe6afb44358c9ad652c1e9ad8116abd6e1ddf407a44945fb2",
+    "text": "can you teach me to change my oil",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.7855871642823196,
+    "label": "oil_change_how",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"oil_change\"}",
+    "sample_id": "d8bc62c62220ddd8e06e681e94fb2a8c6c4ab8280e0eef17ddda849e2c5a77fa",
+    "text": "can you tell me how to change my oil",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"change_user_name\"}"
+  },
+  {
+    "gate_score": 0.4940083942888999,
+    "label": "balance",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"question\"}",
+    "sample_id": "fe052d212e1faf07f2a1b0b103d31cbc849ed0a1616019074d252f010cfe8fc1",
+    "text": "i wonder if i have enough money in my chase account for a bike",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.17685864581182775,
+    "label": "balance",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"user_name\"}",
+    "sample_id": "c556a09c03c470c147e58592fb725c9b8bd9f579ab8378a7ad1cd7b5e5bc8258",
+    "text": "i keep trying to figure out if i have enough money in my chase account to purchase a new set of tires",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"pay_bill\"}"
+  },
+  {
+    "gate_score": 0.3751384653290411,
+    "label": "balance",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"user_name\"}",
+    "sample_id": "83e864e0d08276a1c5e69c9c5b5bfafb86dfa49f33515657c93aa8975e9beff4",
+    "text": "can you tell me how much money i have i my bank accounts",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.0604065410108565,
+    "label": "confirm_reservation",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"check_to_check_reservation\"}",
+    "sample_id": "438f7514531bfc6e12ce0a862ec2e660f702bcec94f7602b964dbd3171a19518",
+    "text": "check to see if i am still booked to be eating at gusto handcrafted pasta & pizza at 6:30 pm",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"check_to_check\"}"
+  },
+  {
+    "gate_score": 0.0769393278676786,
+    "label": "freeze_account",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"account_blocked\"}",
+    "sample_id": "f563b6c72ef81e790cc728e0d13f9763e798f2ae2ddba42d1ba8fce543653a0e",
+    "text": "please immediately block my navy federal credit union account",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"block_account\"}"
+  },
+  {
+    "gate_score": 0.17205511156078604,
+    "label": "who_made_you",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"what_is_your_name\"}",
+    "sample_id": "097e587b0f28d1a11f0d311e4468981ca90ba454906c120157e4c9d136fd1855",
+    "text": "what is the company that made you",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"what_are_your_hobbies\"}"
+  },
+  {
+    "gate_score": 0.14637005222939925,
+    "label": "distance",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"what_is_your_name\"}",
+    "sample_id": "e65d92863e05a7d3efaa49264f224dc566a6a77961377089305f94bd21e98516",
+    "text": "what is the average time it takes to get to target in los angeles",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.4351874070124786,
+    "label": "user_name",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"how_do_you_show_my_name\"}",
+    "sample_id": "33468a8b7da237a8a461ea597120ebf101e2ec39b9b22aef966d2ca54c4f8a12",
+    "text": "how do you show my name",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"how_do_you_ask\"}"
+  },
+  {
+    "gate_score": 0.4075311664594349,
+    "label": "timezone",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"time\"}",
+    "sample_id": "82eb544ea081b930e0075b18744d9488ee06a203c3c11180b551aeabe94abebf",
+    "text": "which time zone is germany is in",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.12926203114520782,
+    "label": "restaurant_suggestion",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"where_are_you_from\"}",
+    "sample_id": "da27e734cb7aa0446656e6b932cadf45f7bcdc1bb13166aed3dc205dc7848feb",
+    "text": "where is your favorite restaurant to eat",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"restaurant_reservation\"}"
+  },
+  {
+    "gate_score": 0.1370803172077025,
+    "label": "restaurant_suggestion",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"do_you_have_pets\"}",
+    "sample_id": "83828dc1e98c460250c4c0bbbff19263b7a1d2d6dea780ae4e0ffbcd2e9724d3",
+    "text": "do you have any restaurant recommendations",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.7721642340460028,
+    "label": "rewards_balance",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"gymboree_card_rewards_balance\"}",
+    "sample_id": "ce48210767221b7a2ce898b6082b936625f6dee9967a6456c94f5bcfbf0f9e79",
+    "text": "what is my gymboree card's rewards balance",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"what_is_your_name\"}"
+  },
+  {
+    "gate_score": 0.08714828203446542,
+    "label": "pto_request_status",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"status\"}",
+    "sample_id": "54f2bdf33c4cae1493191a5996470d8ad5ce6054a98ae57b1fba97b0aabecfff",
+    "text": "what's the status of my medical leave",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"what_is_your_name\"}"
+  },
+  {
+    "gate_score": 0.06987243336004081,
+    "label": "new_card",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"question\"}",
+    "sample_id": "88cd7f805c45c7e51f5c3960b2b7926dba4cd3e919ff4bd0bf7028093550615b",
+    "text": "who has the best credit card offering for a college student",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.8837405509610077,
+    "label": "lost_luggage",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"where_is_my_luggage\"}",
+    "sample_id": "c5730f27602f2e0f90d75ef9b603df67bcfc59757c4ddf603aa758d5263cc72d",
+    "text": "where is my luggage",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"where_is_luggage\"}"
+  },
+  {
+    "gate_score": 0.9283704531045628,
+    "label": "lost_luggage",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"howcan i locate my luggage\"}",
+    "sample_id": "b0a537ad6d3a994aaee2feb6225a139f3101eb0268e5a05a70d1f271e9ad95af",
+    "text": "howcan i locate my luggage",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.10352559638067207,
+    "label": "oil_change_when",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"oil_change_how\"}",
+    "sample_id": "adb143ec0df5c5085b96316984cd0778e9be964c16e4a3ac6ff3660ad37b0f3f",
+    "text": "how long does it take before you have to change your oil",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"how_long\"}"
+  },
+  {
+    "gate_score": 0.13963962303908994,
+    "label": "yes",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"approved\"}",
+    "sample_id": "9a5f5783197d6b78a7f799fbe3160b03cedd041e5573eb6274dd7fc456ed3aba",
+    "text": "approved",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"accept_reservations\"}"
+  },
+  {
+    "gate_score": 0.5247105329864684,
+    "label": "reminder",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"whats_on_my_reminder_list\"}",
+    "sample_id": "162b7e76cc3e68f463e0cf14d1dd3cbe94d98d5c4a00a120ff3baf6ef64f647c",
+    "text": "whats on my reminder list, read back",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"whats_on_reminder_list\"}"
+  },
+  {
+    "gate_score": 0.17586875385992576,
+    "label": "tire_pressure",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"check_air_levels\"}",
+    "sample_id": "118f3102cbd571e9046744c29fd76ddc10532cf032344b39886ba9b18c37bdf1",
+    "text": "i need you to check the air levels in my tires and let me know if i have enough in them",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.1426375733367408,
+    "label": "tire_pressure",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"how much psi is in my car tires\"}",
+    "sample_id": "fd997c1d1cedda59e6044f12aa771c5fd1fb4df5a1ebfad075dbaa7b989411a0",
+    "text": "how much psi is in my car tires",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"how_many_psi\"}"
+  },
+  {
+    "gate_score": 0.03615572601223157,
+    "label": "calendar",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"date\"}",
+    "sample_id": "94f55e1f524cc2841bf51c0d78146d69800c405a94c52bbd6d2c4ee4a16aae70",
+    "text": "what's my schedule like for thursday the 14th",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"schedule\"}"
+  },
+  {
+    "gate_score": 0.7702403694631903,
+    "label": "calculator",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"math\"}",
+    "sample_id": "14538d4cb2a41e7b5f2607708f2a029a8bb557768dc94278bdc031d7724687e3",
+    "text": "what is 89 divided by 3",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"do_you_have_pets\"}"
+  },
+  {
+    "gate_score": 0.4330893224763819,
+    "label": "date",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"date\"}",
+    "sample_id": "44008ca5b04c5ea903560a231b45a119de67e183d21ae9d55d2605db140dca51",
+    "text": "what is the current date",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"current_location\"}"
+  },
+  {
+    "gate_score": 0.5589319695221384,
+    "label": "schedule_maintenance",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"find_out_where\"}",
+    "sample_id": "39bf14e2507dffb976cc8b41979046ff547939050602921b3b09fa6feea80c9a",
+    "text": "find out where i can schedule to get my car's tires checked",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.04558802108227121,
+    "label": "thank_you",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"thank_you\"}",
+    "sample_id": "9532d679e3d0277c396cd0f811a53b71c089c89e30a92044ccc935fd4858b5ac",
+    "text": "i am glad that you did that",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.02426665886154267,
+    "label": "thank_you",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"appreciated\"}",
+    "sample_id": "8e07cd4c1dcada1becefa3aafbeb7a04413abde6fee90b7fe9ab993d99a2b217",
+    "text": "appreciated",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"accept_reservations\"}"
+  },
+  {
+    "gate_score": 0.4377551288993053,
+    "label": "report_lost_card",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"report_card_stolen\"}",
+    "sample_id": "77a3cc565521cf6d0a2fd42ba8cf101f9c845e014f84d8f11e6cb5a57722e78b",
+    "text": "my card was stolen, how do i report this",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"report_fraud\"}"
+  },
+  {
+    "gate_score": 0.18778406599611944,
+    "label": "todo_list",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"todo_list\"}",
+    "sample_id": "165abb9db135855003830e965db4eb677695ccecaabb345dd640e42e5d5b5003",
+    "text": "is there anything on my todo list for taking out the trash",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.4303197892841736,
+    "label": "todo_list",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"todo_list\"}",
+    "sample_id": "1a82f29cf9dcd1ec6a4831e98032dd0ec8c17ba79858b116d3712bced53c3cc5",
+    "text": "is my todo list free",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.27112222020076254,
+    "label": "todo_list",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"todo_list\"}",
+    "sample_id": "e9d92c2db5975ebec4b94935bea77772b50dacb5ba7ab416657e9a2b996c33d1",
+    "text": "can you tell me if there is anything on my todo list",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.07098751310753658,
+    "label": "change_accent",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"change_ai_name\"}",
+    "sample_id": "4e324d6d768f4d0cf3dd9338b0e4c4f3da1f7ef4c57c2e91cc5c3966d1efbd68",
+    "text": "your accent needs to be changed",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"change_accent\"}"
+  },
+  {
+    "gate_score": 0.16116047916267073,
+    "label": "w2",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"who_do_you_work_for\"}",
+    "sample_id": "54acf0591904d8b9e0132610d70619dfaff5824f8078b253a6700237bc01d18b",
+    "text": "who should i call for a w2",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.13237167459086782,
+    "label": "w2",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"where_are_you_from\"}",
+    "sample_id": "aebaf23f7ad566c911c28de6aeb97afcf8e62f968f4a45b2085a58c768a6a618",
+    "text": "where will i find my w-2",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"where_are_your_hobbies\"}"
+  },
+  {
+    "gate_score": 0.10360087407508682,
+    "label": "w2",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"can_i_find_my_w-2_online\"}",
+    "sample_id": "426db77f95a17c2c19a910c25cc14e9ed0d379427195598d099dcee2cf658949",
+    "text": "can i find my w-2 online",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.7568343752678165,
+    "label": "routing",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"routing\"}",
+    "sample_id": "c940316c841f0ce4769eae0d77c4019cf9c7b8b8030b63f9c299be60a1556bc1",
+    "text": "where can i locate my routing number for chase please",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"location\"}"
+  },
+  {
+    "gate_score": 0.05163514674436663,
+    "label": "do_you_have_pets",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"question\"}",
+    "sample_id": "844e138ecea31c24a1161acd7b657f4a1bb1c3f0534171f53272a18271e81749",
+    "text": "what type of animal is living in your home",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.5390642781359324,
+    "label": "plug_type",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"plug_type\"}",
+    "sample_id": "4c70ccb5eec376cd9031bb79c246b556b2e484659c37c8c0f6d3717ea721ab23",
+    "text": "what kind of plug is used in japan",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.5085688384588406,
+    "label": "tire_change",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"todo_list_update\"}",
+    "sample_id": "08182ff7fb2f78a3178798244739fb3dcac755b576d54d5eac1d3d7b8f7971eb",
+    "text": "when should i change these tires",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.2591190137274483,
+    "label": "exchange_rate",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"convert\"}",
+    "sample_id": "5734781b21c19558a5b4b5c1a41aa3297f96ac7befe69114bde22f911f6a340f",
+    "text": "convert 100 dollars to euros",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.6998859213899445,
+    "label": "next_holiday",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"holiday\"}",
+    "sample_id": "409e89cce7652a4b4647d607b7fc036a9fa6f51d33a9fdc39adc32c1b30b6cbe",
+    "text": "please tell me when is the next holiday here",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.2583753132162739,
+    "label": "who_do_you_work_for",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"who_is_your_superior\"}",
+    "sample_id": "75d47a9a744f1b71707030d008ca188cbff550a073931d8921c3098d93433184",
+    "text": "who is your superior",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.713527989880646,
+    "label": "who_do_you_work_for",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"question\"}",
+    "sample_id": "6320ea432d76d95aa22b9fbec8c729feb39378504026932934a1ea6c174e35de",
+    "text": "who is your boss by the way",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"who_is_your_boss\"}"
+  },
+  {
+    "gate_score": 0.2670688127085498,
+    "label": "accept_reservations",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"application_status\"}",
+    "sample_id": "d14a25b94acd2446ad0b52b0b884c1f516725b95f3a478b75c02dc1396cc8de9",
+    "text": "am i able to make reservations at spago in beverly hills",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"accept_reservations\"}"
+  },
+  {
+    "gate_score": 0.5271331860585673,
+    "label": "accept_reservations",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"accept_reservations\"}",
+    "sample_id": "31979f84800ddab02a2371881f1ea07c9333b215b747c5eaf18200165cb5ce15",
+    "text": "does bellagio allow you to do reservations",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.5977388929873548,
+    "label": "order_status",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"when will my order arrive\"}",
+    "sample_id": "a3a8a4030a21bf02223794fc8987e062038e3deb004d16205a0b61552a1df1e3",
+    "text": "when will my order arrive",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.5206221061440115,
+    "label": "international_fees",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"question\"}",
+    "sample_id": "6f88785f888031607b2a367b1ab0e16353f06563c39d784e779ca77eebe2b947",
+    "text": "does my american express card have any international transaction fees",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.5077256171268419,
+    "label": "international_fees",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"question\"}",
+    "sample_id": "a7a2c2be8fc240826b29f32277540021d13960e5b0f3cd3f9e109d5c6f638a5e",
+    "text": "does my capital one credit card have international transaction fees",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.14174140403684823,
+    "label": "last_maintenance",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"user_name\"}",
+    "sample_id": "1f53b041fb434ea4533f04969d2b1eb0ad4fa75a8b6f8e237990936db74a415f",
+    "text": "could you inform me of when i last got my car checked",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.6629554936709425,
+    "label": "meeting_schedule",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"what_is_schedule\"}",
+    "sample_id": "f057dbf8e75f2622c6209c0bb40664977e07868e82f9b843aaacc1e562b0a91a",
+    "text": "what is my schedule like today, any meetings with dan",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"what_is_your_name\"}"
+  },
+  {
+    "gate_score": 0.5373587648050109,
+    "label": "ingredients_list",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"ingredients_list\"}",
+    "sample_id": "687bd2d2b9ac6637f0e33e61b284286e42b4a8218d7960eecd0d9411c2be5b83",
+    "text": "what ingredients do i need for shrimp scampi",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"ingredients\"}"
+  },
+  {
+    "gate_score": 0.7604222877495783,
+    "label": "report_fraud",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"oos\"}",
+    "sample_id": "a1bdc054e027fa6ae9c0ec7b37394cf0a8037039706c205e5dd074363051772b",
+    "text": "i want to report fraudulent activity on my capital one",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"report_fraud\"}"
+  },
+  {
+    "gate_score": 0.2514805026089953,
+    "label": "measurement_conversion",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"conversion\"}",
+    "sample_id": "26c20e80398500654bac80b9a0b59ff2e3af8c80e5d50468dc2b0ccc4e4ac200",
+    "text": "how do i convert a cup to ml",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"convert\"}"
+  },
+  {
+    "gate_score": 0.5067735744443769,
+    "label": "measurement_conversion",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"how_many_ounces\"}",
+    "sample_id": "4ae133b056ad60155d31179ada15c71b6f0623e34fcf2280e52e983dd4aefa17",
+    "text": "how many ounces in a cup",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.15836565262467603,
+    "label": "book_hotel",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"hotel_reservation\"}",
+    "sample_id": "0f99ae73dcbfd29b4206cb38f7e115c0da68d6ac6e330894b49ee33acd0a3d7a",
+    "text": "can you reserve a hotel for myself a hotel in afghanistan at the zoo for the 10th to the 15th",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.1399476440426597,
+    "label": "weather",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"what_are_your_hobbies\"}",
+    "sample_id": "3ee59e72cdfa648623ec077229ea160c42dd9ff6b180c345573bba94640a82bf",
+    "text": "what's the forecast for the day",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.21994457418118576,
+    "label": "vaccines",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"what_are_your_hobbies\"}",
+    "sample_id": "051442af574aaa0eb41a9d1a83abd8e7cba73af5507b79e612467a284ba41eab",
+    "text": "what shots are required to visit australia",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.20026136822339,
+    "label": "pto_balance",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"po\", \"oos\"}",
+    "sample_id": "c7242984c9b5cdca3290fea75fd417cb8f46b9732946461eb0b4f895852d7174",
+    "text": "whats the number of pto days i have to my availability",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"po\"}"
+  },
+  {
+    "gate_score": 0.235338155567869,
+    "label": "directions",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"where_can_i_find\"}",
+    "sample_id": "a5b1b49576335b2f8bcf74ae830d3db394ced7f16e0f1bd98257f57353ea251a",
+    "text": "where can i find the nearest dollar store",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"where_can_i_find_the_nearest_dollar_store\"}"
+  },
+  {
+    "gate_score": 0.22850361226542415,
+    "label": "greeting",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"text\"}",
+    "sample_id": "659c426a12a1cbdd228bac008305193f06cf87b3d2ea3c765035216317d211ab",
+    "text": "hey what's up",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.8751668347813165,
+    "label": "reset_settings",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"clean_bootup\"}",
+    "sample_id": "9731d1c2fa219dc117c5e53818e0cd98ea0286ba3e1aea45e60ff9564be0153b",
+    "text": "i want a clean bootup to factory settings",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.10196107607356218,
+    "label": "bill_balance",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"pay_bill\"}",
+    "sample_id": "5d178b62d9ae149f644512eafc5d293a6f7b8a8e5aedbd0e58a44379ec481eb5",
+    "text": "how much do i have left to pay on my server and domain",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.7317915632248138,
+    "label": "calendar_update",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"appointment\"}",
+    "sample_id": "0e6deb03b12a3019d31fba37069b4c68e76e11441678d4805cf354fcf43a69f4",
+    "text": "for friday, add a doctor's appointment to my calendar",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"calendar\"}"
+  },
+  {
+    "gate_score": 0.05805837004444123,
+    "label": "gas",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"no\"}",
+    "sample_id": "380f579da1fca3f99af8e3843470aedaabc544c325089975c52e5f00b6132555",
+    "text": "what's left in the tank",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.11381992988766022,
+    "label": "update_playlist",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"user_name\"}",
+    "sample_id": "9703b8e3226c3f4ece8fc70c0918410563cec31b6be2d70e122587dddd713e23",
+    "text": "put this in my workout playlist",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.46768628844494226,
+    "label": "tell_joke",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"fun_fact\"}",
+    "sample_id": "5dbcace74f3151c03168f23475c3019311589d3d3f30cfb01e4b11ccdf938133",
+    "text": "do you have any funny jokes you can tell",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.20855062936777474,
+    "label": "change_ai_name",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"oos\"}",
+    "sample_id": "fba998a8b8ccc9513ac09c0a5da990af41f45711b19fead93c31edec3a6d6a5b",
+    "text": "i'd like to call you alex",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"call\"}"
+  },
+  {
+    "gate_score": 0.1201455033121152,
+    "label": "how_old_are_you",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"question\"}",
+    "sample_id": "396d58fabc5116297e8227df1a83f1cf013be29f8c5707985b8b147926dd6e1e",
+    "text": "i was wondering what age you are",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.651223326266149,
+    "label": "meal_suggestion",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"meal_suggestion\"}",
+    "sample_id": "a2a556a8ea7e3e942a5f5ddc4627c6ce5240da2389d6631b14d76b2e6b693fe9",
+    "text": "suggest a meal from thailand please",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"suggestion\"}"
+  },
+  {
+    "gate_score": 0.26157344863266885,
+    "label": "recipe",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"instructions\"}",
+    "sample_id": "11b30c0d44f8533d3c5ecc73cc2b30999ed35c87c4ef2c756538b2685bfa80b9",
+    "text": "can you give me instructions on how to make alfredo",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.8780314774998024,
+    "label": "traffic",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"travel_alert\"}",
+    "sample_id": "90e3a0121562ef7125fdc2e8a1d77f897e493a4a8acfa39f4dc12484df68099e",
+    "text": "how bad is the traffic on the way to downtown",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"how_bad\"}"
+  },
+  {
+    "gate_score": 0.2279620584734225,
+    "label": "traffic",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"travel_alert\"}",
+    "sample_id": "cab8a24f156a5fe46542c3e82ab907701fd2629dbaed26a464bfbe8b96e37831",
+    "text": "what kind of traffic can i expect on the way to church",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"traffic\"}"
+  },
+  {
+    "gate_score": 0.8189344571096705,
+    "label": "card_declined",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"card_declined\"}",
+    "sample_id": "e4c48ad0af3f7c9bc7cdb1d7b08f5c5253f8cf231515a6409051490d12fd9f1e",
+    "text": "my card was declined at mcdonald's and i want to know why",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  },
+  {
+    "gate_score": 0.08705961715448823,
+    "label": "oos",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\": \"what_are_your_hobbies\"}",
+    "sample_id": "aff3a230e0924d47e946cd90a4578db338fd155494dd5694b56e68a90f278692",
+    "text": "what is the name of the 13th president",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\": \"oos\"}"
+  }
+]

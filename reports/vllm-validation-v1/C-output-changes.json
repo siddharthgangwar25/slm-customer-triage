@@ -1,0 +1,92 @@
+[
+  {
+    "gate_score": 0.10827175977674344,
+    "label": "replacement_card_duration",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\":\"replacement_card_duration\"}",
+    "sample_id": "21bdaffb8ecf1b5de4bd7fe3dd667f9f109ae0b6b5d6acbd73c88a29a5cbf215",
+    "text": "what's the time of arrival on my new credit card",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\":\"expiration_date\"}"
+  },
+  {
+    "gate_score": 0.5027597726002045,
+    "label": "user_name",
+    "reference_decision": {
+      "decision": "route",
+      "intent": "change_user_name",
+      "reason": "supported_intent"
+    },
+    "reference_raw": "{\"intent\":\"change_user_name\"}",
+    "sample_id": "b5adbfb5b3376a560250d9051ea2803f08f2c7e0f260509b04dd439a7055c5a4",
+    "text": "are you able to call me by my name",
+    "vllm_decision": {
+      "decision": "route",
+      "intent": "user_name",
+      "reason": "supported_intent"
+    },
+    "vllm_raw": "{\"intent\":\"user_name\"}"
+  },
+  {
+    "gate_score": 0.5318275384206709,
+    "label": "min_payment",
+    "reference_decision": {
+      "decision": "route",
+      "intent": "bill_due",
+      "reason": "supported_intent"
+    },
+    "reference_raw": "{\"intent\":\"bill_due\"}",
+    "sample_id": "7e8c7d04e0dcef539ffc53c5a8f76c0930d7b7d708aea232e7c700e8ecfd94d6",
+    "text": "what's the minimum due for my electric bill",
+    "vllm_decision": {
+      "decision": "route",
+      "intent": "min_payment",
+      "reason": "supported_intent"
+    },
+    "vllm_raw": "{\"intent\":\"min_payment\"}"
+  },
+  {
+    "gate_score": 0.03701099575040058,
+    "label": "text",
+    "reference_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "reference_raw": "{\"intent\":\"change_ai_name\"}",
+    "sample_id": "88566b418f9c60ae52bfc61dc79d962b4fddc913f37020c1770007e45034478e",
+    "text": "tell carl that he sucks",
+    "vllm_decision": {
+      "decision": "human_review",
+      "intent": null,
+      "reason": "low_gate_score"
+    },
+    "vllm_raw": "{\"intent\":\"change_user_name\"}"
+  },
+  {
+    "gate_score": 0.18414430787786898,
+    "label": "oos",
+    "reference_decision": {
+      "decision": "route",
+      "intent": "meaning_of_life",
+      "reason": "supported_intent"
+    },
+    "reference_raw": "{\"intent\":\"meaning_of_life\"}",
+    "sample_id": "cd649fac17643ff48926b031f29158319f6cec83f59ce98411d1f1f67ea3315e",
+    "text": "what does it mean if i dream of falling off a building",
+    "vllm_decision": {
+      "decision": "route",
+      "intent": "what_song",
+      "reason": "supported_intent"
+    },
+    "vllm_raw": "{\"intent\":\"what_song\"}"
+  }
+]

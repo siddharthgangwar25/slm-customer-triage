@@ -1,0 +1,162 @@
+{
+  "candidate_selected_or_promoted": false,
+  "candidates": {
+    "B": {
+      "changes": {
+        "correct_to_wrong": 14,
+        "parsed_label_changed": 82,
+        "response_changed": 0,
+        "route_or_review_changed": 0,
+        "wrong_to_correct": 7
+      },
+      "raw_changed_count": 95,
+      "reference_classification": {
+        "catalog_size": 150,
+        "infrastructure_failure_count": 0,
+        "infrastructure_failure_rate": 0.0,
+        "invalid_output_count": 654,
+        "invalid_output_rate": 0.21096774193548387,
+        "model_calls": 3100,
+        "oos_count": 100,
+        "raw_supported_accuracy": 0.224,
+        "raw_supported_macro_f1": 0.27237703167248356,
+        "sample_count": 3100,
+        "supported_count": 3000
+      },
+      "reference_frozen_threshold": {
+        "coverage": 0.0,
+        "human_review_count": 3100,
+        "infrastructure_failure_count": 0,
+        "oos_count": 100,
+        "oos_recall": 1.0,
+        "oos_recall_wilson95": [
+          0.9630065017930143,
+          1.0
+        ],
+        "routed_count": 0,
+        "routed_error_count": 0,
+        "routing_error": null,
+        "routing_error_wilson95": null,
+        "sample_count": 3100,
+        "supported_count": 3000,
+        "supported_review_rate": 1.0,
+        "threshold": 1.0000000000000002
+      },
+      "vllm_classification": {
+        "catalog_size": 150,
+        "infrastructure_failure_count": 0,
+        "infrastructure_failure_rate": 0.0,
+        "invalid_output_count": 632,
+        "invalid_output_rate": 0.20387096774193547,
+        "model_calls": 3100,
+        "oos_count": 100,
+        "raw_supported_accuracy": 0.22133333333333333,
+        "raw_supported_macro_f1": 0.26979625208223906,
+        "sample_count": 3100,
+        "supported_count": 3000
+      },
+      "vllm_frozen_threshold": {
+        "coverage": 0.0,
+        "human_review_count": 3100,
+        "infrastructure_failure_count": 0,
+        "oos_count": 100,
+        "oos_recall": 1.0,
+        "oos_recall_wilson95": [
+          0.9630065017930143,
+          1.0
+        ],
+        "routed_count": 0,
+        "routed_error_count": 0,
+        "routing_error": null,
+        "routing_error_wilson95": null,
+        "sample_count": 3100,
+        "supported_count": 3000,
+        "supported_review_rate": 1.0,
+        "threshold": 1.0000000000000002
+      }
+    },
+    "C": {
+      "changes": {
+        "correct_to_wrong": 1,
+        "parsed_label_changed": 5,
+        "response_changed": 3,
+        "route_or_review_changed": 0,
+        "wrong_to_correct": 2
+      },
+      "raw_changed_count": 5,
+      "reference_classification": {
+        "catalog_size": 150,
+        "infrastructure_failure_count": 0,
+        "infrastructure_failure_rate": 0.0,
+        "invalid_output_count": 1,
+        "invalid_output_rate": 0.0003225806451612903,
+        "model_calls": 3100,
+        "oos_count": 100,
+        "raw_supported_accuracy": 0.9653333333333334,
+        "raw_supported_macro_f1": 0.9662168898619922,
+        "sample_count": 3100,
+        "supported_count": 3000
+      },
+      "reference_frozen_threshold": {
+        "coverage": 0.8035483870967742,
+        "human_review_count": 609,
+        "infrastructure_failure_count": 0,
+        "oos_count": 100,
+        "oos_recall": 0.9,
+        "oos_recall_wilson95": [
+          0.8256343384950865,
+          0.9447708629393249
+        ],
+        "routed_count": 2491,
+        "routed_error_count": 56,
+        "routing_error": 0.022480931352870333,
+        "routing_error_wilson95": [
+          0.017352947679543634,
+          0.029079445213050083
+        ],
+        "sample_count": 3100,
+        "supported_count": 3000,
+        "supported_review_rate": 0.173,
+        "threshold": 0.11417805060646902
+      },
+      "vllm_classification": {
+        "catalog_size": 150,
+        "infrastructure_failure_count": 0,
+        "infrastructure_failure_rate": 0.0,
+        "invalid_output_count": 1,
+        "invalid_output_rate": 0.0003225806451612903,
+        "model_calls": 3100,
+        "oos_count": 100,
+        "raw_supported_accuracy": 0.9656666666666667,
+        "raw_supported_macro_f1": 0.9665352169492538,
+        "sample_count": 3100,
+        "supported_count": 3000
+      },
+      "vllm_frozen_threshold": {
+        "coverage": 0.8035483870967742,
+        "human_review_count": 609,
+        "infrastructure_failure_count": 0,
+        "oos_count": 100,
+        "oos_recall": 0.9,
+        "oos_recall_wilson95": [
+          0.8256343384950865,
+          0.9447708629393249
+        ],
+        "routed_count": 2491,
+        "routed_error_count": 54,
+        "routing_error": 0.021678040947410677,
+        "routing_error_wilson95": [
+          0.01665278575986395,
+          0.02817629883998927
+        ],
+        "sample_count": 3100,
+        "supported_count": 3000,
+        "supported_review_rate": 0.173,
+        "threshold": 0.11417805060646902
+      }
+    }
+  },
+  "comparison_seconds": 5391.5427872,
+  "split": "val",
+  "test_inference": false
+}

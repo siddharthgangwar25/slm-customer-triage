@@ -1,8 +1,11 @@
 # Separate vLLM validation experiment
 
-The 1 October smoke completed: **12/12 requests**, with **B 5/6** and **C 6/6**
-exact generation matches after the 2 October accounting audit. Full validation
-remains pending. [Evidence and correction](../reports/vllm-smoke-v1/README.md).
+The full validation run completed and was audited on 2 October: **6,200/6,200
+requests**, with **B 3,005/3,100** and **C 3,095/3,100** exact generation matches.
+[Full results](../reports/vllm-validation-v1/README.md). The alternative is not
+adopted: output differences prevent treating it as the frozen reference backend.
+The verified Transformers service remains in place. No more GPU work is needed
+for this comparison. vLLM load testing remains unexecuted, with no speedup claim.
 
 This is a new backend variant for Section 9. It does not replace the frozen
 Transformers benchmark, select another checkpoint, change thresholds, rerun the
@@ -85,7 +88,7 @@ this comparison is not the Section 9 500-request serving load benchmark. The
 existing Transformers load benchmark remains the only completed one until a
 separate vLLM load experiment is explicitly recorded.
 
-## Commands
+## Commands (completed-run history)
 
 From the project root in PowerShell, with Docker Desktop running, no venv
 activation is needed. Use a fresh output directory for each attempt.
@@ -94,7 +97,7 @@ activation is needed. Use a fresh output directory for each attempt.
 .\.venv\Scripts\python.exe scripts/run_vllm_experiment.py --output artifacts/vllm-smoke-v1
 ```
 
-After a successful smoke, the longer validation-only command is:
+The longer validation-only command, now completed, was:
 
 ```powershell
 .\.venv\Scripts\python.exe scripts/run_vllm_experiment.py --full --skip-build --output artifacts/vllm-validation-v1
@@ -113,5 +116,12 @@ To regenerate the isolated lock deliberately:
 .\.tools\uv.exe pip compile environments/vllm/requirements.in --python-version 3.11 --python-platform x86_64-manylinux_2_28 --generate-hashes --output-file environments/vllm/requirements.lock --cache-dir .uv-cache --no-emit-index-url
 ```
 
-Execution results and the next concrete step are recorded in
+Both output directories already exist; do not repeat these completed runs.
+To re-audit saved evidence without inference, use a fresh audit output directory:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/verify_vllm_experiment.py --input reports/vllm-validation-v1 --output artifacts/vllm-validation-audit-v2
+```
+
+Execution results and the next milestone are recorded in
 [implementation status](implementation_status.md).

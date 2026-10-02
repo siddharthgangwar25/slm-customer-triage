@@ -1,0 +1,30 @@
+{
+  "auth_check": "passed",
+  "candidates": {
+    "B": {
+      "classification_and_frozen_threshold_metrics_verified": true,
+      "completed": 3100,
+      "generation_exact_matches": 3005,
+      "mismatch_fields": {
+        "output_tokens": 72,
+        "raw_output": 95
+      },
+      "original_exact_matches": 3005,
+      "submitted": 3100
+    },
+    "C": {
+      "classification_and_frozen_threshold_metrics_verified": true,
+      "completed": 3100,
+      "generation_exact_matches": 3095,
+      "mismatch_fields": {
+        "output_tokens": 3,
+        "raw_output": 5
+      },
+      "original_exact_matches": 3095,
+      "submitted": 3100
+    }
+  },
+  "checksums_verified": 14,
+  "frozen_release_and_ledger_unchanged": true,
+  "test_inference": false
+}

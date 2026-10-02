@@ -1,8 +1,20 @@
 # Implementation status
 
-Last updated: **2026-10-02**. Milestones **1–4 are implemented, executed, and locally verified**. **Milestone 5's full native benchmark and CPU/GPU Transformers container acceptance are verified. Section 9's separate vLLM smoke is executed and audited; full vLLM validation remains pending. C remains disqualified for automatic release.** Milestone 6 has not been implemented. Original baseline and 4B evidence remain unchanged. The genuine test split has been used once per frozen candidate; do not retune or repeat it.
+Last updated: **2026-10-02**. Milestones **1–4 are implemented, executed, and locally verified**. **Milestone 5's full native benchmark and CPU/GPU Transformers container acceptance are verified. Section 9's separate vLLM compatibility/validation experiment is complete and audited; the alternative is not adopted. C remains disqualified for automatic release.** Milestone 6 has not been implemented. Original baseline and 4B evidence remain unchanged. The genuine test split has been used once per frozen candidate; do not retune or repeat it.
 
-## Section 9 - vLLM smoke executed; full validation handoff
+## Section 9 - full vLLM validation audited; alternative not adopted
+
+The user completed the full comparison on 2 October. **6,200/6,200 requests completed without inference failures**. Exact generation matches: **B 3,005/3,100**, **C 3,095/3,100**. All input token counts and truncation flags match; raw outputs differ on 95 B and five C examples. C changes three routed labels, so this is not an exact replacement for the frozen backend. [Full evidence and changed examples](../reports/vllm-validation-v1/README.md).
+
+C's supported validation macro-F1 is **0.966535**, versus the Transformers reference's **0.966217**. At the unchanged threshold, coverage remains **80.3548%**, routed errors change from **56 to 54 of 2,491**, and oos review recall remains **90/100**. Two corrected routes, one gated raw regression and an oos request routed to a different wrong label account for the main changes. These are validation diagnostics, not new policy selection or evidence that the original final-test disqualification is cured. B's macro-F1 is **0.269796** versus **0.272377**; its frozen policy still reviews all requests.
+
+The comparisons took **89.86 minutes** combined (B 40.26, C 49.60), plus **80.56 seconds** to HTTP readiness. Whole-GPU snapshots were **3,823/3,726 MiB**, not workload peaks. This was an ungated serial comparison, including first-use work; no warmed vLLM load-test or speedup claim follows.
+
+CPU audit verifies all 14 original checksums, all 6,200 reference joins, raw outputs, token/EOS accounting, parsing, classification and fixed-threshold metrics. Reviewed every changed policy response and checked original input/label/gate identities. The image matches the smoke, all executed experiment-file hashes match, the frozen release still verifies, and release/test-ledger hashes are unchanged. Docker confirms cleanup. This follow-up changes evidence/documentation only; the prior **158 passing tests**, lint/format and mypy results remain the latest code checks, with no redundant inference or unit-suite rerun.
+
+**The separate vLLM compatibility/validation experiment is complete; retain the verified Transformers service.** vLLM is not adopted. Its gateway integration, warmed concurrency benchmark and cost report remain unexecuted and would be required before future adoption. No more terminal work is required for this comparison. **Next milestone: Milestone 6 demonstration and handoff**, which has not started. C remains disqualified for automatic release; no deployment was activated and no test data was reused.
+
+## Section 9 - earlier vLLM smoke and full-validation handoff (completed above)
 
 The interrupted run finished on 1 October and was audited on 2 October. The separate Linux/WSL2 vLLM 0.10.2 image loads Qwen3-0.6B NF4/FP16 and checkpoint-944 LoRA on the GTX 1650. All **12/12 HTTP requests completed**, with no inference failures. Generation parity: **B 5/6, C 6/6**. Each received the same three supported and three oos validation examples. One B output changed from invalid `question` to `oos`; six examples cannot establish full quality or parity. [Retained evidence and audit](../reports/vllm-smoke-v1/README.md).
 

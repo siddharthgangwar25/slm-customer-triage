@@ -1,5 +1,11 @@
 # Experiment journal
 
+## 2026-10-02 - full paired vLLM validation
+
+The user completed both 3,100-example validation runs. Every request completed with no inference failure. B changed 95 raw outputs; C changed five. C fixed two routed mistakes, regressed one raw supported prediction that the gate already reviewed, changed another gated mistake, and routed one oos request to a different wrong label. Three full policy responses changed even though route/review counts stayed identical.
+
+C's supported macro-F1 moved from 0.966217 to 0.966535; fixed-threshold routing errors moved from 56 to 54, with unchanged 90/100 oos recall. B's macro-F1 declined from 0.272377 to 0.269796. These are validation observations, not a new independent test or sufficient reason to substitute the backend after the frozen final test. The full comparison took 89.86 minutes plus startup; no warmed load benchmark was run. The CPU audit verified all records and preserved the original release/ledger. Decision: complete the alternative-backend experiment, retain Transformers, and leave vLLM unadopted. [Evidence](../reports/vllm-validation-v1/README.md).
+
 ## 2026-10-02 - vLLM smoke audit
 
 Hypothesis: the unchanged paired Qwen3-0.6B base and LoRA adapter can execute under a separate vLLM NF4/FP16 Linux runtime on the 4 GiB GTX 1650.

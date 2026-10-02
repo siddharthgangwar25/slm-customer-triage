@@ -1,5 +1,11 @@
 # Implementation decisions
 
+## 2026-10-02 - full vLLM comparison complete; keep Transformers
+
+- **Close the validation experiment without adopting the alternative.** All 6,200 generations completed, but exact matches are B 3,005/3,100 and C 3,095/3,100. C changes three routed labels. The backend is demonstrably feasible, not interchangeable with the frozen reference.
+- **Do not select again after test exposure.** C's two fewer validation routing errors do not authorize changing the frozen release, thresholds or final-test result. Keep the existing Transformers implementation and its recorded automatic-release disqualification.
+- **Bound performance claims.** The 89.86-minute serial comparison includes first-use work, generates even for gate-rejected requests, and is not a warmed gateway load benchmark. No vLLM speedup or cost saving is established. Additional vLLM load/integration work is deferred unless that backend is pursued for adoption; it is not required to finish this comparison. Milestone 6 remains next.
+
 ## 2026-10-02 - separate vLLM runtime experiment
 
 - Pin vLLM 0.10.2 to match the existing PyTorch 2.8/CUDA 12.8 base and its documented Turing/V1 support. Resolve an isolated hash lock; do not modify frozen runtime identities. Current documentation and pinned APIs are linked in [the runbook](vllm_experiment.md).
