@@ -1,6 +1,6 @@
 # Milestone 5 serving and release runbook
 
-The full native workflow and CPU/GPU container acceptance completed on 1 October 2026 and were audited from saved evidence. See [full GPU container results](../reports/milestone5-container-gpu-full-v1/README.md): 3,100 exact parity matches and 500/500 serial HTTP completions. The [original final report](../reports/milestone5-final-v1/README.md) still disqualifies C because its fixed-policy oos review recall is 89.6%, below 90%. **Do not repeat the completed test experiment or tune its thresholds.** The local Transformers/NF4/PEFT path is verified; Section 9's [full vLLM validation](../reports/vllm-validation-v1/README.md) is executed and audited; the alternative is not adopted. vLLM load testing and hosted CI remain unexecuted. The commands below are completed-run history, not outstanding terminal tasks.
+The full native workflow and CPU/GPU container acceptance completed on 1 October 2026 and were audited from saved evidence. See [full GPU container results](../reports/milestone5-container-gpu-full-v1/README.md): 3,100 exact parity matches and 500/500 serial HTTP completions. The [original final report](../reports/milestone5-final-v1/README.md) still disqualifies C because its fixed-policy oos review recall is 89.6%, below 90%. **Do not repeat the completed test experiment or tune its thresholds.** The local Transformers/NF4/PEFT path is verified; the [full vLLM validation](../reports/vllm-validation-v1/README.md) is executed and audited; the alternative is not adopted. vLLM load testing and hosted CI remain unexecuted. The commands below are completed-run history, not outstanding terminal tasks.
 
 ## Completed full GPU container validation
 
@@ -67,7 +67,7 @@ Stop on any failure and inspect the saved log. Re-running the same script resume
 
 The final output has a UTC timestamp, recorded in `artifacts/milestone5/release/test_use.json`. That ledger and `artifacts/test-use-registry/` prevent accidental duplicate test experiments. `active.lock` prevents concurrent final writers. Ctrl+C removes that lock; a hard process kill may leave it behind. Confirm the owning run is stopped before recovering a stale lock. Do not delete test-use records to restart. A new experiment must disclose all prior exposure through `prior_test_exposure`, use a new release identity/output, and must not become a hidden test-tuning loop.
 
-Expected outputs under `artifacts/milestone5/`: `parity/`, `load/` (all outcomes), `cost.json`, GPU samples, worker resource metadata, and `release/release.json`. The ledger points to `artifacts/final-<UTC>/`, containing all three prediction files/reports and `final_report.json`. Audit these artifacts and update status after completion.
+Expected outputs under `artifacts/milestone5/`: `parity/`, `load/` (all outcomes), `cost.json`, GPU samples, worker resource metadata, and `release/release.json`. The ledger points to `artifacts/final-<UTC>/`, containing all three prediction files/reports and `final_report.json`. Audit these artifacts after completion.
 
 ## Service design and known capacity
 

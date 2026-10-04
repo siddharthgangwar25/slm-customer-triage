@@ -67,4 +67,4 @@ duplicates limit interpretation.
 Retained prediction/error files contain attributed public benchmark text.
 Service telemetry omits submitted text by default. Authored demo prompts are
 illustrations, not independent held-out data. The optional 100+ request challenge
-set is deferred pending independent review; see [challenge protocol](challenge_protocol.md).
+set has not been collected or independently reviewed.

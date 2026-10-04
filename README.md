@@ -125,7 +125,8 @@ uv run --locked pytest -q
 CPU CI is configured for Windows and Linux and includes a container check;
 hosted execution remains unverified. The
 [manual GPU fixture](docs/gpu_smoke.md) is opt-in and uses a tiny synthetic model.
-[Current verification status](docs/implementation_status.md).
+Local verification: **165 tests passed**, with 3,100 matching CPU validation
+predictions and API decisions. [Reproduction evidence](reports/publication-readiness-v1/README.md).
 
 | Directory | Contents |
 | --- | --- |
@@ -135,7 +136,7 @@ hosted execution remains unverified. The
 | `configs/`, `prompts/`, `environments/` | Experiment settings, prompt and dependency locks |
 | `deployment/` | Dockerfiles, Compose configuration and AWS runbook |
 | [`reports/`](reports/README.md) | Saved predictions, comparisons, plots and execution evidence |
-| `docs/` | Setup, cards, architecture, runbooks and implementation history |
+| `docs/` | Setup, cards, architecture and runbooks |
 
 Model weights, raw data and local environments are excluded from Git. CPU
 weights are reproduced by the quick start. GPU use requires the documented

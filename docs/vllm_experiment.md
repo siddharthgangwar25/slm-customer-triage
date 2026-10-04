@@ -7,7 +7,7 @@ adopted: output differences prevent treating it as the frozen reference backend.
 The verified Transformers service remains in place. No more GPU work is needed
 for this comparison. vLLM load testing remains unexecuted, with no speedup claim.
 
-This is a new backend variant for Section 9. It does not replace the frozen
+This is a separately evaluated backend variant. It does not replace the frozen
 Transformers benchmark, select another checkpoint, change thresholds, rerun the
 test split, or activate a release. The original C release remains disqualified
 because its final-test oos review recall was 89.6%, below the fixed 90% requirement.
@@ -84,7 +84,7 @@ constitute a newly selected or approved policy.
 Exact output parity is a measured result, not a prerequisite for retaining an
 experiment. A completed run may contain differences. No result from six rows is
 a quality conclusion. First-request compilation/warmup is included in timings;
-this comparison is not the Section 9 500-request serving load benchmark. The
+this comparison is separate from the 500-request serving load benchmark. The
 existing Transformers load benchmark remains the only completed one until a
 separate vLLM load experiment is explicitly recorded.
 
@@ -123,5 +123,5 @@ To re-audit saved evidence without inference, use a fresh audit output directory
 .\.venv\Scripts\python.exe scripts/verify_vllm_experiment.py --input reports/vllm-validation-v1 --output artifacts/vllm-validation-audit-v2
 ```
 
-Execution results and the next milestone are recorded in
-[implementation status](implementation_status.md).
+Execution results are recorded in the
+[validation comparison](../reports/vllm-validation-v1/README.md).

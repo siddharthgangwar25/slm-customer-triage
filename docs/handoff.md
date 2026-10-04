@@ -14,7 +14,7 @@ not silently counted as completed acceptance.
 | Understand implementation | [Architecture](architecture.md), [API](api.md) |
 | Inspect changed errors | [Error analysis](error_analysis.md) |
 | Run local containers or plan hosting | [Deployment](deployment.md), [AWS plan](../deployment/aws_runbook.md) |
-| Inspect exact execution evidence | [Status](implementation_status.md), `reports/` |
+| Inspect exact execution evidence | [Results index](../reports/README.md) |
 
 ## What ships and what does not
 
@@ -52,29 +52,7 @@ No cloud resources were provisioned, no money spent and no production users or
 ticketing/reservation integration exist. vLLM compatibility/validation completed,
 but adoption, load testing and backend cost measurement did not.
 
-The independent 100+ request challenge set is deferred; [protocol](challenge_protocol.md).
+An independent fresh challenge set has not been collected or reviewed.
 Cloud execution requires account, region, host, budget, session duration and
 cleanup ownership before launch. The existing failed release does not become
 approved merely because an infrastructure demo is authorized.
-
-## Learning checkpoints
-
-- **Why TF-IDF?** Intent wording often has discriminative words/bigrams. A small
-  CPU classifier is cheap to fit and a useful measured control.
-- **What does LoRA change?** Trainable low-rank adapter matrices; the quantized
-  base stays frozen. This reduces trainable state, not the need for a base model.
-- **Why completion masking?** Loss applies to JSON answer/EOS tokens, not the
-  system catalog or supplied request. The collator/masks were checked before SFT.
-- **Why can a high F1 model fail release?** Supported classification and rejecting
-  unknown requests are different tasks. C misses the required oos-review recall.
-- **What does a threshold trade?** Increasing it generally reviews more inputs;
-  coverage and routed error depend on data mix. Gate scores are uncalibrated.
-- **Why not reuse public test results?** They are already exposed; repeated tuning
-  turns the test into another validation set. Pretraining overlap is also unknown.
-- **Why check a serving backend?** Different kernels, precision/cache behavior
-  and decoding implementations can change outputs even with the same weights.
-
-Before taking ownership, run CPU reproduction, inspect the failed release rule,
-explain one supported regression and one oos error, locate exact model/policy
-hashes, and practice stopping the demo/container. Record any future changes as
-new experiments with their own evidence.

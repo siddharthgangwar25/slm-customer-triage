@@ -1,6 +1,6 @@
 # Manual GPU integration check
 
-Section 8's optional-to-run GPU CI is defined in
+The manually triggered GPU CI workflow is defined in
 [gpu-smoke.yml](../.github/workflows/gpu-smoke.yml). Normal push/PR CI remains
 CPU-only. This workflow does not provision hardware, call paid APIs, download a
 pretrained model, or read benchmark splits. Installing the locked training

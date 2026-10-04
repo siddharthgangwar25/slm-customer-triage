@@ -1,6 +1,6 @@
 # Milestone 4 local runbook
 
-**Completed 2026-09-29.** The user ran the full workflow and its artifacts passed the acceptance audit. See [execution status](implementation_status.md), [training evidence](../reports/finetuning-run-v1/README.md) and [three-way results](../reports/three-way-qwen3-06b-v1/report.md). The instructions below document reproduction and resumption; the original run is already complete. To re-audit its local artifacts without training or GPU imports, run `.\.venv\Scripts\python.exe scripts/verify_milestone4.py --output artifacts/milestone4-acceptance-v2` with a fresh output directory.
+**Completed 2026-09-29.** The full workflow and artifact audit passed. See [training evidence](../reports/finetuning-run-v1/README.md) and [three-way results](../reports/three-way-qwen3-06b-v1/report.md). The instructions below document reproduction and resumption; the original run is already complete. To re-audit its local artifacts without training or GPU imports, run `.\.venv\Scripts\python.exe scripts/verify_milestone4.py --output artifacts/milestone4-acceptance-v2` with a fresh output directory.
 
 Run from the repository root in PowerShell. **No virtual-environment activation is needed:** the script calls the training environment's Python explicitly. Keep that terminal open and prevent the computer sleeping during a run.
 
@@ -66,6 +66,6 @@ Expected final outputs:
 - `reports/finetuned-qwen3-06b-qlora-v1-val/` and `...-policy/`: selected C, confusion matrix, per-class scores and plots.
 - `reports/three-way-qwen3-06b-v1/`: raw/policy comparison, paired bootstrap intervals, error transitions, fixed/regressed examples and complete paired predictions.
 
-After a new training run, verify the artifacts, inspect changed errors, and record measured limitations in `docs/implementation_status.md`. Keep validation results separate from final-test and serving evidence.
+After a new training run, verify the artifacts, inspect changed errors, and record measured limitations alongside its results. Keep validation results separate from final-test and serving evidence.
 
 The CPU service continues using the baseline. The training lock is separate from CPU and prompted environments. CI exercises synthetic fixtures without importing GPU libraries; run the real GPU checks explicitly. APIs are based on the installed [TRL 0.24 SFTTrainer](https://huggingface.co/docs/trl/v0.24.0/en/sft_trainer) and [PEFT quantization workflow](https://huggingface.co/docs/peft/v0.17.0/en/developer_guides/quantization), and must be verified by the recorded smoke.

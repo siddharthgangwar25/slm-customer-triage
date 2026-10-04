@@ -18,7 +18,6 @@ DOCS = [
     "docs/architecture.md",
     "docs/error_analysis.md",
     "docs/deployment.md",
-    "docs/challenge_protocol.md",
     "deployment/aws_runbook.md",
     "docs/api.md",
 ]

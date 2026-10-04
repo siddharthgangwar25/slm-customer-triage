@@ -106,5 +106,4 @@ release. Inspect saved test evidence with the CPU auditor instead.
 | GPU busy or unavailable | Stop other GPU experiments; check the worker log and pinned environment |
 | Docker engine missing | Start Docker Desktop in Linux-container mode; CPU Python reproduction works without it |
 
-The actual fresh-environment acceptance evidence is linked from
-[implementation status](implementation_status.md).
+See the [fresh-environment reproduction evidence](../reports/publication-readiness-v1/README.md).
