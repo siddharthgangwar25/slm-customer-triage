@@ -1,4 +1,4 @@
-# Customer request triage
+# Customer Request Triage
 
 An English intent-classification project using CLINC150, with a FastAPI service
 that recommends an intent or human review. It compares TF-IDF + logistic
