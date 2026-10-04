@@ -20,10 +20,31 @@ def main():
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     os.chdir(root)
+    if sys.version_info[:2] != (3, 11):
+        parser.error("Use Python 3.11 for the locked CPU environment")
     output = args.output.resolve()
+    if not output.is_relative_to(root):
+        parser.error("--output must be inside the project directory")
+    if output.exists():
+        parser.error(f"Output already exists: {output}. Choose a new directory")
+    uv = shutil.which(args.uv or "uv")
+    if uv is None and args.uv is None:
+        local_uv = root / ".tools" / ("uv.exe" if os.name == "nt" else "uv")
+        if local_uv.is_file():
+            uv = str(local_uv)
+    if uv is None:
+        parser.error("uv executable not found; install uv or pass --uv with its executable path")
+    source_dir = args.source_dir.resolve() if args.source_dir else None
+    if source_dir:
+        missing = [
+            name
+            for name in ("data_full.json", "domains.json", "LICENSE")
+            if not (source_dir / name).is_file()
+        ]
+        if missing:
+            parser.error(f"--source-dir is missing: {', '.join(missing)}")
     relative = output.relative_to(root).as_posix()
     output.mkdir(parents=True, exist_ok=False)
-    uv = args.uv or shutil.which("uv") or str(root / ".tools/uv.exe")
     env = {
         **os.environ,
         "UV_PROJECT_ENVIRONMENT": str(output / "environment"),
@@ -33,31 +54,31 @@ def main():
 
     def run(name, command):
         started = time.perf_counter()
-        print(f"{name}: running; log {output / (name + '.log')}", flush=True)
-        with (output / (name + ".log")).open("w", encoding="utf-8") as log:
-            proc = subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT)
-        commands.append(
-            {
-                "stage": name,
-                "argv": command,
-                "exit_code": proc.returncode,
-                "seconds": time.perf_counter() - started,
-            }
-        )
+        log_path = output / f"{name}.log"
+        print(f"{name}: running; log {log_path}", flush=True)
+        record = {"stage": name, "argv": command, "exit_code": None}
+        with log_path.open("w", encoding="utf-8") as log:
+            try:
+                proc = subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT)
+                record["exit_code"] = proc.returncode
+            except OSError as exc:
+                record["error_type"] = type(exc).__name__
+                log.write(f"Could not start {name}: {exc}\n")
+        record["seconds"] = time.perf_counter() - started
+        commands.append(record)
         (output / "commands.json").write_text(
-            json.dumps(commands, indent=2) + "\n", encoding="utf-8"
+            json.dumps(commands, indent=2) + "\n", encoding="utf-8", newline="\n"
         )
-        if proc.returncode:
-            raise RuntimeError(f"{name} failed; inspect its log")
+        if record["exit_code"] != 0:
+            raise RuntimeError(f"{name} failed; inspect {log_path}")
 
     run("sync", [uv, "sync", "--locked", "--python", sys.executable])
     python = str(
         output / "environment" / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
     )
+    cli = [python, "-m", "triage.cli"]
     prepare = [
-        python,
-        "-m",
-        "triage.cli",
+        *cli,
         "data",
         "prepare",
         "--config",
@@ -65,8 +86,8 @@ def main():
         "--output",
         relative + "/data",
     ]
-    if args.source_dir:
-        prepare += ["--source-dir", str(args.source_dir.resolve())]
+    if source_dir:
+        prepare += ["--source-dir", str(source_dir)]
     run("prepare", prepare)
     # JSON is also YAML. No dependency is needed in this bootstrap process.
     config = {
@@ -82,19 +103,17 @@ def main():
         "threads": 1,
     }
     config_path = output / "baseline.json"
-    config_path.write_text(json.dumps(config, indent=2) + "\n", encoding="utf-8")
-    run("train", [python, "-m", "triage.cli", "train", "baseline", "--config", str(config_path)])
+    config_path.write_text(json.dumps(config, indent=2) + "\n", encoding="utf-8", newline="\n")
+    run("train", [*cli, "train", "baseline", "--config", str(config_path)])
     run(
         "predict",
-        [python, "-m", "triage.cli", "predict", "--config", str(config_path), "--split", "val"],
+        [*cli, "predict", "--config", str(config_path), "--split", "val"],
     )
     predictions = relative + "/predictions/predictions.jsonl"
     run(
         "evaluate",
         [
-            python,
-            "-m",
-            "triage.cli",
+            *cli,
             "evaluate",
             "--predictions",
             predictions,
@@ -105,9 +124,7 @@ def main():
     run(
         "policy",
         [
-            python,
-            "-m",
-            "triage.cli",
+            *cli,
             "policy",
             "select",
             "--predictions",
@@ -150,4 +167,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (OSError, RuntimeError) as exc:
+        print(f"reproduce_cpu: {exc}", file=sys.stderr)
+        sys.exit(1)

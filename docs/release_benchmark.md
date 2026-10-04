@@ -67,7 +67,7 @@ Stop on any failure and inspect the saved log. Re-running the same script resume
 
 The final output has a UTC timestamp, recorded in `artifacts/milestone5/release/test_use.json`. That ledger and `artifacts/test-use-registry/` prevent accidental duplicate test experiments. `active.lock` prevents concurrent final writers. Ctrl+C removes that lock; a hard process kill may leave it behind. Confirm the owning run is stopped before recovering a stale lock. Do not delete test-use records to restart. A new experiment must disclose all prior exposure through `prior_test_exposure`, use a new release identity/output, and must not become a hidden test-tuning loop.
 
-Expected outputs under `artifacts/milestone5/`: `parity/`, `load/` (all outcomes), `cost.json`, GPU samples, worker resource metadata, and `release/release.json`. The ledger points to `artifacts/final-<UTC>/`, containing all three prediction files/reports and `final_report.json`. Ask Codex to audit these and update status after completion.
+Expected outputs under `artifacts/milestone5/`: `parity/`, `load/` (all outcomes), `cost.json`, GPU samples, worker resource metadata, and `release/release.json`. The ledger points to `artifacts/final-<UTC>/`, containing all three prediction files/reports and `final_report.json`. Audit these artifacts and update status after completion.
 
 ## Service design and known capacity
 

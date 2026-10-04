@@ -27,7 +27,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\run_milestone4.ps1
 
 Training is bounded by a **24-hour local wall-time budget across recorded sessions**, checked at optimizer-step boundaries (16 microbatches). Loading, checkpointing and the final save/reload can add time; this is a cooperative limit, not a hard process watchdog. The smoke estimate must fit the budget before a full run starts. An exhausted budget saves a partial checkpoint and cannot count as completed training or enter checkpoint selection. Do not reset the budget by deleting progress files.
 
-Periodic resumable checkpoints are saved every 100 optimizer steps and at each completed epoch, with optimizer/scheduler/RNG state. Ctrl+C records failure/progress; resume uses the last sealed checkpoint, replaying work since that checkpoint. Abrupt process termination can lose the latest progress accounting and is not an exact resume. If stopped before the first checkpoint, retain the incomplete directory and ask Codex to inspect it before starting a new output. In-flight gradients are not saved. Examples processed count actual forward passes, including replay after a resume; do not interpret that counter as unique examples.
+Periodic resumable checkpoints are saved every 100 optimizer steps and at each completed epoch, with optimizer/scheduler/RNG state. Ctrl+C records failure/progress; resume uses the last sealed checkpoint, replaying work since that checkpoint. Abrupt process termination can lose the latest progress accounting and is not an exact resume. If stopped before the first checkpoint, retain and inspect the incomplete directory before starting a new output. In-flight gradients are not saved. Examples processed count actual forward passes, including replay after a resume; do not interpret that counter as unique examples.
 
 ## Reproduce setup and prerequisite checks
 
@@ -66,6 +66,6 @@ Expected final outputs:
 - `reports/finetuned-qwen3-06b-qlora-v1-val/` and `...-policy/`: selected C, confusion matrix, per-class scores and plots.
 - `reports/three-way-qwen3-06b-v1/`: raw/policy comparison, paired bootstrap intervals, error transitions, fixed/regressed examples and complete paired predictions.
 
-After the terminal command finishes, tell Codex to continue Milestone 4. Codex should verify these genuine artifacts, inspect the changed errors, record measured limitations, and update `docs/implementation_status.md`. Implementation alone does not satisfy Milestone 4's requirement for all three genuine reports. No test scores, deployment upgrade, or quality improvement are assumed.
+After a new training run, verify the artifacts, inspect changed errors, and record measured limitations in `docs/implementation_status.md`. Keep validation results separate from final-test and serving evidence.
 
 The CPU service continues using the baseline. The training lock is separate from CPU and prompted environments. CI exercises synthetic fixtures without importing GPU libraries; run the real GPU checks explicitly. APIs are based on the installed [TRL 0.24 SFTTrainer](https://huggingface.co/docs/trl/v0.24.0/en/sft_trainer) and [PEFT quantization workflow](https://huggingface.co/docs/peft/v0.17.0/en/developer_guides/quantization), and must be verified by the recorded smoke.

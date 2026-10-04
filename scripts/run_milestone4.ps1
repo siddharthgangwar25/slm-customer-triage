@@ -76,4 +76,4 @@ if ($Stage -in @('All', 'Report')) {
     }
 }
 
-Write-Host "Milestone 4 stage '$Stage' finished. Ask Codex to inspect the artifacts and update implementation_status.md."
+Write-Host "Milestone 4 stage '$Stage' finished. See docs/finetuning.md for artifact verification."

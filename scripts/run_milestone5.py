@@ -173,7 +173,7 @@ def main():
             command.append("--resume")
         env = {**os.environ, "HF_HUB_OFFLINE": "1"}
         subprocess.run(command, env=env, check=True)
-    print("Stage complete. Ask Codex to audit the results and update implementation_status.md.")
+    print("Stage complete. See docs/release_benchmark.md for artifact verification.")
 
 
 if __name__ == "__main__":

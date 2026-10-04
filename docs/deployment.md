@@ -30,6 +30,18 @@ retrying a 503; repeated busy responses mean insufficient capacity, not success.
 
 ## CPU Docker Compose
 
+For file-based configuration, copy `.env.example` to `.env` in the repository
+root and fill in three distinct randomly generated values. Pass it explicitly:
+
+```console
+docker compose --env-file .env -f deployment/compose.yaml --profile cpu up --build
+```
+
+The shared Compose file requires all three keys during interpolation, including
+the worker key when selecting the CPU profile. `.env` is ignored by Git and
+excluded from Docker's build context. The Python CLI does not load this file;
+use process environment variables for native Python commands.
+
 Docker Desktop must run Linux containers. Prepare the original-layout CPU bundle
 first, or use the alternate-bundle command below. Compose interpolates all
 required environment fields, so set all three credentials even for CPU mode:

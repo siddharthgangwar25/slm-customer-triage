@@ -30,6 +30,19 @@ its retained report copy documents exposure. Do not reset it, delete the registr
 repeat `benchmark final` or silently substitute vLLM. Reproduce validation in new
 directories. The frozen service/model source remains unchanged by the handoff.
 
+## Dependency maintenance
+
+CPU dependencies cover the classifier (scikit-learn, NumPy, SciPy, joblib,
+threadpoolctl), reports (Matplotlib, PyYAML) and API (FastAPI, Pydantic, Uvicorn).
+SciPy is used through scikit-learn and its version is recorded with the model.
+Development tools and `httpx2` support linting, typing and API tests. GPU locks
+also retain Accelerate and bitsandbytes, loaded through Transformers/PEFT, and
+the isolated vLLM compatibility pins. An absent direct import alone does not
+make these unused dependencies.
+
+Keep CPU and GPU environments separate. Upgrade dependencies in a new evaluated
+variant; the existing lock hashes are part of the frozen experiment identity.
+
 ## Acceptance boundaries
 
 Local CPU reproduction, live API demo and model/report audits are recorded in

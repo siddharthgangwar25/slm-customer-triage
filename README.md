@@ -1,100 +1,119 @@
 # Customer request triage
 
-A reproducible English intent-classification experiment and local FastAPI demo
-using CLINC150. Compare a CPU TF-IDF baseline, a prompted Qwen3-0.6B model and a
-paired QLoRA adapter. Routing recommends an intent or human review; it performs
-no business action.
+An English intent-classification project using CLINC150, with a FastAPI service
+that recommends an intent or human review. It compares TF-IDF + logistic
+regression, prompted Qwen3-0.6B and a QLoRA fine-tuned version of the same model.
 
-**Fine tuning improved supported test macro-F1 to 0.9568, but no candidate
-qualified for automatic release.** C reviewed 89.6% of out-of-scope test requests,
-below the fixed 90% requirement. The project preserves this negative release
-result; no threshold was retuned or candidate substituted after test.
+## Features
 
-## Start here
+- Reproducible data preparation, training and evaluation with pinned sources,
+  dependency locks and artifact checksums.
+- Routing policies selected on validation data, with explicit review decisions
+  for low-confidence, out-of-scope and invalid model outputs.
+- FastAPI endpoints with Pydantic validation, optional bearer authentication,
+  request limits, health checks and private Prometheus metrics.
+- CPU Docker deployment and a separate authenticated GPU inference worker.
+- Saved A/B/C comparisons, error analysis, serving parity and load-test results.
 
-- [Setup and fresh CPU reproduction](docs/setup.md)
-- [Two-minute live demo](docs/demo.md)
-- [Model/release card](docs/model_card.md) and [data card](docs/data_card.md)
-- [Architecture](docs/architecture.md), [API](docs/api.md) and [error analysis](docs/error_analysis.md)
-- [Local deployment](docs/deployment.md) and [developer handoff](docs/handoff.md)
-- [Milestone 6 acceptance](reports/milestone6-handoff-v1/README.md), [status](docs/implementation_status.md) and [project specification](Customer_Request_Triage_Project_Spec.md)
+## Results
 
-## Reproduce without a GPU
+Frozen test: 4,500 supported requests across 150 intents and 1,000 out-of-scope
+requests. All candidates use the same test examples; thresholds were selected
+on validation and fixed before testing.
 
-From the project root, with Python 3.11 and uv installed:
+| Measure | TF-IDF baseline | Prompted Qwen3-0.6B | QLoRA fine-tuned |
+| --- | ---: | ---: | ---: |
+| Supported macro-F1 | 0.8866 | 0.2785 | **0.9568** |
+| Routing coverage | 60.05% | 0% | **70.65%** |
+| Error among routed requests | 5.99% | Undefined | **4.76%** |
+| Out-of-scope review recall | 92.7% | 100% (reviews everything) | **89.6%** |
+| Invalid outputs / 5,500 | 0 | 1,032 | 44 |
+
+**No candidate qualified for automatic release.** Fine-tuning improved supported
+classification but missed the fixed 90% out-of-scope review requirement. The
+service is a local research demonstration and performs no business actions.
+
+See the [final comparison and confidence intervals](reports/milestone5-final-v1/README.md)
+and [error analysis](docs/error_analysis.md). Coverage/error plots:
+[baseline](reports/milestone5-final-v1/baseline-report/coverage_error.png),
+[prompted](reports/milestone5-final-v1/prompted-report/coverage_error.png),
+[fine-tuned](reports/milestone5-final-v1/finetuned-report/coverage_error.png).
+
+## Quick start
+
+Install **Python 3.11** and **uv 0.12.19**, then run from the repository root:
 
 ```console
 uv sync --locked
 uv run --locked python scripts/reproduce_cpu.py --output artifacts/reproduction-v1
 ```
 
-The runner creates a fresh locked CPU environment, prepares checksum-verified
-sources, trains and reloads a new baseline, evaluates all 3,100 validation
-requests, selects its policy, checks API parity and runs an authenticated live
-HTTP demo. Each stage has logs; the demo stops its own server. No Docker, GPU,
-model hub account or cloud account is needed. Initial installation/data download
-requires internet. Use a new output directory for every run. See [setup](docs/setup.md)
-for offline source reuse, individual commands, persistent serving and recovery.
+The helper creates a fresh CPU environment, downloads and verifies CLINC150,
+trains and reloads the baseline, evaluates 3,100 validation requests, selects a
+policy, checks API parity and runs a live HTTP demo. The first run needs internet;
+no GPU, Docker or model-hub account is required. Choose a new output directory
+for each run. [Setup and troubleshooting](docs/setup.md).
 
-On the implementation machine, the existing baseline can demonstrate immediately:
+Start the API using the reproduced model:
 
-```powershell
-.\.venv\Scripts\python.exe scripts/run_demo.py --output artifacts/demo-rehearsal-v1
+```console
+uv run --locked triage serve --bundle artifacts/reproduction-v1/bundle --policy artifacts/reproduction-v1/policy/policy.json
 ```
 
-No venv activation is needed with the explicit executable. A fresh checkout must
-first reproduce or receive a trusted matching bundle/policy; ignored model files
-are not included in Git. The demo is a local research path, not release approval.
+Open **http://127.0.0.1:8000/docs** and try `POST /v1/triage`:
 
-## Frozen final test results
+```json
+{"text": "what is my account balance"}
+```
 
-Each candidate has 5,500 retained results: 4,500 supported and 1,000 oos.
+The response contains `intent`, `decision` (`route` or `human_review`), `reason`,
+model/policy versions and latency. Stop the server with **Ctrl+C**.
+See the [API reference](docs/api.md) for schemas, status codes and limits, or
+the [demo guide](docs/demo.md) for an automated presentation.
 
-| Measure | A: CPU baseline | B: prompted 0.6B | C: fine-tuned 0.6B |
-| --- | ---: | ---: | ---: |
-| Supported macro-F1 | 0.886628 | 0.278546 | **0.956794** |
-| Coverage | 60.05% | 0% | 70.65% |
-| Routed errors / routes | 198 / 3,303 | 0 / 0 | 185 / 3,886 |
-| Routing error | 5.99% | Undefined | 4.76% |
-| Oos review recall | 92.7% | 100%, review all | **89.6%** |
-| Invalid outputs | 0 | 1,032 | 44 |
+## Configuration
 
-A misses the 5% routing-error constraint. B has no eligible automatic policy and
-reviews everything. C misses the oos-review constraint. C's supported macro-F1
-advantage over A is 0.070166, paired bootstrap 95% interval [0.061720, 0.080052].
-These are public benchmark results, not evidence of real customer performance.
-[Final report and audit](reports/milestone5-final-v1/README.md).
+Pass runtime limits through `--config configs/service.yaml`. Model and training
+settings live in `configs/`; GPU environments have separate locks under
+`environments/`.
 
-The test was used once per frozen candidate. Do not rerun the completed final
-workflow, reset its ledger, change thresholds or treat it as an untouched set.
-Validation remains available for explicitly separate backend comparisons.
+| Environment variable | Purpose | When unset |
+| --- | --- | --- |
+| `TRIAGE_API_KEY` | Bearer key for `/v1/triage` and `/v1/model` | Local API authentication disabled |
+| `TRIAGE_METRICS_KEY` | Separate bearer key for `/metrics` | Metrics endpoint disabled |
+| `TRIAGE_WORKER_KEY` | Shared secret between gateway and GPU worker | GPU worker cannot start |
 
-## Training and serving evidence
+Use distinct randomly generated keys. Native Python commands read process
+environment variables; they **do not automatically load `.env`**. For Docker
+Compose, copy [.env.example](.env.example) to `.env`, fill in the keys and pass
+`--env-file .env`. The Compose configuration requires all three values.
+[Deployment commands and credential setup](docs/deployment.md).
 
-C has 596,049,920 base parameters and 10,092,544 trainable adapter parameters.
-One epoch on 15,100 training requests took 11.69 hours on a GTX 1650 4 GiB.
-Paired B/C inference uses the same pinned base, prompt and NF4/FP16 greedy decoder.
-The original 4B prompted result remains a separate historical experiment.
-[Training runbook](docs/finetuning.md), [adapter card](docs/finetuned_model_card.md),
-[paired validation/error review](reports/three-way-qwen3-06b-v1/error_analysis.md).
+## Architecture
 
-The verified Transformers GPU container matches all 3,100 C validation outputs.
-Its 500-request serial workload completes at 1.345/s with 1,116.87 ms p95 and
-36.45-second startup. Concurrency 4/8 mostly fails busy, so no scaling claim is
-made. [Full GPU evidence](reports/milestone5-container-gpu-full-v1/README.md).
-CPU Docker also matches all 3,100 baseline validation decisions.
-[CPU evidence](reports/milestone5-container-cpu-v1/README.md).
+```mermaid
+flowchart LR
+    Client --> API[FastAPI gateway]
+    API --> Gate[CPU baseline gate]
+    Gate -->|below threshold| Review[Human review]
+    Gate -->|eligible request| Model[CPU classifier or private GPU worker]
+    Model --> Policy[Validate output and apply routing policy]
+    Policy --> Decision[Intent recommendation or human review]
+```
 
-The separate vLLM experiment completed 6,200 validation generations but changed
-95 B and five C outputs; it is not adopted and has no warmed load benchmark.
-[vLLM results](reports/vllm-validation-v1/README.md).
+The CPU path reuses the baseline's prediction and score. The GPU path calls a
+separate authenticated Transformers worker. The gateway enforces request and
+inference limits and records metrics without logging raw request text.
+[Architecture details](docs/architecture.md).
 
-Hosting cost is an assumed demand/dated-price scenario, not measured EC2
-throughput, spending or savings. Cloud deployment is **omitted and unverified**.
-The optional independently reviewed 100+ request challenge set is **deferred**;
-[collection protocol](docs/challenge_protocol.md). Demo examples are not that set.
+The verified GPU container matched all 3,100 validation outputs. A 500-request
+serial workload achieved **1.345 requests/s** and **1.117-second p95** on a GTX
+1650 (4 GB); concurrent workloads mostly received busy responses.
+[Serving evidence](reports/milestone5-container-gpu-full-v1/README.md).
+The separate [vLLM experiment](docs/vllm_experiment.md) changed some outputs and
+was not adopted. Cloud deployment remains unverified.
 
-## Checks and artifacts
+## Development
 
 ```console
 uv run --locked ruff check .
@@ -103,31 +122,35 @@ uv run --locked mypy
 uv run --locked pytest -q
 ```
 
-CPU tests use marked synthetic fixtures. Real benchmark and handoff acceptance
-are retained separately. The configured Windows/Linux CI workflow is committed;
-hosted execution remains unverified. [Latest check outcomes](docs/implementation_status.md).
+CPU CI is configured for Windows and Linux and includes a container check;
+hosted execution remains unverified. The
+[manual GPU fixture](docs/gpu_smoke.md) is opt-in and uses a tiny synthetic model.
+[Current verification status](docs/implementation_status.md).
 
-Section 8's [manual GPU smoke workflow](docs/gpu_smoke.md) is separate from
-normal CI. It checks a tiny synthetic CUDA training/save/reload/inference path
-and requires an explicitly configured GPU runner. It does not rerun benchmarks.
-See the [publication checklist](docs/publication.md) for remaining GitHub steps.
+| Directory | Contents |
+| --- | --- |
+| `src/triage/` | Data, models, training, evaluation, routing and API |
+| `scripts/` | Reproduction, demos and experiment verification |
+| `tests/` | CPU unit and integration tests with synthetic fixtures |
+| `configs/`, `prompts/`, `environments/` | Experiment settings, prompt and dependency locks |
+| `deployment/` | Dockerfiles, Compose configuration and AWS runbook |
+| [`reports/`](reports/README.md) | Saved predictions, comparisons, plots and execution evidence |
+| `docs/` | Setup, cards, architecture, runbooks and implementation history |
 
-`src/triage/` holds data, model, policy, evaluation and API code; `configs/` and
-`prompts/` hold frozen inputs; CPU/GPU locks pin dependencies. `reports/` retains
-manifests, public benchmark predictions, error reviews, metrics and checksums.
-Large weights, raw data, environments and secrets remain outside Git in ignored
-local directories. Load only trusted joblib bundles. A recipient can reproduce CPU
-weights, but needs the documented training procedure or a trusted artifact copy
-for the original GPU adapter; no public adapter download is published.
+Model weights, raw data and local environments are excluded from Git. CPU
+weights are reproduced by the quick start. GPU use requires the documented
+[training procedure](docs/finetuning.md) or trusted matching artifacts. Load
+only trusted model bundles. [Developer handoff](docs/handoff.md).
 
-The original project code's license is currently undecided; no root code license
-has been selected. The dataset and upstream models retain their own licenses,
-as documented in the data and model cards.
+## Data and licensing
 
-CLINC attribution: Larson et al. (2019), *An Evaluation Dataset for Intent
-Classification and Out-of-Scope Prediction*, [original repository](https://github.com/clinc/oos-eval),
-commit `828f8093932c8fe6ca7936c3d2e52903b1c523de`.
+CLINC150: Larson et al. (2019), *An Evaluation Dataset for Intent Classification
+and Out-of-Scope Prediction*, from [clinc/oos-eval](https://github.com/clinc/oos-eval)
+at commit `828f8093932c8fe6ca7936c3d2e52903b1c523de`.
 [Retained CC BY 3.0 license](reports/baseline-c1-v1-val/CLINC_LICENSE.txt).
-Canonicalization preserves request text and official membership. Five cross-split
-duplicate groups (four conflicting) remain documented. Only 100 training oos
-examples exist; public pretraining contamination cannot be ruled out.
+
+The project code's license is undecided. Dataset and model licenses remain
+separate; see the [data card](docs/data_card.md) and [model card](docs/model_card.md).
+Public benchmark results do not establish real customer performance. Known
+duplicates and possible pretraining overlap are documented. The final test is
+already consumed; do not rerun it to tune thresholds or replace the candidate.

@@ -19,8 +19,8 @@ failed automatic-routing release.
   inspect changes before publishing. This is not a comprehensive security audit.
 - Licensing is **undecided at the owner's request**. No root code license is
   added. Existing dataset/model attribution remains unchanged.
-- The [status log](implementation_status.md) explicitly separates the current
-  state from historical handoffs. Older run commands are not current tasks.
+- The [status page](implementation_status.md) links to a separate historical
+  log. Older handoff commands are not current tasks.
 
 Retained check results and exact limitations are in
 [publication evidence](../reports/publication-readiness-v1/README.md).

@@ -35,6 +35,8 @@ if uv is not on PATH. `--uv <path>` explicitly selects another uv executable.
 The bootstrap interpreter must be Python 3.11. No venv activation is necessary
 when using explicit Python paths or `uv run`.
 
+The runner checks Python, uv, output location and optional cached-source files
+before installing dependencies. Outputs must be inside the project directory.
 The runner refuses an existing output, including partial failures. Choose a new
 directory, inspect the failed stage's log, and retain the failure evidence.
 Do not delete original bundles or edit frozen configuration to make a retry work.

@@ -19,6 +19,7 @@ dist/
 !.env.example
 !.env.sample
 .aws/
+.ssh/
 *.pem
 *.key
 *.p12

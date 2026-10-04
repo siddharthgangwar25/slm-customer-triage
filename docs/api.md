@@ -1,6 +1,6 @@
-# Local CPU API
+# Triage API
 
-Milestone 2 implements the routing contract in Section 6 of the specification. Run from the repository root with the locked CPU environment. No model download occurs at import or request time.
+The gateway serves the CPU baseline or a separate private GPU worker using the same routing contract. Run from the repository root with the locked CPU environment. No model download occurs at import or request time.
 
 ## Policy selection
 
@@ -24,7 +24,7 @@ The measured baseline threshold is `0.2088413160728636`: 2,121 of 3,100 requests
 uv run --locked triage serve --bundle artifacts/baseline-c1-v1 --policy reports/local-policy/policy.json --config configs/service.yaml
 ```
 
-Default address: `127.0.0.1:8000`. `--host` permits only IPv4/IPv6 loopback, and `--port` changes the port. If `--policy` is omitted, the service looks for `policy.json` within the trusted bundle directory. A bad bundle leaves the process live but not ready; fix the configuration and restart. There is no reload or administrative API in this milestone.
+Default address: `127.0.0.1:8000`. `--host` changes the binding address, and `--port` changes the port. Docker uses `0.0.0.0` inside the container, with Compose publishing the gateway on host loopback. If `--policy` is omitted, the service looks for `policy.json` within the trusted bundle directory. A bad bundle leaves the process live but not ready; fix the configuration and restart. There is no reload or administration endpoint.
 
 For optional authentication, set `TRIAGE_API_KEY` in the process environment before starting the server. Send `Authorization: Bearer <your-key>` to `/v1/triage` and `/v1/model`; Swagger's Authorize control supports this. Authentication is disabled when the variable is absent or empty. Health endpoints remain available without credentials. Do not put keys in YAML or commit them.
 
