@@ -1,0 +1,50 @@
+name: Manual GPU fixture
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: manual-gpu-fixture
+  cancel-in-progress: false
+
+jobs:
+  smoke:
+    # Explicit opt-in; never schedule GPU work for pushes or pull requests.
+    if: >-
+      vars.ENABLE_GPU_SMOKE == 'true' &&
+      github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: [self-hosted, linux, x64, triage-gpu]
+    timeout-minutes: 20
+    env:
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_DATASETS_OFFLINE: "1"
+      TOKENIZERS_PARALLELISM: "false"
+      TRIAGE_SMOKE_OUTPUT: artifacts/gpu-ci-${{ github.run_id }}-${{ github.run_attempt }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff # v6
+        with:
+          version: "0.12.19"
+      - name: Install locked training environment
+        run: uv sync --project environments/training --locked
+      - name: Tokenize, train, save/reload and generate on CUDA
+        timeout-minutes: 5
+        run: environments/training/.venv/bin/python scripts/verify_gpu_fixture.py --output "$TRIAGE_SMOKE_OUTPUT"
+      - name: Retain fixture result in job summary
+        if: always()
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          result = Path(os.environ["TRIAGE_SMOKE_OUTPUT"]) / "verification.json"
+          text = result.read_text() if result.exists() else "No passing fixture result; inspect job logs."
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as summary:
+              summary.write("## Synthetic GPU fixture (not benchmark evidence)\n\n```text\n" + text + "\n```\n")
+          PY

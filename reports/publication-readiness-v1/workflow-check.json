@@ -1,0 +1,11 @@
+{
+  "yaml_parsed": true,
+  "manual_only": true,
+  "opt_in_and_default_branch_guard": true,
+  "pinned_actions": true,
+  "job_timeout_minutes": 20,
+  "ignore_rules_checked": 9,
+  "example_env_allowed": true,
+  "hosted_execution_verified": false,
+  "validation_note": "Initial ad hoc ignore checks mishandled Windows CRLF stdin and negated-rule exit status; corrected to NUL-delimited bytes and verbose pattern verification."
+}

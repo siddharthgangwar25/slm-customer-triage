@@ -1,0 +1,19 @@
+{
+  "base_commit": "08330b1cff1c41c609212e9caa951dc6ff253e9f",
+  "clean_checkout_commit": "08330b1cff1c41c609212e9caa951dc6ff253e9f",
+  "source_sha256": "2a91de5d0e0e4625c3b3fcb22a5898d16b387f6259568b9bdd2b21df3f48a4c4",
+  "frozen_release_id": "release-a0bcea381506",
+  "release_ledger_sha256": "55a628a4d1b1ea8cec2a25478479d3835f32593a8049d8ebbe468485297e8da1",
+  "local_links_checked": 71,
+  "input_sha256": {
+    ".github/workflows/gpu-smoke.yml": "2f9ef0b864cf9553abffbb7e5df7c7ed7ea0d3ee932f1467c7863d6a3c9f48bc",
+    "scripts/verify_gpu_fixture.py": "38b883d17bf03e03f77275ef00b8e4152678f4f31917738ee32d953c7d768350",
+    "environments/training/uv.lock": "c41391e253e0915ab017bbdbd02413e7b06584e2842a297e5bb68bc58cb5598c",
+    "uv.lock": "38fda39dd158abfa51f462b4d899e8a970bb345e178c094824f09a4a2913a03c",
+    "README.md": "fd105816f9adaa40c4091f40ca24d177ba38ef20be5a96a74d480b8fb2e3f397",
+    "docs/gpu_smoke.md": "e8977b1bb7c2fd6fe065fc404a6f537e80eb4cf882982d5a9da0814e1cdcd9a1",
+    "docs/publication.md": "3d895b2c55a97605382f59830491328c37781ffaaeb8e47a7614bf778c643dc4",
+    "docs/implementation_status.md": "5285ee3efd563808ed213a59a351534277c905ee733ebfc10afbf7a074933ad1",
+    ".gitignore": "6231899e7f854ecc33e11ea3d8b182c722c058084f4b277e44bbd8ed9f59d3c1"
+  }
+}

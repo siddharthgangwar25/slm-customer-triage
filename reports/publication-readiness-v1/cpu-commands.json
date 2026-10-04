@@ -1,0 +1,124 @@
+[
+  {
+    "stage": "sync",
+    "argv": [
+      "C:/Users/gangw/Documents/Projects/slm-customer-triage/.tools/uv.exe",
+      "sync",
+      "--locked",
+      "--python",
+      "C:\\Users\\gangw\\Documents\\Projects\\slm-customer-triage\\.venv\\Scripts\\python.exe"
+    ],
+    "exit_code": 0,
+    "seconds": 17.29172869998729
+  },
+  {
+    "stage": "prepare",
+    "argv": [
+      "C:\\Users\\gangw\\Documents\\Projects\\slm-customer-triage\\artifacts\\publication-clean-checkout-v1\\artifacts\\reproduction-v2\\environment\\Scripts\\python.exe",
+      "-m",
+      "triage.cli",
+      "data",
+      "prepare",
+      "--config",
+      "configs/data.yaml",
+      "--output",
+      "artifacts/reproduction-v2/data"
+    ],
+    "exit_code": 0,
+    "seconds": 2.294019399996614
+  },
+  {
+    "stage": "train",
+    "argv": [
+      "C:\\Users\\gangw\\Documents\\Projects\\slm-customer-triage\\artifacts\\publication-clean-checkout-v1\\artifacts\\reproduction-v2\\environment\\Scripts\\python.exe",
+      "-m",
+      "triage.cli",
+      "train",
+      "baseline",
+      "--config",
+      "C:\\Users\\gangw\\Documents\\Projects\\slm-customer-triage\\artifacts\\publication-clean-checkout-v1\\artifacts\\reproduction-v2\\baseline.json"
+    ],
+    "exit_code": 0,
+    "seconds": 18.630893699999433
+  },
+  {
+    "stage": "predict",
+    "argv": [
+      "C:\\Users\\gangw\\Documents\\Projects\\slm-customer-triage\\artifacts\\publication-clean-checkout-v1\\artifacts\\reproduction-v2\\environment\\Scripts\\python.exe",
+      "-m",
+      "triage.cli",
+      "predict",
+      "--config",
+      "C:\\Users\\gangw\\Documents\\Projects\\slm-customer-triage\\artifacts\\publication-clean-checkout-v1\\artifacts\\reproduction-v2\\baseline.json",
+      "--split",
+      "val"
+    ],
+    "exit_code": 0,
+    "seconds": 4.206431200000225
+  },
+  {
+    "stage": "evaluate",
+    "argv": [
+      "C:\\Users\\gangw\\Documents\\Projects\\slm-customer-triage\\artifacts\\publication-clean-checkout-v1\\artifacts\\reproduction-v2\\environment\\Scripts\\python.exe",
+      "-m",
+      "triage.cli",
+      "evaluate",
+      "--predictions",
+      "artifacts/reproduction-v2/predictions/predictions.jsonl",
+      "--output",
+      "artifacts/reproduction-v2/evaluation"
+    ],
+    "exit_code": 0,
+    "seconds": 2.3687879999924917
+  },
+  {
+    "stage": "policy",
+    "argv": [
+      "C:\\Users\\gangw\\Documents\\Projects\\slm-customer-triage\\artifacts\\publication-clean-checkout-v1\\artifacts\\reproduction-v2\\environment\\Scripts\\python.exe",
+      "-m",
+      "triage.cli",
+      "policy",
+      "select",
+      "--predictions",
+      "artifacts/reproduction-v2/predictions/predictions.jsonl",
+      "--split",
+      "val",
+      "--output",
+      "artifacts/reproduction-v2/policy"
+    ],
+    "exit_code": 0,
+    "seconds": 0.8296572999970522
+  },
+  {
+    "stage": "api-parity",
+    "argv": [
+      "C:\\Users\\gangw\\Documents\\Projects\\slm-customer-triage\\artifacts\\publication-clean-checkout-v1\\artifacts\\reproduction-v2\\environment\\Scripts\\python.exe",
+      "scripts/verify_api.py",
+      "--bundle",
+      "artifacts/reproduction-v2/bundle",
+      "--policy",
+      "artifacts/reproduction-v2/policy/policy.json",
+      "--predictions",
+      "artifacts/reproduction-v2/predictions/predictions.jsonl",
+      "--output",
+      "artifacts/reproduction-v2/api-parity"
+    ],
+    "exit_code": 0,
+    "seconds": 22.74250039999606
+  },
+  {
+    "stage": "demo",
+    "argv": [
+      "C:\\Users\\gangw\\Documents\\Projects\\slm-customer-triage\\artifacts\\publication-clean-checkout-v1\\artifacts\\reproduction-v2\\environment\\Scripts\\python.exe",
+      "scripts/run_demo.py",
+      "--bundle",
+      "artifacts/reproduction-v2/bundle",
+      "--policy",
+      "artifacts/reproduction-v2/policy/policy.json",
+      "--output",
+      "artifacts/reproduction-v2/demo"
+    ],
+    "exit_code": 0,
+    "seconds": 3.3270432999997865
+  }
+]

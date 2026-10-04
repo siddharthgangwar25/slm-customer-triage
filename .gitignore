@@ -12,3 +12,16 @@ dist/
 /data/
 /artifacts/
 /reports/local-*/
+
+# Local credentials; example templates may be committed without real secrets.
+.env
+.env.*
+!.env.example
+!.env.sample
+.aws/
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519

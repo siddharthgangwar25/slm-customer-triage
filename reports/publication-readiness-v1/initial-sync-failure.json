@@ -1,0 +1,14 @@
+[
+  {
+    "stage": "sync",
+    "argv": [
+      "C:/Users/gangw/Documents/Projects/slm-customer-triage/.tools/uv.exe",
+      "sync",
+      "--locked",
+      "--python",
+      "C:\\Users\\gangw\\Documents\\Projects\\slm-customer-triage\\.venv\\Scripts\\python.exe"
+    ],
+    "exit_code": 2,
+    "seconds": 5.91745959999389
+  }
+]

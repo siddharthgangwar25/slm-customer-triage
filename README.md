@@ -107,6 +107,11 @@ CPU tests use marked synthetic fixtures. Real benchmark and handoff acceptance
 are retained separately. The configured Windows/Linux CI workflow is committed;
 hosted execution remains unverified. [Latest check outcomes](docs/implementation_status.md).
 
+Section 8's [manual GPU smoke workflow](docs/gpu_smoke.md) is separate from
+normal CI. It checks a tiny synthetic CUDA training/save/reload/inference path
+and requires an explicitly configured GPU runner. It does not rerun benchmarks.
+See the [publication checklist](docs/publication.md) for remaining GitHub steps.
+
 `src/triage/` holds data, model, policy, evaluation and API code; `configs/` and
 `prompts/` hold frozen inputs; CPU/GPU locks pin dependencies. `reports/` retains
 manifests, public benchmark predictions, error reviews, metrics and checksums.
@@ -114,6 +119,10 @@ Large weights, raw data, environments and secrets remain outside Git in ignored
 local directories. Load only trusted joblib bundles. A recipient can reproduce CPU
 weights, but needs the documented training procedure or a trusted artifact copy
 for the original GPU adapter; no public adapter download is published.
+
+The original project code's license is currently undecided; no root code license
+has been selected. The dataset and upstream models retain their own licenses,
+as documented in the data and model cards.
 
 CLINC attribution: Larson et al. (2019), *An Evaluation Dataset for Intent
 Classification and Out-of-Scope Prediction*, [original repository](https://github.com/clinc/oos-eval),

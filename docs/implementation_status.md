@@ -1,6 +1,51 @@
 # Implementation status
 
-Last updated: **2026-10-02**. Milestones **1–4 are implemented, executed, and locally verified**. **Milestone 5's full native benchmark and CPU/GPU Transformers container acceptance are verified. Section 9's separate vLLM compatibility/validation experiment is complete and audited; the alternative is not adopted. C remains disqualified for automatic release.** **Milestone 6 local demonstration and handoff are implemented and verified.** Cloud execution is omitted/unverified; the optional independent challenge set is deferred. Original baseline and 4B evidence remain unchanged. The genuine test split has been used once per frozen candidate; do not retune or repeat it.
+Last updated: **2026-10-04**. Milestones **1–4 are implemented, executed, and locally verified**. **Milestone 5's full native benchmark and CPU/GPU Transformers container acceptance are verified. Section 9's separate vLLM compatibility/validation experiment is complete and audited; the alternative is not adopted. C remains disqualified for automatic release.** **Milestone 6 local demonstration and handoff are implemented and verified.** Cloud execution is omitted/unverified; the optional independent challenge set is deferred. Original baseline and 4B evidence remain unchanged. The genuine test split has been used once per frozen candidate; do not retune or repeat it.
+
+## Publication preparation - local checks complete
+
+Added Section 8's manually triggered GPU workflow, synthetic CUDA fixture and
+[GPU smoke guide](gpu_smoke.md), explicit secret-file ignore rules, README
+licensing/CI notes and the [publication checklist](publication.md). Historical
+handoffs below are now clearly marked. Licensing remains undecided at the
+user's request; no root license is added.
+
+Cloned commit `08330b1` into a separate local checkout with no existing model
+or dataset files. Ran `scripts/reproduce_cpu.py` with installed Python/uv tools,
+a new environment/cache and newly downloaded pinned data. All eight stages
+passed. The CPU audit confirms **3,100/3,100** validation predictions match the
+original reference and **3,100/3,100** API decisions match offline predictions;
+the authenticated real HTTP demo passed and stopped its service.
+
+`scripts/verify_gpu_fixture.py --output artifacts/publication-gpu-fixture-v3`
+passed locally on GTX 1650 in the locked training environment, with actual
+child exit code zero. Two optimizer steps have finite loss/gradients and change
+adapter parameters; tokenizer reload, completion/EOS masking, reloaded logits
+(maximum difference **0.0**) and greedy generation match. This random tiny FP32
+LoRA fixture does not rerun the original quantized model experiment.
+
+**159 tests passed in 17.23 seconds.** Ruff lint/format and mypy passed. YAML,
+manual trigger/opt-in guards, pinned Actions, execution timeout and secret-file
+ignore rules were checked locally. Initial network-sandbox, fixture tokenizer,
+PowerShell stderr and ad hoc ignore-check harness issues are recorded with
+their resolutions in [retained evidence](../reports/publication-readiness-v1/README.md).
+The frozen source, release and completed test ledger still verify; no benchmark
+test was rerun and no release was activated.
+
+**Next step:** create an empty GitHub repository, then configure its actual URL
+and push the local branch. Hosted Windows/Linux CPU checks and the CPU container
+job must run before claiming hosted CI verification. GPU workflow execution on
+GitHub needs a separately configured runner and remains unverified. No repository,
+runner or paid resource was created by this local preparation. GPU Compose,
+cloud and optional independent challenge evaluation retain their earlier limits.
+
+## Historical milestone records
+
+**Everything below records the state at the time of each milestone or handoff.**
+Older statements such as "not started", "next milestone", and terminal-run
+instructions are historical, not outstanding tasks. Use the current summary
+above and publication checklist for remaining work. In particular, do not rerun
+old training/final-test commands to prepare the repository for publication.
 
 ## Milestone 6 - local demonstration and handoff complete
 

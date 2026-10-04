@@ -1,0 +1,46 @@
+[
+  {
+    "name": "ruff",
+    "argv": [
+      ".venv/Scripts/ruff.exe",
+      "check",
+      "."
+    ],
+    "exit_code": 0,
+    "seconds": 0.06463090001489036,
+    "output": "All checks passed!\n"
+  },
+  {
+    "name": "format",
+    "argv": [
+      ".venv/Scripts/ruff.exe",
+      "format",
+      "--check",
+      "."
+    ],
+    "exit_code": 0,
+    "seconds": 0.08207210002001375,
+    "output": "117 files already formatted\n"
+  },
+  {
+    "name": "mypy",
+    "argv": [
+      ".venv/Scripts/mypy.exe"
+    ],
+    "exit_code": 0,
+    "seconds": 0.6051988000108395,
+    "output": "Success: no issues found in 5 source files\n"
+  },
+  {
+    "name": "pytest",
+    "argv": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "pytest",
+      "-q"
+    ],
+    "exit_code": 0,
+    "seconds": 18.348780100001022,
+    "output": "........................................................................ [ 45%]\n........................................................................ [ 90%]\n...............                                                          [100%]\n159 passed in 17.23s\n"
+  }
+]

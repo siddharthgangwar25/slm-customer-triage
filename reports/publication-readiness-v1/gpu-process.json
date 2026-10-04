@@ -1,0 +1,13 @@
+[
+  {
+    "name": "gpu-fixture",
+    "argv": [
+      "C:\\Users\\gangw\\Documents\\Projects\\slm-customer-triage\\environments\\training\\.venv\\Scripts\\python.exe",
+      "scripts/verify_gpu_fixture.py",
+      "--output",
+      "artifacts/publication-gpu-fixture-v3"
+    ],
+    "exit_code": 0,
+    "log": "artifacts\\publication-gpu-fixture-v3.log"
+  }
+]
