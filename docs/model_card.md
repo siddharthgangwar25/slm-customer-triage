@@ -84,5 +84,6 @@ Changes to weights, prompt, tokenizer, precision, backend or policy require a
 new variant and validation, with prior test exposure disclosed. Keep the release
 inactive; do not relax thresholds to improve its recorded test result. Accuracy
 monitoring requires reviewed labels. A genuinely fresh, independently reviewed
-dataset is needed before renewed release selection. [Handoff](handoff.md).
+dataset is needed before renewed release selection. See [setup](setup.md) for
+reproduction and dependency maintenance.
 Cloud execution remains **unverified and omitted**.

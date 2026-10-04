@@ -2,7 +2,7 @@
 
 These commands start a **local research/demo service**. None of the frozen
 candidates qualified for automatic production release. No active release pointer
-exists. Cloud hosting remains [unverified](../deployment/aws_runbook.md).
+exists. Cloud hosting has not been implemented or verified.
 
 ## CPU Python service
 
@@ -98,8 +98,8 @@ docker compose -f deployment/compose.yaml --profile gpu down
 The worker starts before the gateway, remains on an internal network and has no
 published port. Startup failure must be resolved before a gateway is considered
 ready. The equivalent runner topology passed full parity/load checks, but the
-GPU Compose profile itself is **not separately executed**. Its commands are a
-handoff path, not additional measured acceptance. See [serving runbook](release_benchmark.md).
+GPU Compose profile itself is **not separately executed**. See the
+[serving runbook](release_benchmark.md) for the measured topology and results.
 The vLLM variant is separate and not adopted.
 
 ## Staging, activation and recovery
@@ -117,7 +117,5 @@ previous accepted live release to roll back to. For this local demo, stop the
 failed process and restart the documented trusted bundle/configuration; this is
 process recovery, not evidence of production traffic migration.
 
-Future cloud staging, restricted roles, HTTPS, secret injection, health checks
-and teardown are specified in the [AWS plan](../deployment/aws_runbook.md).
-Do not provision until the account/region/host/budget/session/cleanup decisions
-are authorized. No cloud execution is needed to reproduce the CPU demo.
+No cloud resources are required to reproduce the CPU demo. Retained cloud cost
+estimates describe a hypothetical hosting scenario, not a deployed service.

@@ -69,7 +69,7 @@ Open **http://127.0.0.1:8000/docs** and try `POST /v1/triage`:
 The response contains `intent`, `decision` (`route` or `human_review`), `reason`,
 model/policy versions and latency. Stop the server with **Ctrl+C**.
 See the [API reference](docs/api.md) for schemas, status codes and limits, or
-the [demo guide](docs/demo.md) for an automated presentation.
+the [automated demo instructions](docs/setup.md#automated-api-demo).
 
 ## Configuration
 
@@ -134,14 +134,14 @@ predictions and API decisions. [Reproduction evidence](reports/publication-readi
 | `scripts/` | Reproduction, demos and experiment verification |
 | `tests/` | CPU unit and integration tests with synthetic fixtures |
 | `configs/`, `prompts/`, `environments/` | Experiment settings, prompt and dependency locks |
-| `deployment/` | Dockerfiles, Compose configuration and AWS runbook |
+| `deployment/` | Dockerfiles, Compose configuration and recorded pricing assumptions |
 | [`reports/`](reports/README.md) | Saved predictions, comparisons, plots and execution evidence |
 | `docs/` | Setup, cards, architecture and runbooks |
 
 Model weights, raw data and local environments are excluded from Git. CPU
 weights are reproduced by the quick start. GPU use requires the documented
 [training procedure](docs/finetuning.md) or trusted matching artifacts. Load
-only trusted model bundles. [Developer handoff](docs/handoff.md).
+only trusted model bundles. [Artifact requirements](docs/setup.md#gpu-models-and-artifacts).
 
 ## Data and licensing
 

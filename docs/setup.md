@@ -57,6 +57,28 @@ keys. Set `TRIAGE_API_KEY` and `TRIAGE_METRICS_KEY` to separate secrets for an
 authenticated manual demo. `/metrics` exists only when its key is configured.
 For concrete Windows commands, see [deployment](deployment.md).
 
+## Automated API demo
+
+After CPU reproduction, run three example requests through a temporary local
+service:
+
+```console
+uv run --locked python scripts/run_demo.py --bundle artifacts/reproduction-v1/bundle --policy artifacts/reproduction-v1/policy/policy.json --output artifacts/demo-v1
+```
+
+With the original local baseline bundle available, the defaults also work:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/run_demo.py --output artifacts/demo-v1
+```
+
+Choose a fresh output directory each time. The runner starts a localhost HTTP
+service on an available port, generates temporary API and metrics keys, submits
+three requests, and checks authentication, invalid input and private metrics.
+It stops its own server, including on failure. Inspect `demo.json`, `service.log`
+and `metrics.txt` for results. Credentials are not printed. The examples
+illustrate API behavior; they are not an independent evaluation set.
+
 ## Individual clean-clone commands
 
 If you prefer the original output layout, use these **only when those output
@@ -76,7 +98,7 @@ bundle; a similarly named historical policy does not necessarily match it.
 Only load trusted joblib artifacts: their serialization executes Python.
 For direct module invocation use `python -m triage.cli`, not `python -m triage`.
 
-## GPU and artifact handoff
+## GPU models and artifacts
 
 Optional GPU environments remain separate: [prompted](prompted_benchmark.md),
 [fine tuning](finetuning.md), [serving evidence](release_benchmark.md) and
@@ -92,6 +114,19 @@ fit on another machine must be checked with the small smoke before long runs.
 
 Never rerun `scripts/run_milestone5.py` or `benchmark final` for this completed
 release. Inspect saved test evidence with the CPU auditor instead.
+
+## Dependency maintenance
+
+CPU dependencies support classification (scikit-learn, NumPy, SciPy, joblib and
+threadpoolctl), reporting (Matplotlib and PyYAML) and serving (FastAPI, Pydantic
+and Uvicorn). SciPy is used through scikit-learn and its version is recorded with
+the model. Development dependencies provide linting, typing and tests; `httpx2`
+supports API tests.
+
+GPU environments also include Accelerate and bitsandbytes, loaded through
+Transformers/PEFT, and separate vLLM compatibility pins. Keep CPU and GPU
+environments separate. Evaluate dependency upgrades as a new experiment variant:
+the existing lock hashes are part of the frozen experiment identity.
 
 ## Troubleshooting
 

@@ -78,4 +78,4 @@ retain failed submissions: fast rejections are not successful latency/throughput
 Operational distributions can flag changes; reviewed labels establish accuracy.
 
 See [API](api.md), [deployment](deployment.md), [model card](model_card.md)
-and [handoff](handoff.md).
+and [setup](setup.md).

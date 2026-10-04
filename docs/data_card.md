@@ -45,12 +45,12 @@ text-length summaries; preparation writes `duplicates.json` with group details.
 TF-IDF and logistic regression fit only on 15,000 supported training records.
 C trains on all 15,100 training records. Validation selected the prompt, paired
 model/checkpoint and routing thresholds. The official test was evaluated once
-for each frozen A/B/C candidate under the completed Milestone 5 ledger.
+for each frozen A/B/C candidate under the completed test-use ledger.
 Its results are now exposed: do not call it untouched or tune on it. Earlier
 preparation manifests describe their historical pre-evaluation state; the
 completed ledger is the current record.
 
-Milestone 6 reproduction repeats CPU training and validation in fresh outputs.
+CPU reproduction repeats training and validation in fresh outputs.
 Preparation checks official test integrity but performs no test inference.
 The separate vLLM experiment also used validation only.
 

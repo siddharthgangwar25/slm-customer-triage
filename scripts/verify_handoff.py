@@ -1,4 +1,4 @@
-"""CPU-only audit of Milestone 6 reproduction, demo, links and frozen release."""
+"""CPU-only audit of reproduction, demo, documentation links and frozen release."""
 
 import argparse
 import re
@@ -10,15 +10,12 @@ from triage.release import load_release, source_hash
 DOCS = [
     "README.md",
     "docs/setup.md",
-    "docs/demo.md",
-    "docs/handoff.md",
     "docs/data_card.md",
     "docs/model_card.md",
     "docs/finetuned_model_card.md",
     "docs/architecture.md",
     "docs/error_analysis.md",
     "docs/deployment.md",
-    "deployment/aws_runbook.md",
     "docs/api.md",
 ]
 

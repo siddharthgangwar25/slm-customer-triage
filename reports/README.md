@@ -24,3 +24,8 @@ Some historical per-candidate report headings incorrectly say "validation" for
 test data; the explicit `split` field, sample counts and final comparison identify
 the actual split. The original files are preserved rather than silently edited.
 Current results and limitations are summarized in the [model card](../docs/model_card.md).
+
+Historical reports also reference documentation that has since been consolidated
+or removed. Demo and artifact instructions now live in [setup](../docs/setup.md);
+the unexecuted AWS deployment plan was removed. Document paths and hashes in
+the original audit records describe the repository at the time of each run.

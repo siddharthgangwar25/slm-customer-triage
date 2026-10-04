@@ -1,4 +1,4 @@
-# Milestone 5 serving and release runbook
+# Serving and release benchmark
 
 The full native workflow and CPU/GPU container acceptance completed on 1 October 2026 and were audited from saved evidence. See [full GPU container results](../reports/milestone5-container-gpu-full-v1/README.md): 3,100 exact parity matches and 500/500 serial HTTP completions. The [original final report](../reports/milestone5-final-v1/README.md) still disqualifies C because its fixed-policy oos review recall is 89.6%, below 90%. **Do not repeat the completed test experiment or tune its thresholds.** The local Transformers/NF4/PEFT path is verified; the [full vLLM validation](../reports/vllm-validation-v1/README.md) is executed and audited; the alternative is not adopted. vLLM load testing and hosted CI remain unexecuted. The commands below are completed-run history, not outstanding terminal tasks.
 

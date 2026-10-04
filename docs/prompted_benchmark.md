@@ -1,6 +1,16 @@
-# Prompted model benchmark
+# Historical Qwen3-4B prompted benchmark
 
-Milestone 3 uses the pinned official Qwen3 model through Transformers. The completed configuration is Qwen/Qwen3-4B at revision `1cfa9a7208912126459214e8b04321603b3df60c`, with NF4 double quantization, FP16 compute and system-prefix caching on the local 4 GiB GTX 1650. All 3,100 validation outcomes and the [baseline comparison](../reports/baseline-prompted-v1/report.md) are retained. The comparison report records measurements and limitations.
+This guide records the earlier Qwen/Qwen3-4B experiment through Transformers,
+at revision `1cfa9a7208912126459214e8b04321603b3df60c`, with NF4 double
+quantization, FP16 compute and system-prefix caching on the local 4 GiB GTX 1650.
+All 3,100 validation outcomes and the
+[baseline comparison](../reports/baseline-prompted-v1/report.md) are retained.
+
+The final A/B/C comparison uses **Qwen3-0.6B** for both prompted and fine-tuned
+candidates. The 4B model is not the paired control for that comparison. See
+[training and paired validation](finetuning.md) for the 0.6B workflow and
+[the model card](model_card.md) for final results. Commands below refer to the
+historical 4B configuration; completed output directories cannot be reused.
 
 ## Isolated environment
 
@@ -17,7 +27,7 @@ Its own `uv.lock` pins PyTorch 2.8.0 with CUDA 12.8, Transformers 4.57.6, Accele
 .\environments\prompted\.venv\Scripts\triage.exe predict --config configs/prompted.yaml --split val
 ```
 
-Run the full command only after the smoke demonstrates that the selected model actually loads, fits the complete prompt, generates non-thinking outputs, and is feasible on your hardware. No automatic model/precision/device fallback is allowed. A smaller smoke or a changed model must keep its actual identity and receive a separate configuration/experiment ID. If the paired research model changes, Milestone 4 must fine-tune that exact replacement model and revision.
+Run the full command only after the smoke demonstrates that the selected model actually loads, fits the complete prompt, generates non-thinking outputs, and is feasible on your hardware. No automatic model/precision/device fallback is allowed. A smaller smoke or a changed model must keep its actual identity and receive a separate configuration/experiment ID. Paired prompted and fine-tuned comparisons must use the same base model and revision.
 
 ## Prompt and decoding
 
@@ -55,4 +65,12 @@ The shared evaluator preserves invalid and failed requests in all accounting. Ea
 
 Runtime metadata distinguishes model load time (including optional prefix prefill), summed per-request inference time, and the last process session's wall time. Cached inference timings exclude that one-time prefix prefill. Memory includes process RSS/Windows peak working set and peak CUDA allocated/reserved bytes; CUDA allocator figures do not include other applications or all driver overhead. CPU baseline and GPU prompted timings have different execution conditions and are not interchangeable with API latency, throughput, or cost.
 
-The Milestone 2 API still loads only the baseline bundle. A prompted policy can be evaluated offline but cannot be substituted into that baseline service. GPU serving and backend parity belong to later milestones. Test prediction remains blocked.
+## Current serving and test status
+
+The API supports CPU baseline inference and a separate private GPU worker.
+The final fine-tuned 0.6B model's Transformers container matched all 3,100
+validation outputs; see [serving and release evidence](release_benchmark.md).
+That result does not establish serving parity for this historical 4B model.
+The final A/B/C test has already been consumed, and no candidate qualified for
+automatic release. Use validation for reproduction; do not rerun the completed
+test to tune thresholds or replace a candidate.
